@@ -55,3 +55,6 @@ Desktop.ini
 
 # Local AI context and agent instructions
 AI/
+
+# Design reference, local only
+xelulabs_reference.html
