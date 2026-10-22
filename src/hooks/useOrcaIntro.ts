@@ -35,21 +35,15 @@ function steps(): Step[] {
     ]
 }
 
-export function useOrcaIntro(run: number) {
+export function useOrcaIntro() {
     const [state, setState] = useState<IntroState>(START)
-    const [lastRun, setLastRun] = useState(run)
-
-    if (run !== lastRun) {
-        setLastRun(run)
-        setState(START)
-    }
 
     useEffect(() => {
         const timers = steps().map(([ms, patch]) =>
             setTimeout(() => setState((s) => ({ ...s, ...patch })), ms),
         )
         return () => timers.forEach(clearTimeout)
-    }, [run])
+    }, [])
 
     return state
 }
