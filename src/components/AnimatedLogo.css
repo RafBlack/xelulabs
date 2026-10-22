@@ -1,0 +1,174 @@
+.logo-tilt {
+  position: absolute;
+  left: 950px;
+  top: 110px;
+  width: 980px;
+  opacity: 0.8;
+  pointer-events: none;
+  transform: perspective(1600px) rotateY(-16deg) rotateX(7deg);
+  transform-origin: 50% 50%;
+  animation: sway 9s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%, 100% { transform: perspective(1600px) rotateY(-16deg) rotateX(7deg); }
+  50% { transform: perspective(1600px) rotateY(-5deg) rotateX(2deg); }
+}
+
+.logo-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 22px rgba(255, 255, 255, 0.12));
+}
+
+.logo-stroke {
+  stroke-dasharray: 1 1.5;
+  stroke-dashoffset: 0;
+  animation: drawMain 11s linear infinite;
+}
+
+.logo-stroke.logo-a { animation-name: drawA; }
+.logo-stroke.logo-b { animation-name: drawB; }
+
+.logo-lag1 { animation-delay: 0.12s; }
+.logo-lag2 { animation-delay: 0.24s; }
+.logo-lag3 { animation-delay: 0.36s; }
+
+@keyframes drawMain {
+  0%, 3% { stroke-dashoffset: 1.2; animation-timing-function: cubic-bezier(0.6, 0, 1, 0.5); }
+  18% { stroke-dashoffset: 0; }
+  82% { stroke-dashoffset: 0; animation-timing-function: cubic-bezier(0.6, 0, 1, 0.5); }
+  96%, 100% { stroke-dashoffset: -1.2; }
+}
+
+@keyframes drawA {
+  0%, 19% { stroke-dashoffset: 1.2; animation-timing-function: cubic-bezier(0.6, 0, 1, 0.5); }
+  25% { stroke-dashoffset: 0; }
+  82% { stroke-dashoffset: 0; animation-timing-function: cubic-bezier(0.6, 0, 1, 0.5); }
+  96%, 100% { stroke-dashoffset: -1.2; }
+}
+
+@keyframes drawB {
+  0%, 24% { stroke-dashoffset: 1.2; animation-timing-function: cubic-bezier(0.6, 0, 1, 0.5); }
+  30% { stroke-dashoffset: 0; }
+  82% { stroke-dashoffset: 0; animation-timing-function: cubic-bezier(0.6, 0, 1, 0.5); }
+  96%, 100% { stroke-dashoffset: -1.2; }
+}
+
+.logo-bristles .logo-stroke.logo-lag1,
+.logo-bristles .logo-stroke.logo-lag2,
+.logo-bristles .logo-stroke.logo-lag3 {
+  opacity: 0;
+  animation-name: bOut;
+}
+
+@keyframes bOut {
+  0%, 81.9% { stroke-dashoffset: 0; opacity: 0; }
+  82% { stroke-dashoffset: 0; opacity: 1; animation-timing-function: cubic-bezier(0.6, 0, 1, 0.5); }
+  95% { stroke-dashoffset: -1.2; opacity: 1; }
+  95.1%, 100% { stroke-dashoffset: -1.2; opacity: 0; }
+}
+
+.logo-tips {
+  filter: drop-shadow(0 0 14px #ffffff) drop-shadow(0 0 40px rgba(255, 255, 255, 0.7));
+}
+
+.logo-tip {
+  stroke-dasharray: 0.035 2;
+  stroke-dashoffset: 0.035;
+  opacity: 0;
+  animation: headMain 11s linear infinite;
+}
+
+.logo-tip.logo-a { animation-name: headA; }
+.logo-tip.logo-b { animation-name: headB; }
+
+@keyframes headMain {
+  0%, 2.9% { stroke-dashoffset: 0.035; opacity: 0; }
+  3% { stroke-dashoffset: 0.035; opacity: 1; animation-timing-function: cubic-bezier(0.6, 0, 1, 0.5); }
+  18% { stroke-dashoffset: -0.965; opacity: 1; }
+  19.5%, 100% { stroke-dashoffset: -0.965; opacity: 0; }
+}
+
+@keyframes headA {
+  0%, 18.9% { stroke-dashoffset: 0.035; opacity: 0; }
+  19% { stroke-dashoffset: 0.035; opacity: 1; animation-timing-function: cubic-bezier(0.6, 0, 1, 0.5); }
+  25% { stroke-dashoffset: -0.965; opacity: 1; }
+  26.5%, 100% { stroke-dashoffset: -0.965; opacity: 0; }
+}
+
+@keyframes headB {
+  0%, 23.9% { stroke-dashoffset: 0.035; opacity: 0; }
+  24% { stroke-dashoffset: 0.035; opacity: 1; animation-timing-function: cubic-bezier(0.6, 0, 1, 0.5); }
+  30% { stroke-dashoffset: -0.965; opacity: 1; }
+  31.5%, 100% { stroke-dashoffset: -0.965; opacity: 0; }
+}
+
+.logo-bloom {
+  opacity: 0;
+  animation: bloom 11s ease-out infinite;
+}
+
+@keyframes bloom {
+  0%, 17.5% { opacity: 0; }
+  20% { opacity: 0.12; }
+  30%, 100% { opacity: 0; }
+}
+
+.logo-glint {
+  stroke-dasharray: 0.08 0.92;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  animation: glint 11s ease-in-out infinite;
+}
+
+@keyframes glint {
+  0%, 38% { stroke-dashoffset: 1; opacity: 0; }
+  40% { opacity: 0.8; }
+  56% { stroke-dashoffset: -0.1; opacity: 0.8; }
+  59%, 100% { stroke-dashoffset: -0.1; opacity: 0; }
+}
+
+.logo-rgb1,
+.logo-rgb2 { mix-blend-mode: screen; }
+
+.logo-rgb1 { animation: glitch1 4.2s steps(1) infinite; }
+.logo-rgb2 { animation: glitch2 4.2s steps(1) infinite; }
+
+@keyframes glitch1 {
+  0%, 88%, 94%, 100% { transform: translate(-7px, 0); }
+  90% { transform: translate(-22px, 4px); }
+  92% { transform: translate(10px, -3px); }
+}
+
+@keyframes glitch2 {
+  0%, 88%, 94%, 100% { transform: translate(7px, 0); }
+  90% { transform: translate(22px, -4px); }
+  92% { transform: translate(-10px, 3px); }
+}
+
+.logo-scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(to bottom, transparent 0, transparent 3px, rgba(11, 11, 12, 0.45) 3px, rgba(11, 11, 12, 0.45) 5px);
+  animation: scanroll 6s linear infinite;
+}
+
+@keyframes scanroll {
+  to { background-position: 0 100px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-tilt,
+  .logo-stroke,
+  .logo-tip,
+  .logo-bloom,
+  .logo-glint,
+  .logo-rgb1,
+  .logo-rgb2,
+  .logo-scan {
+    animation: none;
+  }
+}
