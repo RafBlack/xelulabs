@@ -5,7 +5,7 @@ export type Wave = { x: number; y: number; r: number }
 
 type Source = { x: number; y: number; t: number }
 
-export function useRipples(run: number) {
+export function useRipples() {
     const [waves, setWaves] = useState<Wave[]>([])
     const list = useRef<Source[]>([])
     const frame = useRef(0)
@@ -33,7 +33,7 @@ export function useRipples(run: number) {
             clearInterval(loop)
             timers.forEach(clearTimeout)
         }
-    }, [run, addRipple])
+    }, [addRipple])
 
     useEffect(
         () => () => {
