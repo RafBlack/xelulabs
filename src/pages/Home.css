@@ -1,0 +1,13 @@
+.stage-home {
+  cursor: crosshair;
+}
+
+.hero {
+  position: absolute;
+  left: 260px;
+  top: 270px;
+  width: 620px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
