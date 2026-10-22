@@ -1,0 +1,60 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment variables and local credentials
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
+.aws/
+
+# Test reports and tool caches
+coverage/
+.nyc_output/
+.cache/
+.vite/
+*.tsbuildinfo
+playwright-report/
+test-results/
+
+# Deployment state
+.vercel/
+.netlify/
+
+# Windows and temporary files
+Thumbs.db
+Desktop.ini
+*.tmp
+*.bak
+
+# Local AI scratch work; shared Markdown context stays tracked
+AI/local/
+
+# Local agent instructions
+AI/AGENTS.md
