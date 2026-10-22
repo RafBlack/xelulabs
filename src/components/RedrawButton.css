@@ -1,0 +1,17 @@
+.redraw {
+  position: absolute;
+  left: 168px;
+  bottom: 48px;
+  min-height: 44px;
+  padding: 0 18px;
+  background: transparent;
+  border: 1px solid #2a2b2e;
+  color: #8b8e94;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.redraw:hover {
+  color: #f2f2f0;
+}

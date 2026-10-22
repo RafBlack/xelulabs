@@ -1,0 +1,32 @@
+.header {
+  position: absolute;
+  left: 168px;
+  right: 168px;
+  top: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.nav {
+  display: flex;
+  gap: 56px;
+  width: 720px;
+  padding: 40px 0 22px;
+  border-bottom: 2px solid #3a3b3f;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 17px;
+  letter-spacing: 0.12em;
+}
+
+.nav a.active {
+  color: #f2f2f0;
+}
+
+.est {
+  padding-top: 40px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  letter-spacing: 0.2em;
+  color: #a1a4aa;
+}
