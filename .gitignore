@@ -53,8 +53,5 @@ Desktop.ini
 *.tmp
 *.bak
 
-# Local AI scratch work; shared Markdown context stays tracked
-AI/local/
-
-# Local agent instructions
-AI/AGENTS.md
+# Local AI context and agent instructions
+AI/
