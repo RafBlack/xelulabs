@@ -53,6 +53,7 @@ function Header() {
                     <NavLink key={l.to} to={l.to} end onClick={(event) => {
                         if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
                         event.preventDefault()
+                        setOpen(false)
                         go(l.to, l.path)
                     }}>
                         {l.label}
