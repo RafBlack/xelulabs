@@ -38,7 +38,7 @@ function Home() {
                     Projects / CTF / Community
                 </p>
                 <HeroTitle play={play} />
-                <Terminal />
+                <Terminal play={play} />
                 <div className="hero-actions">
                     <Link className="btn btn-fill" to="/contact">
                         Join XeluLabs

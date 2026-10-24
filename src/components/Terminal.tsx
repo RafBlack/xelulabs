@@ -26,10 +26,11 @@ function Chars({ text, shown, cursorAt }: { text: string; shown: number; cursorA
     ))
 }
 
-function Terminal() {
-    const [n, setN] = useState(0)
+function Terminal({ play }: { play: boolean }) {
+    const [n, setN] = useState(play ? 0 : TOTAL)
 
     useEffect(() => {
+        if (!play) return
         const start = performance.now()
         let frame = requestAnimationFrame(function tick(now) {
             const next = typedAt(now - start)
@@ -37,7 +38,7 @@ function Terminal() {
             if (next < TOTAL) frame = requestAnimationFrame(tick)
         })
         return () => cancelAnimationFrame(frame)
-    }, [])
+    }, [play])
 
     const cmdShown = Math.min(n, CMD.length)
     const descShown = Math.max(0, n - CMD.length)
