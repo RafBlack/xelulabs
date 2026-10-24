@@ -14,7 +14,7 @@ const DRIPS = [
     { left: '34%', top: '78%' },
 ]
 
-function BigOrca() {
+function BigOrca({ play }: { play: boolean }) {
     return (
         <div className="big-orca" aria-hidden="true">
             <div className="big-orca-body">
@@ -27,12 +27,13 @@ function BigOrca() {
                         ))}
                         <PixelPaths art={BIG_ORCA} />
                     </svg>
-                    {DRIPS.map((d, i) => (
-                        <i key={i} className="drip" style={{ ...d, animationDelay: `${3.2 + i * 0.35}s` }} />
-                    ))}
+                    {play &&
+                        DRIPS.map((d, i) => (
+                            <i key={i} className="drip" style={{ ...d, animationDelay: `${3.2 + i * 0.35}s` }} />
+                        ))}
                 </div>
             </div>
-            <Splash />
+            {play && <Splash />}
         </div>
     )
 }

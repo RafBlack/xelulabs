@@ -7,7 +7,7 @@ import { useSwimIntro } from '../hooks/useSwimIntro'
 const cols = SMALL_ORCA.rows[0].length
 const rows = SMALL_ORCA.rows.length
 
-function HeroTitle() {
+function HeroTitle({ play }: { play: boolean }) {
     const lineRef = useRef<HTMLSpanElement>(null)
     const orcaRef = useRef<HTMLSpanElement>(null)
     useSwimIntro(lineRef, orcaRef)
@@ -20,14 +20,16 @@ function HeroTitle() {
                         {ch}
                     </span>
                 ))}
-                <span ref={orcaRef} className="swim-orca">
-                    <svg viewBox={`0 0 ${cols} ${rows}`} shapeRendering="crispEdges">
-                        <g className="swim-tail">
-                            <PixelPaths art={SMALL_ORCA} to={SMALL_ORCA_TAIL} />
-                        </g>
-                        <PixelPaths art={SMALL_ORCA} from={SMALL_ORCA_TAIL} />
-                    </svg>
-                </span>
+                {play && (
+                    <span ref={orcaRef} className="swim-orca">
+                        <svg viewBox={`0 0 ${cols} ${rows}`} shapeRendering="crispEdges">
+                            <g className="swim-tail">
+                                <PixelPaths art={SMALL_ORCA} to={SMALL_ORCA_TAIL} />
+                            </g>
+                            <PixelPaths art={SMALL_ORCA} from={SMALL_ORCA_TAIL} />
+                        </svg>
+                    </span>
+                )}
             </span>
             <span className="hero-labs" aria-hidden="true">
                 LABS

@@ -27,3 +27,12 @@ a:hover {
   width: min(1240px, 100% - 2 * clamp(16px, 4vw, 32px));
   margin-inline: auto;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

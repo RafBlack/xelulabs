@@ -9,8 +9,10 @@ import BigOrca from '../components/BigOrca'
 import { toStage, useMousePosition } from '../hooks/useMousePosition'
 import { useRipples } from '../hooks/useRipples'
 import { useCutouts } from '../hooks/useCutouts'
+import { useIntro } from '../hooks/useIntro'
 
 function Home() {
+    const play = useIntro()
     const { stageRef, heroRef, holes } = useCutouts()
     const { pos, onMouseMove, onMouseLeave } = useMousePosition()
     const { waves, addRipple } = useRipples()
@@ -23,7 +25,7 @@ function Home() {
     return (
         <div
             ref={stageRef}
-            className="stage stage-home"
+            className={`stage stage-home${play ? ' intro' : ''}`}
             onMouseMove={onMouseMove}
             onMouseLeave={onMouseLeave}
             onClick={burst}
@@ -31,7 +33,7 @@ function Home() {
             <DotGrid pos={pos} waves={waves} holes={holes} />
             <Header />
             <main ref={heroRef} className="hero container">
-                <HeroTitle />
+                <HeroTitle play={play} />
                 <Description />
                 <div className="hero-actions">
                     <Link className="btn btn-fill" to="/contact">
@@ -43,7 +45,7 @@ function Home() {
                 </div>
                 <p className="hero-est">Est. 2026, Philippines</p>
             </main>
-            <BigOrca />
+            <BigOrca play={play} />
         </div>
     )
 }
