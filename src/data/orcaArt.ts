@@ -2,18 +2,18 @@ export type Pixels = { rows: string[]; palette: Record<string, string> }
 
 export const SMALL_ORCA: Pixels = {
     rows: [
-        '..........KK........',
-        '.........KKK........',
-        '......KKKKKKKKK.....',
-        'KK...KKKKKKKKKKWWK..',
-        'KKK.KKKGGKKKKKKWEKK.',
-        '.KKKKKKKKKKKKKKKKKKK',
-        '.KKKKKKWWWWWWWWWKKK.',
-        'KKK.KKKKWWWWWWWKKK..',
-        'KK....KKKKKKKKK.....',
-        '........KK..........',
+        '........1...........',
+        '........11..........',
+        '........111.........',
+        '1......11111111.....',
+        '11...111111111221...',
+        '.111111111111111111.',
+        '11..1111112222221111',
+        '1......1222222222...',
+        '........11..........',
+        '........1...........',
     ],
-    palette: { K: '#3d3f45', G: '#6b6d72', W: '#f2f2ef', E: '#0b0b0c' },
+    palette: { 1: '#4a4a52', 2: '#f2f2ef' },
 }
 
 export const SMALL_ORCA_TAIL = 4
