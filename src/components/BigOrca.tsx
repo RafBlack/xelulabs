@@ -100,14 +100,14 @@ function BigOrca({ play }: { play: boolean }) {
             const position = (pointer.x - stage.left) / stage.width
             const progress = Math.max(0, Math.min(1, (position - HEAD_AIM.inset) / (1 - HEAD_AIM.inset * 2)))
             const angle = HEAD_AIM.min + (HEAD_AIM.max - HEAD_AIM.min) * progress
-            aim.style.setProperty('--aim', `${Math.round(angle * 10) / 10}deg`)
+            aim.style.transform = `rotate(${Math.round(angle * 10) / 10}deg)`
         }
         const move = (event: PointerEvent) => {
             if (event.pointerType === 'touch' && event.type !== 'pointerdown') return
             aimPointerRef.current = { x: event.clientX, y: event.clientY }
             if (!frame) frame = window.requestAnimationFrame(update)
         }
-        if (state.kind) aim.style.setProperty('--aim', '0deg')
+        if (state.kind) aim.style.transform = 'rotate(0deg)'
         else if (aimPointerRef.current) frame = window.requestAnimationFrame(update)
         window.addEventListener('pointermove', move, { passive: true })
         window.addEventListener('pointerdown', move, { passive: true })

@@ -24,7 +24,6 @@
 .big-orca-aim {
   position: relative;
   transform-origin: 60% 100%;
-  transform: rotate(var(--aim, 0deg));
   transition: transform 0.25s ease-out;
 }
 
