@@ -10,8 +10,10 @@ import BigOrca from '../components/BigOrca'
 import { toStage, useMousePosition } from '../hooks/useMousePosition'
 import { useRipples } from '../hooks/useRipples'
 import { useCutouts } from '../hooks/useCutouts'
+import { usePageTransition } from '../hooks/usePageTransition'
 
 function Home() {
+    const go = usePageTransition()
     const [play] = useState(() => !matchMedia('(prefers-reduced-motion: reduce)').matches)
     const { stageRef, heroRef, holes } = useCutouts()
     const { pos, onMouseMove, onMouseLeave } = useMousePosition()
@@ -40,10 +42,18 @@ function Home() {
                 <HeroTitle play={play} />
                 <Terminal play={play} />
                 <div className="hero-actions">
-                    <Link className="btn btn-fill" to="/contact">
+                    <Link className="btn btn-fill" to="/contact" onClick={(event) => {
+                        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+                        event.preventDefault()
+                        go('/contact', '~/join')
+                    }}>
                         Join xelulabs
                     </Link>
-                    <Link className="btn btn-line" to="/about">
+                    <Link className="btn btn-line" to="/about" onClick={(event) => {
+                        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+                        event.preventDefault()
+                        go('/about', '~/projects')
+                    }}>
                         See our projects
                     </Link>
                 </div>

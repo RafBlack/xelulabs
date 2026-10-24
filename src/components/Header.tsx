@@ -2,12 +2,15 @@ import './Header.css'
 import { memo, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { GHOSTS, LOGO_PATHS, LOGO_VIEWBOX } from '../data/logoPaths'
+import { SMALL_ORCA } from '../data/orcaArt'
+import PixelRects from './PixelRects'
+import { usePageTransition } from '../hooks/usePageTransition'
 
 const links = [
-    { to: '/', label: 'HOME' },
-    { to: '/crew', label: 'CREW' },
-    { to: '/about', label: 'ABOUT' },
-    { to: '/contact', label: 'CONTACT' },
+    { to: '/', label: 'HOME', path: '~/' },
+    { to: '/crew', label: 'CREW', path: '~/crew' },
+    { to: '/about', label: 'ABOUT', path: '~/about' },
+    { to: '/contact', label: 'CONTACT', path: '~/contact' },
 ]
 
 function Mark() {
@@ -26,11 +29,24 @@ function Mark() {
 
 function Header() {
     const [open, setOpen] = useState(false)
+    const go = usePageTransition()
     return (
         <header className={`header container${open ? ' header-open' : ''}`}>
-            <Link to="/" className="brand" aria-label="xelulabs home">
+            <Link to="/" className="brand" aria-label="xelulabs home" onClick={(event) => {
+                if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+                event.preventDefault()
+                setOpen(false)
+                go('/', '~/')
+            }}>
                 <Mark />
                 <span>XELU</span>
+                <span className="nav-track" aria-hidden="true">
+                    <span className="nav-swim">
+                        <svg className="nav-fish" viewBox="0 0 20 10" shapeRendering="crispEdges">
+                            <PixelRects art={SMALL_ORCA} />
+                        </svg>
+                    </span>
+                </span>
             </Link>
             <button
                 type="button"
@@ -46,8 +62,20 @@ function Header() {
             </button>
             <nav id="main-nav" className="nav" aria-label="Main">
                 {links.map((l) => (
-                    <NavLink key={l.to} to={l.to} end>
+                    <NavLink key={l.to} to={l.to} end onClick={(event) => {
+                        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+                        event.preventDefault()
+                        setOpen(false)
+                        go(l.to, l.path)
+                    }}>
                         {l.label}
+                        <span className="nav-track" aria-hidden="true">
+                            <span className="nav-swim">
+                                <svg className="nav-fish" viewBox="0 0 20 10" shapeRendering="crispEdges">
+                                    <PixelRects art={SMALL_ORCA} />
+                                </svg>
+                            </span>
+                        </span>
                     </NavLink>
                 ))}
             </nav>

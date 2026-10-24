@@ -3,15 +3,18 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Crew from './pages/Crew'
 import Contact from './pages/Contact'
+import PageTransition from './components/PageTransition'
 
 function App() {
     return (
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/crew" element={<Crew />} />
-            <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <PageTransition>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/crew" element={<Crew />} />
+                <Route path="/contact" element={<Contact />} />
+            </Routes>
+        </PageTransition>
     )
 }
 

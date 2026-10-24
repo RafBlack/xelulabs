@@ -10,6 +10,7 @@
 }
 
 .brand {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.625rem;
@@ -71,6 +72,7 @@
 }
 
 .nav a {
+  position: relative;
   display: inline-flex;
   align-items: center;
   min-height: 44px;
@@ -79,8 +81,53 @@
 }
 
 .nav a:hover,
+.nav a:focus-visible,
 .nav a.active {
   color: #ffffff;
+}
+
+.nav-track {
+  position: absolute;
+  inset-inline: 0;
+  bottom: -6px;
+  height: 12px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.nav a:hover .nav-track,
+.nav a:focus-visible .nav-track,
+.brand:hover .nav-track,
+.brand:focus-visible .nav-track {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.nav-swim {
+  position: absolute;
+  left: -4px;
+  width: calc(100% - 20px);
+  height: 12px;
+  animation: navSwim 1.6s linear infinite;
+}
+
+.nav-fish {
+  display: block;
+  width: 24px;
+  height: 12px;
+  animation: navFlip 1.6s linear infinite;
+}
+
+@keyframes navSwim {
+  0%, 100% { transform: translateX(0); }
+  48%, 50% { transform: translateX(100%); }
+}
+
+@keyframes navFlip {
+  0%, 48%, 100% { transform: scaleX(1); }
+  50%, 98% { transform: scaleX(-1); }
 }
 
 .menu-btn {
@@ -137,5 +184,11 @@
 
   .nav a {
     padding-inline: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-track {
+    display: none;
   }
 }
