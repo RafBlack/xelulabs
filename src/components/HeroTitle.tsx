@@ -1,5 +1,5 @@
 import './HeroTitle.css'
-import { useRef } from 'react'
+import { memo, useRef } from 'react'
 import PixelRects from './PixelRects'
 import { SMALL_ORCA, SMALL_ORCA_TAIL } from '../data/orcaArt'
 import { useSwimIntro } from '../hooks/useSwimIntro'
@@ -38,4 +38,4 @@ function HeroTitle({ play }: { play: boolean }) {
     )
 }
 
-export default HeroTitle
+export default memo(HeroTitle)

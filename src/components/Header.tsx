@@ -1,5 +1,5 @@
 import './Header.css'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { GHOSTS, LOGO_PATHS, LOGO_VIEWBOX } from '../data/logoPaths'
 
@@ -55,4 +55,4 @@ function Header() {
     )
 }
 
-export default Header
+export default memo(Header)

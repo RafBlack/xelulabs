@@ -1,4 +1,5 @@
 import './BigOrca.css'
+import { memo } from 'react'
 import PixelRects from './PixelRects'
 import Splash from './Splash'
 import { BIG_ORCA, BIG_ORCA_GLITCH } from '../data/orcaArt'
@@ -37,4 +38,4 @@ function BigOrca({ play }: { play: boolean }) {
     )
 }
 
-export default BigOrca
+export default memo(BigOrca)
