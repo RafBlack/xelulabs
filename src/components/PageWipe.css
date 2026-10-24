@@ -28,7 +28,9 @@
   inset: 0;
   background: #10292e;
   will-change: transform;
-  animation: pageWipe 1.7s cubic-bezier(0.7, 0, 0.3, 1) both;
+  animation-name: pageWipe;
+  animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  animation-fill-mode: both;
 }
 
 .page-wipe-edge {
@@ -71,7 +73,8 @@
   font-family: 'JetBrains Mono', monospace;
   font-size: 22px;
   white-space: nowrap;
-  animation: pageWipeText 1.7s both;
+  animation-name: pageWipeText;
+  animation-fill-mode: both;
 }
 
 .page-wipe-text span {

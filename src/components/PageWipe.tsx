@@ -1,9 +1,10 @@
 import './PageWipe.css'
+import { useEffect, useRef } from 'react'
 import { BODY_ORCA } from '../data/orcaArt'
-import { WIPE_EDGE } from '../data/wipe'
+import { WIPE_COVER_END, WIPE_COVER_START, WIPE_DURATION, WIPE_EDGE } from '../data/wipe'
 import PixelRects from './PixelRects'
 
-type Props = { path: string; onComplete: () => void }
+type Props = { path: string; onCovered: () => void; onComplete: () => void }
 
 function WipeEdge({ trailing = false }: { trailing?: boolean }) {
     return (
@@ -13,10 +14,30 @@ function WipeEdge({ trailing = false }: { trailing?: boolean }) {
     )
 }
 
-function PageWipe({ path, onComplete }: Props) {
+function PageWipe({ path, onCovered, onComplete }: Props) {
+    const wave = useRef<HTMLDivElement>(null)
+    const covered = useRef(false)
+
+    useEffect(() => {
+        let frame: number
+        const check = () => {
+            const time = wave.current?.getAnimations()[0]?.currentTime
+            if (time !== null && time !== undefined && Number(time) >= WIPE_DURATION * (WIPE_COVER_START + WIPE_COVER_END) / 2) {
+                if (!covered.current) {
+                    covered.current = true
+                    onCovered()
+                }
+                return
+            }
+            frame = window.requestAnimationFrame(check)
+        }
+        frame = window.requestAnimationFrame(check)
+        return () => window.cancelAnimationFrame(frame)
+    }, [onCovered])
+
     return (
         <div className="page-wipe" aria-hidden="true">
-            <div className="page-wipe-wave" onAnimationEnd={(event) => {
+            <div ref={wave} className="page-wipe-wave" style={{ animationDuration: `${WIPE_DURATION}ms` }} onAnimationEnd={(event) => {
                 if (event.target === event.currentTarget) onComplete()
             }}>
                 <WipeEdge />
@@ -28,7 +49,7 @@ function PageWipe({ path, onComplete }: Props) {
                         </svg>
                     </div>
                 </div>
-                <p className="page-wipe-text"><span>$ </span>cd {path}</p>
+                <p className="page-wipe-text" style={{ animationDuration: `${WIPE_DURATION}ms` }}><span>$ </span>cd {path}</p>
             </div>
         </div>
     )
