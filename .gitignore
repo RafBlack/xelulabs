@@ -55,6 +55,10 @@ Desktop.ini
 
 # Local AI context and agent instructions
 AI/
+.ai/
+.claude/
+CLAUDE.md
+*.dc.html
 
 # Design reference, local only
 xelulabs_reference.html
