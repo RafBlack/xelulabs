@@ -5,7 +5,6 @@ export const XELU_LINES = [
     '$ whoami: xelu',
     'blub.',
     'no bugs here',
-    'sudo pet xelu',
     '$ sudo pet xelu',
     'permission denied',
     'segfault (core dumped)',
