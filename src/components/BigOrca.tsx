@@ -200,56 +200,56 @@ function BigOrca({ play }: { play: boolean }) {
                 <div className="big-orca" aria-hidden="true">
                     <div className="big-orca-rise">
                         <div ref={aimRef} className="big-orca-aim">
-                        <div key={state.id} className="big-orca-react" style={headStyle}>
-                            <svg className="big-orca-bob" viewBox={`0 0 ${HEAD_COLS} ${HEAD_ROWS}`} shapeRendering="crispEdges">
-                                {BIG_ORCA_GLITCH.map((ghost) => (
-                                    <g key={ghost.color} opacity={0.6}>
-                                        <g style={{ animationName: kind === 'glitch' || kind === 'hack' ? ghost.dx < 0 ? 'o5gR' : 'o5gC' : 'none', animationDuration: '0.6s' }}>
-                                            <PixelRects art={headArt} fill={ghost.color} dx={ghost.dx} />
+                            <div key={state.id} className="big-orca-react" style={headStyle}>
+                                <svg className="big-orca-bob" viewBox={`0 0 ${HEAD_COLS} ${HEAD_ROWS}`} shapeRendering="crispEdges">
+                                    {BIG_ORCA_GLITCH.map((ghost) => (
+                                        <g key={ghost.color} opacity={0.6}>
+                                            <g style={{ animationName: kind === 'glitch' || kind === 'hack' ? ghost.dx < 0 ? 'o5gR' : 'o5gC' : 'none', animationDuration: '0.6s' }}>
+                                                <PixelRects art={headArt} fill={ghost.color} dx={ghost.dx} />
+                                            </g>
                                         </g>
-                                    </g>
-                                ))}
-                                <PixelRects art={headArt} />
-                            </svg>
-                            {!reducedMotion && kind === 'hack' && (
-                                <svg className="orca-shades" viewBox="0 0 18 5" shapeRendering="crispEdges" aria-hidden="true">
-                                    <PixelRects art={SHADES} />
+                                    ))}
+                                    <PixelRects art={headArt} />
                                 </svg>
-                            )}
-                            {!reducedMotion && kind === 'shiny' && (
-                                <>
-                                    <span className="orca-spark" style={{ left: '30%', top: '12%' }} />
-                                    <span className="orca-spark" style={{ left: '62%', top: '30%', animationDelay: '0.3s' }} />
-                                    <span className="orca-spark" style={{ left: '20%', top: '52%', animationDelay: '0.6s' }} />
-                                    <span className="orca-spark" style={{ left: '78%', top: '8%', animationDelay: '0.45s' }} />
-                                </>
-                            )}
-                            {!reducedMotion && kind === 'spout' && (
-                                <div className="orca-spout" aria-hidden="true">
-                                    {SPOUT_COLUMNS.map(([left, width, height], i) => (
-                                        <div key={left} className="orca-spout-col" style={{ left, width, height, animationDelay: `${i * 0.05}s` }} />
-                                    ))}
-                                    {SPOUT_DROPS.map((drop, i) => (
-                                        <div key={i} className="orca-spout-pos" style={{ left: drop.left, transform: `scaleX(${drop.flip})` }}>
-                                            <div className="orca-spout-drop" style={{ width: drop.width, height: drop.height, animationDelay: drop.delay }}>
-                                                <i style={{ width: drop.size, height: drop.size, background: drop.color }} />
+                                {!reducedMotion && kind === 'hack' && (
+                                    <svg className="orca-shades" viewBox="0 0 18 5" shapeRendering="crispEdges" aria-hidden="true">
+                                        <PixelRects art={SHADES} />
+                                    </svg>
+                                )}
+                                {!reducedMotion && kind === 'shiny' && (
+                                    <>
+                                        <span className="orca-spark" style={{ left: '30%', top: '12%' }} />
+                                        <span className="orca-spark" style={{ left: '62%', top: '30%', animationDelay: '0.3s' }} />
+                                        <span className="orca-spark" style={{ left: '20%', top: '52%', animationDelay: '0.6s' }} />
+                                        <span className="orca-spark" style={{ left: '78%', top: '8%', animationDelay: '0.45s' }} />
+                                    </>
+                                )}
+                                {!reducedMotion && kind === 'spout' && (
+                                    <div className="orca-spout" aria-hidden="true">
+                                        {SPOUT_COLUMNS.map(([left, width, height], i) => (
+                                            <div key={left} className="orca-spout-col" style={{ left, width, height, animationDelay: `${i * 0.05}s` }} />
+                                        ))}
+                                        {SPOUT_DROPS.map((drop, i) => (
+                                            <div key={i} className="orca-spout-pos" style={{ left: drop.left, transform: `scaleX(${drop.flip})` }}>
+                                                <div className="orca-spout-drop" style={{ width: drop.width, height: drop.height, animationDelay: drop.delay }}>
+                                                    <i style={{ width: drop.size, height: drop.size, background: drop.color }} />
+                                                </div>
                                             </div>
-                                        </div>
+                                        ))}
+                                    </div>
+                                )}
+                                {bubble && (
+                                    <div className="orca-bubble" role="status">
+                                        {bubble}
+                                        <span className="orca-tail" />
+                                        <span className="orca-tail-two" />
+                                    </div>
+                                )}
+                                {fx &&
+                                    DRIPS.map((drip, i) => (
+                                        <i key={i} className="drip" style={{ ...drip, animationDelay: `${3.2 + i * 0.35}s` }} />
                                     ))}
-                                </div>
-                            )}
-                            {bubble && (
-                                <div className="orca-bubble" role="status">
-                                    {bubble}
-                                    <span className="orca-tail" />
-                                    <span className="orca-tail-two" />
-                                </div>
-                            )}
-                            {fx &&
-                                DRIPS.map((drip, i) => (
-                                    <i key={i} className="drip" style={{ ...drip, animationDelay: `${3.2 + i * 0.35}s` }} />
-                                ))}
-                        </div>
+                            </div>
                         </div>
                     </div>
                 </div>
