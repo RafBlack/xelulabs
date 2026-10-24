@@ -32,6 +32,34 @@ export const REACTION_HOLDS = {
 
 export const HACK_WINDOW = 1800
 
+export const REACTION_WEIGHTS = {
+    talk: 30,
+    tilt: 15,
+    spout: 15,
+    glitch: 15,
+    dive: 10,
+    swim: 8,
+    breach: 7,
+} as const
+
+export type RandomReaction = keyof typeof REACTION_WEIGHTS
+
+export function pickReaction(last: RandomReaction | null, withoutBubble: number, random = Math.random): RandomReaction {
+    const body = last === 'swim' || last === 'breach'
+    const pool = (Object.keys(REACTION_WEIGHTS) as RandomReaction[]).filter((reaction) =>
+        reaction !== last &&
+        (!body || (reaction !== 'swim' && reaction !== 'breach')) &&
+        (withoutBubble < 2 || reaction === 'talk' || reaction === 'tilt'),
+    )
+    const total = pool.reduce((sum, reaction) => sum + REACTION_WEIGHTS[reaction], 0)
+    let choice = random() * total
+    for (const reaction of pool) {
+        choice -= REACTION_WEIGHTS[reaction]
+        if (choice < 0) return reaction
+    }
+    return pool[pool.length - 1]
+}
+
 export const SWIM_PATH = [
     { at: 0, x: 1206, y: 944, rotate: 40, flip: -1 },
     { at: 0.62, x: 1200, y: 924, rotate: 40, flip: -1 },

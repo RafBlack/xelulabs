@@ -4,7 +4,8 @@ import type { CSSProperties } from 'react'
 import PixelRects from './PixelRects'
 import Splash from './Splash'
 import { BIG_ORCA, BIG_ORCA_GLITCH, BIG_ORCA_SHINY, BODY_ORCA, SHADES } from '../data/orcaArt'
-import { BREACH_PATH, HACK_WINDOW, REACTION_DURATIONS, REACTION_HOLDS, SPLASH_END, SWIM_PATH } from '../data/timeline'
+import { BREACH_PATH, HACK_WINDOW, pickReaction, REACTION_DURATIONS, REACTION_HOLDS, SPLASH_END, SWIM_PATH } from '../data/timeline'
+import type { RandomReaction } from '../data/timeline'
 
 type Reaction = keyof typeof REACTION_DURATIONS
 type Point = { x: number; y: number }
@@ -12,7 +13,6 @@ type Scale = { x: number; y: number }
 
 const HEAD_COLS = BIG_ORCA.rows[0].length
 const HEAD_ROWS = BIG_ORCA.rows.length
-const RANDOM_REACTIONS: Reaction[] = ['swim', 'breach', 'spout', 'dive', 'glitch', 'tilt', 'talk']
 const LINES = ['hi, i\'m xelu', 'ping? pong.', 'flag{n0t_h3r3}', '$ whoami: xelu', 'blub.', 'no bugs here', 'sudo pet xelu']
 const SPOUT_COLUMNS = [[0, 10, 120], [14, 14, 170], [30, 10, 130]]
 const SPOUT_TONES = ['#f2f2ef', '#cfe9ec', '#7fd3d8']
@@ -69,6 +69,7 @@ function BigOrca({ play }: { play: boolean }) {
     const timerRef = useRef<number | undefined>(undefined)
     const tapsRef = useRef<number[]>([])
     const lastReactionRef = useRef<Reaction | null>(null)
+    const withoutBubbleRef = useRef(0)
     const [fx, setFx] = useState(play)
     const [state, setState] = useState({
         kind: null as Reaction | null,
@@ -154,11 +155,12 @@ function BigOrca({ play }: { play: boolean }) {
         } else if (Math.random() < 0.02) {
             next = 'shiny'
         } else {
-            const pool = RANDOM_REACTIONS.filter((reaction) => reaction !== lastReactionRef.current)
-            next = pool[Math.floor(Math.random() * pool.length)]
+            const last = lastReactionRef.current
+            next = pickReaction(last === 'hack' || last === 'shiny' ? null : last as RandomReaction | null, withoutBubbleRef.current)
         }
         if (reducedMotion && next !== 'hack' && next !== 'shiny') next = 'talk'
         lastReactionRef.current = next
+        withoutBubbleRef.current = next === 'talk' || next === 'tilt' || next === 'hack' || next === 'shiny' ? 0 : withoutBubbleRef.current + 1
         const line = LINES[Math.floor(Math.random() * LINES.length)]
         setState((current) => ({
             ...current,
