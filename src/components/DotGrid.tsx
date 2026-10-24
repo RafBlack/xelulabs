@@ -11,9 +11,9 @@ type Dot = { x: number; y: number; t: number; ox: number; oy: number }
 
 const RADIUS = 140
 const PUSH = 7
-const SIZE = 3
+const SIZE = 2
 const EASE = 0.25
-const STEP = 48
+const STEP = 32
 
 function makeDots(width: number, height: number) {
     const dots: Dot[] = []
@@ -55,18 +55,20 @@ function DotGrid({ pos, waves, holes }: Props) {
         const canvas = canvasRef.current
         const ctx = canvas?.getContext('2d')
         if (!canvas || !ctx) return
-        const ratio = window.devicePixelRatio || 1
+        let ratio = 1
+        let size = SIZE
         let width = 0
         let height = 0
         let dots: Dot[] = []
         let frame = 0
 
         const setup = () => {
+            ratio = window.devicePixelRatio || 1
+            size = Math.max(1, Math.round(SIZE * ratio))
             width = canvas.offsetWidth
             height = canvas.offsetHeight
-            canvas.width = width * ratio
-            canvas.height = height * ratio
-            ctx.setTransform(ratio, 0, 0, ratio, 0, 0)
+            canvas.width = Math.round(width * ratio)
+            canvas.height = Math.round(height * ratio)
             dots = makeDots(width, height)
         }
         const observer = new ResizeObserver(setup)
@@ -74,18 +76,16 @@ function DotGrid({ pos, waves, holes }: Props) {
 
         const draw = () => {
             const { pos, waves, holes } = latest.current
-            ctx.clearRect(0, 0, width, height)
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
             dots.forEach((dot) => {
                 const goal = target(dot, pos, waves)
                 dot.t += (goal.t - dot.t) * EASE
                 dot.ox += (goal.ox - dot.ox) * EASE
                 dot.oy += (goal.oy - dot.oy) * EASE
                 if (inHole(dot, holes)) return
-                const c = Math.round(46 + (150 - 46) * dot.t)
-                ctx.fillStyle = `rgb(${c},${c},${Math.round(51 + (156 - 51) * dot.t)})`
-                ctx.beginPath()
-                ctx.arc(dot.x + dot.ox, dot.y + dot.oy, SIZE * (1 + dot.t * 0.5), 0, Math.PI * 2)
-                ctx.fill()
+                const c = Math.round(38 + (74 - 38) * dot.t)
+                ctx.fillStyle = `rgb(${c},${c},${Math.round(42 + (82 - 42) * dot.t)})`
+                ctx.fillRect(Math.round((dot.x + dot.ox) * ratio), Math.round((dot.y + dot.oy) * ratio), size, size)
             })
             frame = requestAnimationFrame(draw)
         }

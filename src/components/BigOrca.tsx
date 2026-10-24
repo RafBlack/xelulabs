@@ -1,8 +1,9 @@
 import './BigOrca.css'
-import { memo } from 'react'
+import { memo, useEffect, useState } from 'react'
 import PixelRects from './PixelRects'
 import Splash from './Splash'
 import { BIG_ORCA, BIG_ORCA_GLITCH } from '../data/orcaArt'
+import { SPLASH_END } from '../data/timeline'
 
 const cols = BIG_ORCA.rows[0].length
 const rows = BIG_ORCA.rows.length
@@ -15,6 +16,14 @@ const DRIPS = [
 ]
 
 function BigOrca({ play }: { play: boolean }) {
+    const [fx, setFx] = useState(play)
+
+    useEffect(() => {
+        if (!play) return
+        const timer = setTimeout(() => setFx(false), SPLASH_END)
+        return () => clearTimeout(timer)
+    }, [play])
+
     return (
         <>
             <div className="big-orca" aria-hidden="true">
@@ -27,13 +36,13 @@ function BigOrca({ play }: { play: boolean }) {
                         ))}
                         <PixelRects art={BIG_ORCA} />
                     </svg>
-                    {play &&
+                    {fx &&
                         DRIPS.map((d, i) => (
                             <i key={i} className="drip" style={{ ...d, animationDelay: `${3.2 + i * 0.35}s` }} />
                         ))}
                 </div>
             </div>
-            {play && <Splash />}
+            {fx && <Splash />}
         </>
     )
 }

@@ -41,7 +41,7 @@
   aspect-ratio: 1;
   background: #cfe9ec;
   opacity: 0;
-  animation: dripFall 1s ease-in both;
+  animation: dripFall 1s ease-in forwards;
 }
 
 @keyframes dripFall {

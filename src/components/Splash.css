@@ -19,7 +19,7 @@
   background: linear-gradient(#ffffff calc(var(--orca-w) * 0.03), var(--c) 0);
   transform: scaleY(0);
   transform-origin: 50% 100%;
-  animation: colShoot 0.75s cubic-bezier(0.2, 0.8, 0.4, 1) 2.32s both;
+  animation: colShoot 0.75s cubic-bezier(0.2, 0.8, 0.4, 1) 2.32s forwards;
 }
 
 .splash-drop {
@@ -28,13 +28,13 @@
   height: calc(var(--orca-w) * 0.018);
   opacity: 0;
   animation-name: dropBurst;
-  animation-fill-mode: both;
+  animation-fill-mode: forwards;
 }
 
 @keyframes colShoot {
   0% { transform: scaleY(0); }
   40% { transform: scaleY(1); animation-timing-function: ease-in; }
-  100% { transform: scaleY(0); }
+  100% { transform: scaleY(0); opacity: 0; }
 }
 
 @keyframes dropBurst {
