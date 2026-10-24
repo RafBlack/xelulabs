@@ -1,6 +1,6 @@
-# XeluLabs
+# xelulabs
 
-XeluLabs is a passion-driven cybersecurity organization focused on improvement
+xelulabs is a passion-driven cybersecurity organization focused on improvement
 and exposure through practical competition and projects. This repository holds
 its website, built with React and Vite.
 

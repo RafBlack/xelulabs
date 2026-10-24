@@ -9,17 +9,16 @@ type Props = { pos: Point; waves: Wave[]; holes: Hole[] }
 
 type Dot = { x: number; y: number; t: number; ox: number; oy: number }
 
-const WIDTH = 1920
-const HEIGHT = 1080
 const RADIUS = 140
 const PUSH = 7
-const SIZE = 3
+const SIZE = 2
 const EASE = 0.25
+const STEP = 32
 
-function makeDots() {
+function makeDots(width: number, height: number) {
     const dots: Dot[] = []
-    for (let y = 156; y <= 924; y += 48) {
-        for (let x = 168; x <= 1752; x += 48) dots.push({ x, y, t: 0, ox: 0, oy: 0 })
+    for (let y = STEP / 2; y < height; y += STEP) {
+        for (let x = ((width % STEP) + STEP) / 2; x < width; x += STEP) dots.push({ x, y, t: 0, ox: 0, oy: 0 })
     }
     return dots
 }
@@ -56,33 +55,46 @@ function DotGrid({ pos, waves, holes }: Props) {
         const canvas = canvasRef.current
         const ctx = canvas?.getContext('2d')
         if (!canvas || !ctx) return
-        const ratio = window.devicePixelRatio || 1
-        canvas.width = WIDTH * ratio
-        canvas.height = HEIGHT * ratio
-        ctx.scale(ratio, ratio)
-        const dots = makeDots()
+        let ratio = 1
+        let size = SIZE
+        let width = 0
+        let height = 0
+        let dots: Dot[] = []
         let frame = 0
+
+        const setup = () => {
+            ratio = window.devicePixelRatio || 1
+            size = Math.max(1, Math.round(SIZE * ratio))
+            width = canvas.offsetWidth
+            height = canvas.offsetHeight
+            canvas.width = Math.round(width * ratio)
+            canvas.height = Math.round(height * ratio)
+            dots = makeDots(width, height)
+        }
+        const observer = new ResizeObserver(setup)
+        observer.observe(canvas)
 
         const draw = () => {
             const { pos, waves, holes } = latest.current
-            ctx.clearRect(0, 0, WIDTH, HEIGHT)
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
             dots.forEach((dot) => {
                 const goal = target(dot, pos, waves)
                 dot.t += (goal.t - dot.t) * EASE
                 dot.ox += (goal.ox - dot.ox) * EASE
                 dot.oy += (goal.oy - dot.oy) * EASE
                 if (inHole(dot, holes)) return
-                const c = Math.round(46 + (150 - 46) * dot.t)
-                ctx.fillStyle = `rgb(${c},${c},${Math.round(51 + (156 - 51) * dot.t)})`
-                ctx.beginPath()
-                ctx.arc(dot.x + dot.ox, dot.y + dot.oy, SIZE * (1 + dot.t * 0.5), 0, Math.PI * 2)
-                ctx.fill()
+                const c = Math.round(38 + (74 - 38) * dot.t)
+                ctx.fillStyle = `rgb(${c},${c},${Math.round(42 + (82 - 42) * dot.t)})`
+                ctx.fillRect(Math.round((dot.x + dot.ox) * ratio), Math.round((dot.y + dot.oy) * ratio), size, size)
             })
             frame = requestAnimationFrame(draw)
         }
 
         frame = requestAnimationFrame(draw)
-        return () => cancelAnimationFrame(frame)
+        return () => {
+            cancelAnimationFrame(frame)
+            observer.disconnect()
+        }
     }, [])
 
     return <canvas ref={canvasRef} className="dots" aria-hidden="true" />

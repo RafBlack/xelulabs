@@ -55,6 +55,54 @@ Desktop.ini
 
 # Local AI context and agent instructions
 AI/
+.ai/
+.claude/
+CLAUDE.md
+*.dc.html
 
 # Design reference, local only
 xelulabs_reference.html
+
+# Design tool output (impeccable)
+.impeccable/
+DESIGN.md
+PRODUCT.md
+
+# Other AI agents and browser automation, local only
+CLAUDE.local.md
+AGENTS.md
+GEMINI.md
+.cursor/
+.cursorrules
+.windsurf/
+.windsurfrules
+.aider*
+.continue/
+.codex/
+.gemini/
+.playwright-mcp/
+.clinerules
+.cline/
+.roo/
+.roomodes
+.kiro/
+.zed/
+.serena/
+.augment/
+.tabnine/
+.qodo/
+.junie/
+.trae/
+.mcp.json
+.copilot/
+.github/copilot-instructions.md
+.github/instructions/
+.vscode/mcp.json
+llms.txt
+*.prompt.md
+.agent/
+.agents/
+.ai-notes/
+playwright/.auth/
+*.har
+.agent-bridge/

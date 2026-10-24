@@ -1,0 +1,61 @@
+.big-orca {
+  position: absolute;
+  right: -6%;
+  bottom: -12%;
+  z-index: 0;
+  width: var(--orca-w);
+  pointer-events: none;
+}
+
+.big-orca-rise {
+  position: relative;
+}
+
+.intro .big-orca-rise {
+  animation: orcaRise 0.9s cubic-bezier(0.34, 1.45, 0.64, 1) 2.2s both;
+}
+
+.big-orca-bob {
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: orcaBob 3.2s ease-in-out infinite alternate;
+}
+
+.intro .big-orca-bob {
+  animation-delay: 3.1s;
+}
+
+@keyframes orcaRise {
+  from { transform: translateY(120%); }
+  to { transform: none; }
+}
+
+@keyframes orcaBob {
+  to { transform: translateY(-2%); }
+}
+
+.drip {
+  position: absolute;
+  width: 1.6%;
+  aspect-ratio: 1;
+  background: #cfe9ec;
+  opacity: 0;
+  animation: dripFall 1s ease-in forwards;
+}
+
+@keyframes dripFall {
+  0% { transform: none; opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(calc(var(--orca-w) * 0.4)); opacity: 0; }
+}
+
+@media (max-width: 639px) {
+  .big-orca {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    align-self: flex-end;
+    margin: auto -16px calc(var(--orca-w) * -0.2) 0;
+  }
+}

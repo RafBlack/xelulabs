@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { LOGO_HITS, LOOP_MS, RIPPLE } from '../data/timeline'
+import { RIPPLE } from '../data/timeline'
 
 export type Wave = { x: number; y: number; r: number }
 
@@ -21,19 +21,6 @@ export function useRipples() {
         }
         frame.current = requestAnimationFrame(step)
     }, [])
-
-    useEffect(() => {
-        const timers: number[] = []
-        const fire = () => {
-            LOGO_HITS.forEach((h) => timers.push(setTimeout(() => addRipple(h.x, h.y), h.at)))
-        }
-        fire()
-        const loop = setInterval(fire, LOOP_MS)
-        return () => {
-            clearInterval(loop)
-            timers.forEach(clearTimeout)
-        }
-    }, [addRipple])
 
     useEffect(
         () => () => {

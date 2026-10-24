@@ -1,0 +1,50 @@
+import './BigOrca.css'
+import { memo, useEffect, useState } from 'react'
+import PixelRects from './PixelRects'
+import Splash from './Splash'
+import { BIG_ORCA, BIG_ORCA_GLITCH } from '../data/orcaArt'
+import { SPLASH_END } from '../data/timeline'
+
+const cols = BIG_ORCA.rows[0].length
+const rows = BIG_ORCA.rows.length
+
+const DRIPS = [
+    { left: '17.5%', top: '25%' },
+    { left: '20%', top: '37%' },
+    { left: '25%', top: '53%' },
+    { left: '30%', top: '65%' },
+]
+
+function BigOrca({ play }: { play: boolean }) {
+    const [fx, setFx] = useState(play)
+
+    useEffect(() => {
+        if (!play) return
+        const timer = setTimeout(() => setFx(false), SPLASH_END)
+        return () => clearTimeout(timer)
+    }, [play])
+
+    return (
+        <>
+            <div className="big-orca" aria-hidden="true">
+                <div className="big-orca-rise">
+                    <svg className="big-orca-bob" viewBox={`0 0 ${cols} ${rows}`} shapeRendering="crispEdges">
+                        {BIG_ORCA_GLITCH.map((g) => (
+                            <g key={g.color} opacity={0.6}>
+                                <PixelRects art={BIG_ORCA} fill={g.color} dx={g.dx} />
+                            </g>
+                        ))}
+                        <PixelRects art={BIG_ORCA} />
+                    </svg>
+                    {fx &&
+                        DRIPS.map((d, i) => (
+                            <i key={i} className="drip" style={{ ...d, animationDelay: `${3.2 + i * 0.35}s` }} />
+                        ))}
+                </div>
+            </div>
+            {fx && <Splash />}
+        </>
+    )
+}
+
+export default memo(BigOrca)

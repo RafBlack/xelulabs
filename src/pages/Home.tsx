@@ -1,18 +1,19 @@
 import './Home.css'
+import { useState } from 'react'
 import type { MouseEvent } from 'react'
+import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import HeroTitle from '../components/HeroTitle'
-import Description from '../components/Description'
-import AnimatedLogo from '../components/AnimatedLogo'
+import Terminal from '../components/Terminal'
 import DotGrid from '../components/DotGrid'
+import BigOrca from '../components/BigOrca'
 import { toStage, useMousePosition } from '../hooks/useMousePosition'
 import { useRipples } from '../hooks/useRipples'
-import { useOrcaIntro } from '../hooks/useOrcaIntro'
 import { useCutouts } from '../hooks/useCutouts'
 
 function Home() {
-    const intro = useOrcaIntro()
-    const { stageRef, titleRef, descRef, orcaRef, holes } = useCutouts(intro.phase)
+    const [play] = useState(() => !matchMedia('(prefers-reduced-motion: reduce)').matches)
+    const { stageRef, heroRef, holes } = useCutouts()
     const { pos, onMouseMove, onMouseLeave } = useMousePosition()
     const { waves, addRipple } = useRipples()
 
@@ -24,18 +25,31 @@ function Home() {
     return (
         <div
             ref={stageRef}
-            className="stage stage-home"
+            className={`stage stage-home${play ? ' intro' : ''}`}
             onMouseMove={onMouseMove}
             onMouseLeave={onMouseLeave}
             onClick={burst}
         >
             <DotGrid pos={pos} waves={waves} holes={holes} />
-            <AnimatedLogo />
             <Header />
-            <main className="hero">
-                <HeroTitle intro={intro} titleRef={titleRef} orcaRef={orcaRef} />
-                <Description ref={descRef} />
+            <main ref={heroRef} className="hero container">
+                <p className="hero-eyebrow">
+                    <span aria-hidden="true" />
+                    Projects / CTF / Community
+                </p>
+                <HeroTitle play={play} />
+                <Terminal play={play} />
+                <div className="hero-actions">
+                    <Link className="btn btn-fill" to="/contact">
+                        Join xelulabs
+                    </Link>
+                    <Link className="btn btn-line" to="/about">
+                        See our projects
+                    </Link>
+                </div>
+                <p className="hero-est">EST. 2026, PHILIPPINES</p>
             </main>
+            <BigOrca play={play} />
         </div>
     )
 }
