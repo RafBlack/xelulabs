@@ -4,6 +4,7 @@ import type { CSSProperties } from 'react'
 import PixelRects from './PixelRects'
 import Splash from './Splash'
 import { BIG_ORCA, BIG_ORCA_GLITCH, BIG_ORCA_SHINY, BODY_ORCA, SHADES } from '../data/orcaArt'
+import { XELU_LINES } from '../data/xeluLines'
 import { BREACH_PATH, HACK_WINDOW, pickReaction, REACTION_DURATIONS, REACTION_HOLDS, SPLASH_END, SWIM_PATH } from '../data/timeline'
 import type { RandomReaction } from '../data/timeline'
 
@@ -13,7 +14,6 @@ type Scale = { x: number; y: number }
 
 const HEAD_COLS = BIG_ORCA.rows[0].length
 const HEAD_ROWS = BIG_ORCA.rows.length
-const LINES = ['hi, i\'m xelu', 'ping? pong.', 'flag{n0t_h3r3}', '$ whoami: xelu', 'blub.', 'no bugs here', 'sudo pet xelu']
 const SPOUT_COLUMNS = [[0, 10, 120], [14, 14, 170], [30, 10, 130]]
 const SPOUT_TONES = ['#f2f2ef', '#cfe9ec', '#7fd3d8']
 const SPOUT_DROPS = Array.from({ length: 18 }, (_, i) => ({
@@ -161,7 +161,7 @@ function BigOrca({ play }: { play: boolean }) {
         if (reducedMotion && next !== 'hack' && next !== 'shiny') next = 'talk'
         lastReactionRef.current = next
         withoutBubbleRef.current = next === 'talk' || next === 'tilt' || next === 'hack' || next === 'shiny' ? 0 : withoutBubbleRef.current + 1
-        const line = LINES[Math.floor(Math.random() * LINES.length)]
+        const line = XELU_LINES[Math.floor(Math.random() * XELU_LINES.length)]
         setState((current) => ({
             ...current,
             kind: next,
