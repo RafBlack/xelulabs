@@ -8,7 +8,7 @@ const rand = (i: number, k: number) => {
     return v - Math.floor(v)
 }
 
-const COLUMNS = [-4, -3, -2, -1, 0, 1, 2, 3, 4].map((x) => ({ x, h: 0.34 - Math.abs(x) * 0.06 + rand(x, 9) * 0.08 }))
+const COLUMNS = [-4, -3, -2, -1, 0, 1, 2, 3, 4].map((x) => ({ x, h: 0.26 - Math.abs(x) * 0.045 + rand(x, 9) * 0.06 }))
 
 const DROPS = Array.from({ length: 44 }, (_, i) => ({
     x: (rand(i, 1) - 0.5) * 0.3,

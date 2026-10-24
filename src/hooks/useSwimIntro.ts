@@ -22,8 +22,8 @@ export function useSwimIntro(lineRef: RefObject<HTMLElement | null>, orcaRef: Re
         const plan = () => {
             const box = line.getBoundingClientRect()
             const w = orca.offsetWidth
-            const from = -box.left - w
-            const to = document.documentElement.clientWidth - box.left
+            const from = -box.left - 2 * w
+            const to = document.documentElement.clientWidth - box.left + w
             path.setKeyframes([
                 { transform: `translateX(${from}px)` },
                 { transform: `translateX(${to}px)` },

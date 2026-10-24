@@ -1,6 +1,6 @@
 .splash {
   position: absolute;
-  left: 52%;
+  left: 22%;
   bottom: calc(var(--w) * 0.06);
   width: 0;
   height: 0;
