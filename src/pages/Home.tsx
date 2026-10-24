@@ -5,6 +5,7 @@ import Header from '../components/Header'
 import HeroTitle from '../components/HeroTitle'
 import Description from '../components/Description'
 import DotGrid from '../components/DotGrid'
+import BigOrca from '../components/BigOrca'
 import { toStage, useMousePosition } from '../hooks/useMousePosition'
 import { useRipples } from '../hooks/useRipples'
 import { useCutouts } from '../hooks/useCutouts'
@@ -28,6 +29,7 @@ function Home() {
             onClick={burst}
         >
             <DotGrid pos={pos} waves={waves} holes={holes} />
+            <BigOrca />
             <Header />
             <main ref={heroRef} className="hero container">
                 <HeroTitle />

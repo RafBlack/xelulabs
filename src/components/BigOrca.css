@@ -1,0 +1,59 @@
+.big-orca {
+  --w: clamp(240px, 40vw, 640px);
+  position: absolute;
+  right: calc(var(--w) * -0.1);
+  bottom: calc(var(--w) * -0.06);
+  z-index: 0;
+  width: var(--w);
+  transform: rotate(-10deg);
+  transform-origin: 100% 100%;
+  pointer-events: none;
+}
+
+.big-orca-rise {
+  animation: orcaRise 0.9s cubic-bezier(0.34, 1.45, 0.64, 1) 2.2s both;
+}
+
+.big-orca-bob {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  animation: orcaBob 3.2s ease-in-out 3.1s infinite alternate;
+}
+
+.big-orca-ghost {
+  mix-blend-mode: screen;
+  opacity: 0.55;
+}
+
+.big-orca-ghost-0 {
+  transform: translateX(-0.6px);
+  animation: orcaGlitch0 5s steps(1) infinite;
+}
+
+.big-orca-ghost-1 {
+  transform: translateX(0.6px);
+  animation: orcaGlitch1 5s steps(1) infinite;
+}
+
+@keyframes orcaRise {
+  from { transform: translateY(110%); }
+  to { transform: none; }
+}
+
+@keyframes orcaBob {
+  to { transform: translateY(-2.5%); }
+}
+
+@keyframes orcaGlitch0 {
+  88% { transform: translate(-1.6px, 0.3px); }
+  90% { transform: translate(0.8px, -0.2px); }
+  92% { transform: translateX(-0.6px); }
+}
+
+@keyframes orcaGlitch1 {
+  88% { transform: translate(1.6px, -0.3px); }
+  90% { transform: translate(-0.8px, 0.2px); }
+  92% { transform: translateX(0.6px); }
+}
