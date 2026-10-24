@@ -1,7 +1,6 @@
 .orca-layer {
   position: absolute;
   inset: 0;
-  z-index: 2;
   pointer-events: none;
 }
 
@@ -9,7 +8,7 @@
   position: absolute;
   right: -6%;
   bottom: -12%;
-  z-index: 1;
+  z-index: 3;
   width: var(--orca-w);
   pointer-events: none;
 }
@@ -291,7 +290,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 1;
+  z-index: 0;
   width: calc(var(--orca-w) * 0.46);
   pointer-events: none;
   transform-origin: 50% 50%;
@@ -317,7 +316,7 @@
 .orca-burst {
   position: absolute;
   bottom: 0;
-  z-index: 2;
+  z-index: 0;
   width: 40px;
   height: 10px;
   pointer-events: none;
