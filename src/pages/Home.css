@@ -91,6 +91,16 @@
 }
 
 @media (max-width: 639px) {
+  .hero-eyebrow {
+    gap: 12px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+  }
+
+  .hero-eyebrow span {
+    width: 28px;
+  }
+
   .stage-home {
     --orca-w: min(78vw, 340px);
   }

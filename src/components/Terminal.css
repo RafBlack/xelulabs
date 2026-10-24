@@ -52,3 +52,9 @@
 @keyframes blink {
   50% { opacity: 0; }
 }
+
+@media (max-width: 639px) {
+  .terminal .term-desc {
+    text-align: left;
+  }
+}
