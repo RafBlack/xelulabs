@@ -16,7 +16,9 @@ function WipeEdge({ trailing = false }: { trailing?: boolean }) {
 function PageWipe({ path, onComplete }: Props) {
     return (
         <div className="page-wipe" aria-hidden="true">
-            <div className="page-wipe-wave" onAnimationEnd={onComplete}>
+            <div className="page-wipe-wave" onAnimationEnd={(event) => {
+                if (event.target === event.currentTarget) onComplete()
+            }}>
                 <WipeEdge />
                 <WipeEdge trailing />
                 <div className="page-wipe-rider">
