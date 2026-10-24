@@ -5,7 +5,7 @@ import PixelRects from './PixelRects'
 import Splash from './Splash'
 import { BIG_ORCA, BIG_ORCA_GLITCH, BIG_ORCA_SHINY, BODY_ORCA, SHADES } from '../data/orcaArt'
 import { XELU_LINES } from '../data/xeluLines'
-import { BREACH_PATH, HACK_WINDOW, pickReaction, REACTION_DURATIONS, REACTION_HOLDS, SPLASH_END, SWIM_PATH } from '../data/timeline'
+import { BREACH_PATH, HACK_WINDOW, HEAD_AIM, pickReaction, REACTION_DURATIONS, REACTION_HOLDS, SPLASH_END, SWIM_PATH } from '../data/timeline'
 import type { RandomReaction } from '../data/timeline'
 
 type Reaction = keyof typeof REACTION_DURATIONS
@@ -95,12 +95,12 @@ function BigOrca({ play }: { play: boolean }) {
         const update = () => {
             frame = 0
             const pointer = aimPointerRef.current
-            const box = aim.parentElement?.getBoundingClientRect()
-            if (!pointer || !box || state.kind) return
-            const pivotX = box.left + box.width * 0.6
-            const pivotY = box.bottom
-            const angle = Math.atan2(pointer.x - pivotX, pivotY - pointer.y) * 180 / Math.PI
-            aim.style.setProperty('--aim', `${Math.max(-10, Math.min(6, angle))}deg`)
+            const stage = layerRef.current?.closest('.stage')?.getBoundingClientRect()
+            if (!pointer || !stage || state.kind) return
+            const position = (pointer.x - stage.left) / stage.width
+            const progress = Math.max(0, Math.min(1, (position - HEAD_AIM.inset) / (1 - HEAD_AIM.inset * 2)))
+            const angle = HEAD_AIM.min + (HEAD_AIM.max - HEAD_AIM.min) * progress
+            aim.style.setProperty('--aim', `${Math.round(angle * 10) / 10}deg`)
         }
         const move = (event: PointerEvent) => {
             if (event.pointerType === 'touch' && event.type !== 'pointerdown') return

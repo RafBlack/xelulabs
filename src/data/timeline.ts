@@ -32,6 +32,8 @@ export const REACTION_HOLDS = {
 
 export const HACK_WINDOW = 1800
 
+export const HEAD_AIM = { min: -10, max: 6, inset: 0.07 }
+
 export const REACTION_WEIGHTS = {
     talk: 30,
     tilt: 15,
