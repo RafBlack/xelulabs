@@ -110,8 +110,10 @@ function BigOrca({ play }: { play: boolean }) {
             })
         }
         window.addEventListener('pointermove', move, { passive: true })
+        window.addEventListener('pointerdown', move, { passive: true })
         return () => {
             window.removeEventListener('pointermove', move)
+            window.removeEventListener('pointerdown', move)
             window.cancelAnimationFrame(frame)
         }
     }, [state.kind])

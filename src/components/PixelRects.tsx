@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import type { Pixels } from '../data/orcaArt'
 
 type Props = { art: Pixels; from?: number; to?: number; fill?: string; dx?: number }
@@ -12,4 +13,4 @@ function PixelRects({ art, from = 0, to = Infinity, fill, dx = 0 }: Props) {
     )
 }
 
-export default PixelRects
+export default memo(PixelRects)

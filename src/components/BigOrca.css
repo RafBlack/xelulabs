@@ -294,6 +294,7 @@
   width: calc(var(--orca-w) * 0.46);
   pointer-events: none;
   transform-origin: 50% 50%;
+  transition: transform 0.7s cubic-bezier(0.3, 0.7, 0.3, 1);
   will-change: transform;
 }
 
