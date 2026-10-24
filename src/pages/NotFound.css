@@ -1,0 +1,120 @@
+.not-found::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(rgba(127, 211, 216, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(127, 211, 216, 0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, transparent 10%, #000 70%);
+}
+
+.not-found-content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+  align-items: center;
+  flex: 1;
+  gap: clamp(2rem, 7vw, 7rem);
+  padding-block: clamp(3rem, 10vh, 7rem);
+}
+
+.not-found-code {
+  margin: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(160px, 32vw, 470px);
+  font-weight: 700;
+  line-height: 0.7;
+  letter-spacing: -0.08em;
+  color: transparent;
+  -webkit-text-stroke: 1px #3a777b;
+  text-shadow: 8px 8px 0 rgba(127, 211, 216, 0.08);
+  user-select: none;
+}
+
+.not-found-copy {
+  max-width: 34rem;
+}
+
+.not-found-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #7fd3d8;
+}
+
+.not-found-status span {
+  width: 2rem;
+  height: 2px;
+  background: currentColor;
+}
+
+.not-found-copy h1 {
+  margin: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  line-height: 0.85;
+}
+
+.not-found-copy > p:not(.not-found-status) {
+  margin: clamp(1.25rem, 3vw, 2rem) 0;
+  color: #c9cbcf;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.6;
+}
+
+.not-found-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 48px;
+  padding-inline: 1.25rem;
+  border: 1px solid #6b6d72;
+  color: #f2f2ef;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.not-found-link:hover,
+.not-found-link:focus-visible {
+  border-color: #7fd3d8;
+  color: #7fd3d8;
+}
+
+.not-found-link span {
+  font-size: 1.2rem;
+  transition: transform 0.2s ease-out;
+}
+
+.not-found-link:hover span,
+.not-found-link:focus-visible span {
+  transform: translateX(-4px);
+}
+
+@media (max-width: 760px) {
+  .not-found-content {
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 2.5rem;
+  }
+
+  .not-found-code {
+    font-size: clamp(130px, 52vw, 260px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .not-found-link span {
+    transition: none;
+  }
+}
