@@ -2,6 +2,8 @@ import './Header.css'
 import { memo, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { GHOSTS, LOGO_PATHS, LOGO_VIEWBOX } from '../data/logoPaths'
+import { SMALL_ORCA } from '../data/orcaArt'
+import PixelRects from './PixelRects'
 
 const links = [
     { to: '/', label: 'HOME' },
@@ -48,6 +50,13 @@ function Header() {
                 {links.map((l) => (
                     <NavLink key={l.to} to={l.to} end>
                         {l.label}
+                        <span className="nav-track" aria-hidden="true">
+                            <span className="nav-swim">
+                                <svg className="nav-fish" viewBox="0 0 20 10" shapeRendering="crispEdges">
+                                    <PixelRects art={SMALL_ORCA} />
+                                </svg>
+                            </span>
+                        </span>
                     </NavLink>
                 ))}
             </nav>
