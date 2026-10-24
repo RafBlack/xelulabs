@@ -9,7 +9,6 @@ export const TYPE = { cmdStart: 1800, cmdDuration: 800, descStart: 2700, charMs:
 export const REACTION_DURATIONS = {
     swim: '6.5s',
     breach: '2.7s',
-    chase: '5.2s',
     spout: '1.2s',
     dive: '1.6s',
     glitch: '0.6s',
@@ -22,7 +21,6 @@ export const REACTION_DURATIONS = {
 export const REACTION_HOLDS = {
     swim: 6600,
     breach: 2800,
-    chase: 5300,
     spout: 2400,
     dive: 2400,
     glitch: 2400,

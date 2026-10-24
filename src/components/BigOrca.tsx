@@ -7,13 +7,11 @@ import { BIG_ORCA, BIG_ORCA_GLITCH, BIG_ORCA_SHINY, BODY_ORCA, SHADES } from '..
 import { BREACH_PATH, HACK_WINDOW, REACTION_DURATIONS, REACTION_HOLDS, SPLASH_END, SWIM_PATH } from '../data/timeline'
 
 type Reaction = keyof typeof REACTION_DURATIONS
-type Point = { x: number; y: number }
 type Scale = { x: number; y: number }
-type Offset = { x: number; y: number }
 
 const HEAD_COLS = BIG_ORCA.rows[0].length
 const HEAD_ROWS = BIG_ORCA.rows.length
-const RANDOM_REACTIONS: Reaction[] = ['swim', 'breach', 'chase', 'spout', 'dive', 'glitch', 'tilt', 'talk']
+const RANDOM_REACTIONS: Reaction[] = ['swim', 'breach', 'spout', 'dive', 'glitch', 'tilt', 'talk']
 const LINES = ['hi, i\'m xelu', 'ping? pong.', 'flag{n0t_h3r3}', '$ whoami: xelu', 'blub.', 'no bugs here', 'sudo pet xelu']
 const SPOUT_COLUMNS = [[0, 10, 120], [14, 14, 170], [30, 10, 130]]
 const SPOUT_TONES = ['#f2f2ef', '#cfe9ec', '#7fd3d8']
@@ -75,10 +73,7 @@ function BigOrca({ play }: { play: boolean }) {
         pets: 0,
         line: '',
         hover: false,
-        pointer: { x: 1250, y: 700 } as Point,
-        direction: -1,
         scale: { x: 1, y: 1 } as Scale,
-        offset: { x: 0, y: 0 } as Offset,
     })
     const reducedMotion = !play
 
@@ -89,34 +84,6 @@ function BigOrca({ play }: { play: boolean }) {
     }, [play])
 
     useEffect(() => () => window.clearTimeout(timerRef.current), [])
-
-    useEffect(() => {
-        if (state.kind !== 'chase') return
-        const stage = layerRef.current?.closest('.stage')
-        if (!stage) return
-        let frame = 0
-        let pending: Point = { x: 1250, y: 700 }
-        const move = (event: PointerEvent) => {
-            const rect = stage.getBoundingClientRect()
-            pending = { x: event.clientX - rect.left, y: event.clientY - rect.top }
-            if (frame) return
-            frame = window.requestAnimationFrame(() => {
-                frame = 0
-                setState((current) => {
-                    if (current.kind !== 'chase') return current
-                    const direction = pending.x < current.pointer.x - 4 ? -1 : pending.x > current.pointer.x + 4 ? 1 : current.direction
-                    return { ...current, pointer: pending, direction }
-                })
-            })
-        }
-        window.addEventListener('pointermove', move, { passive: true })
-        window.addEventListener('pointerdown', move, { passive: true })
-        return () => {
-            window.removeEventListener('pointermove', move)
-            window.removeEventListener('pointerdown', move)
-            window.cancelAnimationFrame(frame)
-        }
-    }, [state.kind])
 
     useEffect(() => {
         const kind = state.kind
@@ -146,11 +113,8 @@ function BigOrca({ play }: { play: boolean }) {
         taps.push(now)
         tapsRef.current = taps
         const stage = layerRef.current?.closest('.stage')
-        const layer = layerRef.current
         const stageRect = stage?.getBoundingClientRect()
-        const layerRect = layer?.getBoundingClientRect()
         const scale = stageRect ? { x: stageRect.width / 1440, y: stageRect.height / 860 } : { x: 1, y: 1 }
-        const offset = stageRect && layerRect ? { x: layerRect.left - stageRect.left, y: layerRect.top - stageRect.top } : { x: 0, y: 0 }
         let next: Reaction
         if (taps.length >= 5) {
             next = 'hack'
@@ -164,7 +128,6 @@ function BigOrca({ play }: { play: boolean }) {
         if (reducedMotion && next !== 'hack' && next !== 'shiny') next = 'talk'
         lastReactionRef.current = next
         const line = LINES[Math.floor(Math.random() * LINES.length)]
-        const pointer = stageRect ? { x: stageRect.width * 0.84, y: stageRect.height * 0.82 } : { x: 1250, y: 700 }
         setState((current) => ({
             ...current,
             kind: next,
@@ -172,17 +135,14 @@ function BigOrca({ play }: { play: boolean }) {
             pets: current.pets + 1,
             line,
             hover: false,
-            pointer,
-            direction: -1,
             scale,
-            offset,
         }))
         window.clearTimeout(timerRef.current)
         timerRef.current = window.setTimeout(() => setState((current) => ({ ...current, kind: null, hover: false })), REACTION_HOLDS[next] ?? 2400)
     }
 
     const kind = state.kind
-    const isBody = !reducedMotion && (kind === 'swim' || kind === 'breach' || kind === 'chase')
+    const isBody = !reducedMotion && (kind === 'swim' || kind === 'breach')
     const headArt = kind === 'shiny' && !reducedMotion ? BIG_ORCA_SHINY : BIG_ORCA
     const headAnimation = reducedMotion || !kind ? 'none' : isBody ? 'o5away' : `o5${kind}`
     const headStyle: CSSProperties = {
@@ -190,9 +150,6 @@ function BigOrca({ play }: { play: boolean }) {
         animationDuration: kind ? REACTION_DURATIONS[kind] : '0s',
         transform: state.hover && !kind ? 'rotate(-4deg)' : 'rotate(0deg)',
     }
-    const bodyStyle: CSSProperties = kind === 'chase'
-        ? { transform: `translate(${state.pointer.x - state.offset.x}px, ${state.pointer.y - state.offset.y}px) translate(calc(var(--orca-w) * -0.23), calc(var(--orca-w) * -0.1054)) scaleX(${state.direction})` }
-        : {}
     const bursts = kind === 'swim' ? [makeBurst(1310, 0.1), makeBurst(1300, 6)] : kind === 'breach' ? [makeBurst(1040, 0), makeBurst(680, 2.4)] : []
     const bubble = kind === 'tilt' ? '?' : kind === 'talk' ? state.line : kind === 'hack' ? 'access granted' : kind === 'shiny' ? 'shiny xelu!' : ''
 
@@ -263,7 +220,7 @@ function BigOrca({ play }: { play: boolean }) {
                     </div>
                 </div>
                 {isBody && (
-                    <div key={state.id} ref={bodyRef} className="orca-body" aria-hidden="true" style={bodyStyle}>
+                    <div key={state.id} ref={bodyRef} className="orca-body" aria-hidden="true">
                         <div className="orca-body-in">
                             <svg viewBox="0 0 48 22" shapeRendering="crispEdges">
                                 <g opacity={0.6}><PixelRects art={BODY_ORCA} fill="#8a2d45" dx={-0.25} /></g>
