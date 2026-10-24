@@ -1,16 +1,10 @@
 .big-orca {
-  --w: min(clamp(240px, 40vw, 640px), 62svh);
   position: absolute;
-  right: calc(var(--w) * -0.1);
-  bottom: calc(var(--w) * -0.06);
+  top: 42%;
+  right: -40px;
   z-index: 0;
-  width: var(--w);
+  width: var(--orca-w);
   pointer-events: none;
-}
-
-.big-orca-body {
-  transform: rotate(-10deg);
-  transform-origin: 100% 100%;
 }
 
 .big-orca-rise {
@@ -25,7 +19,6 @@
   display: block;
   width: 100%;
   height: auto;
-  overflow: visible;
   animation: orcaBob 3.2s ease-in-out infinite alternate;
 }
 
@@ -33,40 +26,13 @@
   animation-delay: 3.1s;
 }
 
-.big-orca-ghost {
-  mix-blend-mode: screen;
-  opacity: 0.55;
-}
-
-.big-orca-ghost-0 {
-  transform: translateX(-0.6px);
-  animation: orcaGlitch0 5s steps(1) infinite;
-}
-
-.big-orca-ghost-1 {
-  transform: translateX(0.6px);
-  animation: orcaGlitch1 5s steps(1) infinite;
-}
-
 @keyframes orcaRise {
-  from { transform: translateY(110%); }
+  from { transform: translateY(120%); }
   to { transform: none; }
 }
 
 @keyframes orcaBob {
-  to { transform: translateY(-2.5%); }
-}
-
-@keyframes orcaGlitch0 {
-  88% { transform: translate(-1.6px, 0.3px); }
-  90% { transform: translate(0.8px, -0.2px); }
-  92% { transform: translateX(-0.6px); }
-}
-
-@keyframes orcaGlitch1 {
-  88% { transform: translate(1.6px, -0.3px); }
-  90% { transform: translate(-0.8px, 0.2px); }
-  92% { transform: translateX(0.6px); }
+  to { transform: translateY(-2%); }
 }
 
 .drip {
@@ -81,15 +47,15 @@
 @keyframes dripFall {
   0% { transform: none; opacity: 0; }
   10% { opacity: 1; }
-  100% { transform: translateY(calc(var(--w) * 0.4)); opacity: 0; }
+  100% { transform: translateY(calc(var(--orca-w) * 0.4)); opacity: 0; }
 }
 
 @media (max-width: 639px) {
   .big-orca {
     position: relative;
+    top: auto;
     right: auto;
-    bottom: auto;
     align-self: flex-end;
-    margin: auto calc(var(--w) * -0.1) calc(var(--w) * -0.06) 0;
+    margin: auto -16px calc(var(--orca-w) * -0.2) 0;
   }
 }

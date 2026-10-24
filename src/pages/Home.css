@@ -1,4 +1,5 @@
 .stage-home {
+  --orca-w: min(44vw, 620px);
   cursor: crosshair;
 }
 
@@ -60,6 +61,10 @@
 }
 
 @media (max-width: 639px) {
+  .stage-home {
+    --orca-w: min(78vw, 340px);
+  }
+
   .hero {
     padding-bottom: 3rem;
   }

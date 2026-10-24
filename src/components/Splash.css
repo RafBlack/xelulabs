@@ -1,7 +1,7 @@
 .splash {
   position: absolute;
-  left: 22%;
-  bottom: calc(var(--w) * 0.06);
+  right: calc(var(--orca-w) * 0.65 - 40px);
+  bottom: 0;
   width: 0;
   height: 0;
 }
@@ -13,19 +13,19 @@
 }
 
 .splash-col {
-  left: calc(var(--x) * var(--w) * 0.045 - var(--w) * 0.015);
-  width: calc(var(--w) * 0.03);
-  height: calc(var(--h) * var(--w));
-  background: linear-gradient(#ffffff calc(var(--w) * 0.03), var(--c) 0);
+  left: calc(var(--x) * var(--orca-w) * 0.045 - var(--orca-w) * 0.015);
+  width: calc(var(--orca-w) * 0.03);
+  height: calc(var(--h) * var(--orca-w));
+  background: linear-gradient(#ffffff calc(var(--orca-w) * 0.03), var(--c) 0);
   transform: scaleY(0);
   transform-origin: 50% 100%;
   animation: colShoot 0.75s cubic-bezier(0.2, 0.8, 0.4, 1) 2.32s both;
 }
 
 .splash-drop {
-  left: calc(var(--x) * var(--w));
-  width: calc(var(--w) * 0.018);
-  height: calc(var(--w) * 0.018);
+  left: calc(var(--x) * var(--orca-w));
+  width: calc(var(--orca-w) * 0.018);
+  height: calc(var(--orca-w) * 0.018);
   opacity: 0;
   animation-name: dropBurst;
   animation-fill-mode: both;
@@ -40,7 +40,13 @@
 @keyframes dropBurst {
   0% { transform: none; opacity: 0; animation-timing-function: cubic-bezier(0.2, 0.7, 0.4, 1); }
   6% { opacity: 1; }
-  40% { transform: translate(calc(var(--dx) * var(--w) * 0.6), calc(var(--dy) * var(--w) * -1)); animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.6); }
+  40% { transform: translate(calc(var(--dx) * var(--orca-w) * 0.6), calc(var(--dy) * var(--orca-w) * -1)); animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.6); }
   85% { opacity: 1; }
-  100% { transform: translate(calc(var(--dx) * var(--w)), calc(var(--w) * 0.2)); opacity: 0; }
+  100% { transform: translate(calc(var(--dx) * var(--orca-w)), calc(var(--orca-w) * 0.2)); opacity: 0; }
+}
+
+@media (max-width: 639px) {
+  .splash {
+    right: calc(var(--orca-w) * 0.65 - 16px);
+  }
 }

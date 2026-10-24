@@ -1,6 +1,6 @@
 import './HeroTitle.css'
 import { useRef } from 'react'
-import PixelPaths from './PixelPaths'
+import PixelRects from './PixelRects'
 import { SMALL_ORCA, SMALL_ORCA_TAIL } from '../data/orcaArt'
 import { useSwimIntro } from '../hooks/useSwimIntro'
 
@@ -24,9 +24,9 @@ function HeroTitle({ play }: { play: boolean }) {
                     <span ref={orcaRef} className="swim-orca">
                         <svg viewBox={`0 0 ${cols} ${rows}`} shapeRendering="crispEdges">
                             <g className="swim-tail">
-                                <PixelPaths art={SMALL_ORCA} to={SMALL_ORCA_TAIL} />
+                                <PixelRects art={SMALL_ORCA} to={SMALL_ORCA_TAIL} />
                             </g>
-                            <PixelPaths art={SMALL_ORCA} from={SMALL_ORCA_TAIL} />
+                            <PixelRects art={SMALL_ORCA} from={SMALL_ORCA_TAIL} />
                         </svg>
                     </span>
                 )}
