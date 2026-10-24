@@ -17,7 +17,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   min-height: 100svh;
-  overflow: hidden;
+  overflow: clip;
   background: #0b0b0c;
   color: #e8e8e6;
   font-family: 'Barlow', system-ui, sans-serif;
