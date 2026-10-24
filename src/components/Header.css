@@ -10,6 +10,7 @@
 }
 
 .brand {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.625rem;
@@ -94,7 +95,9 @@
 }
 
 .nav a:hover .nav-track,
-.nav a:focus-visible .nav-track {
+.nav a:focus-visible .nav-track,
+.brand:hover .nav-track,
+.brand:focus-visible .nav-track {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.2s ease-out, transform 0.2s ease-out;

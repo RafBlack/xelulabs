@@ -32,9 +32,21 @@ function Header() {
     const go = usePageTransition()
     return (
         <header className={`header container${open ? ' header-open' : ''}`}>
-            <Link to="/" className="brand" aria-label="xelulabs home">
+            <Link to="/" className="brand" aria-label="xelulabs home" onClick={(event) => {
+                if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+                event.preventDefault()
+                setOpen(false)
+                go('/', '~/')
+            }}>
                 <Mark />
                 <span>XELU</span>
+                <span className="nav-track" aria-hidden="true">
+                    <span className="nav-swim">
+                        <svg className="nav-fish" viewBox="0 0 20 10" shapeRendering="crispEdges">
+                            <PixelRects art={SMALL_ORCA} />
+                        </svg>
+                    </span>
+                </span>
             </Link>
             <button
                 type="button"
