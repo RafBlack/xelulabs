@@ -105,3 +105,4 @@ llms.txt
 .ai-notes/
 playwright/.auth/
 *.har
+.agent-bridge/
