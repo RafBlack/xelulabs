@@ -13,6 +13,30 @@
   padding-block: clamp(1.5rem, 9svh, 6rem) 2rem;
 }
 
+.hero-eyebrow {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #7fd3d8;
+}
+
+.hero-eyebrow span {
+  width: 40px;
+  height: 2px;
+  flex: none;
+  background: #7fd3d8;
+}
+
+.intro .hero-eyebrow {
+  animation: fadeUp 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s both;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;

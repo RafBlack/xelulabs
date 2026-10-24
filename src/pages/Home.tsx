@@ -33,6 +33,10 @@ function Home() {
             <DotGrid pos={pos} waves={waves} holes={holes} />
             <Header />
             <main ref={heroRef} className="hero container">
+                <p className="hero-eyebrow">
+                    <span aria-hidden="true" />
+                    Projects / CTF / Community
+                </p>
                 <HeroTitle play={play} />
                 <Description />
                 <div className="hero-actions">
