@@ -38,7 +38,12 @@ function PageWipe({ path, onCovered, onComplete }: Props) {
     return (
         <div className="page-wipe" aria-hidden="true">
             <div ref={wave} className="page-wipe-wave" style={{ animationDuration: `${WIPE_DURATION}ms` }} onAnimationEnd={(event) => {
-                if (event.target === event.currentTarget) onComplete()
+                if (event.target !== event.currentTarget) return
+                if (!covered.current) {
+                    covered.current = true
+                    onCovered()
+                }
+                onComplete()
             }}>
                 <WipeEdge />
                 <WipeEdge trailing />
