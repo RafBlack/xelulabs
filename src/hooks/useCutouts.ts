@@ -1,38 +1,32 @@
 import { useEffect, useRef, useState } from 'react'
-import type { Phase } from './useOrcaIntro'
 
 export type Hole = { x1: number; y1: number; x2: number; y2: number }
 
 const PAD = 26
 
-export function useCutouts(phase: Phase) {
+export function useCutouts() {
     const stageRef = useRef<HTMLDivElement>(null)
-    const titleRef = useRef<HTMLHeadingElement>(null)
-    const descRef = useRef<HTMLParagraphElement>(null)
-    const orcaRef = useRef<HTMLSpanElement>(null)
+    const heroRef = useRef<HTMLElement>(null)
     const [holes, setHoles] = useState<Hole[]>([])
-    const withOrca = phase !== 'gone'
 
     useEffect(() => {
         const measure = () => {
             const stage = stageRef.current
-            if (!stage) return
+            const hero = heroRef.current
+            if (!stage || !hero) return
             const box = stage.getBoundingClientRect()
             if (!box.width) return
             const s = box.width / stage.offsetWidth
-            const els = [titleRef.current, descRef.current, withOrca ? orcaRef.current : null]
             setHoles(
-                els
-                    .filter((el): el is HTMLElement => el !== null)
-                    .map((el) => {
-                        const r = el.getBoundingClientRect()
-                        return {
-                            x1: (r.left - box.left) / s - PAD,
-                            y1: (r.top - box.top) / s - PAD,
-                            x2: (r.right - box.left) / s + PAD,
-                            y2: (r.bottom - box.top) / s + PAD,
-                        }
-                    }),
+                Array.from(hero.children, (el) => {
+                    const r = el.getBoundingClientRect()
+                    return {
+                        x1: (r.left - box.left) / s - PAD,
+                        y1: (r.top - box.top) / s - PAD,
+                        x2: (r.right - box.left) / s + PAD,
+                        y2: (r.bottom - box.top) / s + PAD,
+                    }
+                }),
             )
         }
         let live = true
@@ -44,7 +38,7 @@ export function useCutouts(phase: Phase) {
             cancelAnimationFrame(frame)
             removeEventListener('resize', measure)
         }
-    }, [phase, withOrca])
+    }, [])
 
-    return { stageRef, titleRef, descRef, orcaRef, holes }
+    return { stageRef, heroRef, holes }
 }

@@ -13,8 +13,8 @@ function Mark() {
     const strokes = LOGO_PATHS.map((p) => <path key={p.id} d={p.d} />)
     return (
         <svg className="mark" viewBox={LOGO_VIEWBOX} aria-hidden="true">
-            {GHOSTS.map((g, i) => (
-                <g key={g.color} className={`mark-ghost mark-ghost-${i}`} stroke={g.color}>
+            {GHOSTS.map((color, i) => (
+                <g key={color} className={`mark-ghost mark-ghost-${i}`} stroke={color}>
                     {strokes}
                 </g>
             ))}

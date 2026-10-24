@@ -1,18 +1,16 @@
 import './Home.css'
 import type { MouseEvent } from 'react'
+import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import HeroTitle from '../components/HeroTitle'
 import Description from '../components/Description'
-import AnimatedLogo from '../components/AnimatedLogo'
 import DotGrid from '../components/DotGrid'
 import { toStage, useMousePosition } from '../hooks/useMousePosition'
 import { useRipples } from '../hooks/useRipples'
-import { useOrcaIntro } from '../hooks/useOrcaIntro'
 import { useCutouts } from '../hooks/useCutouts'
 
 function Home() {
-    const intro = useOrcaIntro()
-    const { stageRef, titleRef, descRef, orcaRef, holes } = useCutouts(intro.phase)
+    const { stageRef, heroRef, holes } = useCutouts()
     const { pos, onMouseMove, onMouseLeave } = useMousePosition()
     const { waves, addRipple } = useRipples()
 
@@ -30,11 +28,19 @@ function Home() {
             onClick={burst}
         >
             <DotGrid pos={pos} waves={waves} holes={holes} />
-            <AnimatedLogo />
             <Header />
-            <main className="hero">
-                <HeroTitle intro={intro} titleRef={titleRef} orcaRef={orcaRef} />
-                <Description ref={descRef} />
+            <main ref={heroRef} className="hero container">
+                <HeroTitle />
+                <Description />
+                <div className="hero-actions">
+                    <Link className="btn btn-fill" to="/contact">
+                        Join XeluLabs
+                    </Link>
+                    <Link className="btn btn-line" to="/about">
+                        See our projects
+                    </Link>
+                </div>
+                <p className="hero-est">Est. 2026, Philippines</p>
             </main>
         </div>
     )

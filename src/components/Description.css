@@ -1,14 +1,7 @@
 .hero-desc {
   margin: 0;
-  max-width: 500px;
-  font-size: 22px;
+  max-width: 45ch;
+  font-size: clamp(15px, 1.4vw, 19px);
   line-height: 1.55;
   color: #c9cbcf;
-}
-
-@media (orientation: portrait) {
-  .hero-desc {
-    max-width: 340px;
-    font-size: 16px;
-  }
 }

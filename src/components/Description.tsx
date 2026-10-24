@@ -1,9 +1,8 @@
 import './Description.css'
-import type { Ref } from 'react'
 
-function Description({ ref }: { ref?: Ref<HTMLParagraphElement> }) {
+function Description() {
     return (
-        <p ref={ref} className="hero-desc">
+        <p className="hero-desc">
             A passion-driven cybersecurity organization focused on improvement and exposure through
             practical competition and projects.
         </p>
