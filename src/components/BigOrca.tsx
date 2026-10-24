@@ -122,16 +122,17 @@ function BigOrca({ play }: { play: boolean }) {
         const stage = layerRef.current?.closest('.stage')
         const layer = layerRef.current
         if (!body || !stage || !layer || reducedMotion || (kind !== 'swim' && kind !== 'breach')) return
-        const bodyRect = body.getBoundingClientRect()
         const stageRect = stage.getBoundingClientRect()
         const layerRect = layer.getBoundingClientRect()
+        const dx = stageRect.left - layerRect.left
+        const dy = stageRect.top - layerRect.top
         const path = kind === 'swim' ? SWIM_PATH : BREACH_PATH
         const keyframes = path.map((point) => ({
-            transform: `translate(${point.x * state.scale.x - layerRect.left + stageRect.left - bodyRect.width / 2}px, ${point.y * state.scale.y - layerRect.top + stageRect.top - bodyRect.height / 2}px) rotate(${point.rotate}deg) scaleX(${point.flip})`,
+            offset: point.at / 100,
+            transform: `translate(${point.x * state.scale.x + dx}px, ${point.y * state.scale.y + dy}px) rotate(${point.rotate}deg) scaleX(${point.flip})`,
         }))
         const animation = body.animate(keyframes, {
             duration: parseDuration(REACTION_DURATIONS[kind]),
-            easing: 'ease-in-out',
             fill: 'both',
         })
         return () => animation.cancel()
