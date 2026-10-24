@@ -1,0 +1,79 @@
+@keyframes pageWipe {
+  0% { transform: translateX(-125%); }
+  38%, 62% { transform: translateX(0); }
+  100% { transform: translateX(125%); }
+}
+
+@keyframes pageWipeText {
+  0%, 32% { opacity: 0; }
+  44%, 56% { opacity: 1; }
+  68%, 100% { opacity: 0; }
+}
+
+@keyframes pageWipeWiggle {
+  0% { transform: rotate(-2.5deg); }
+  100% { transform: rotate(2.5deg); }
+}
+
+.page-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  overflow: hidden;
+  pointer-events: all;
+}
+
+.page-wipe-wave {
+  position: absolute;
+  inset: 0;
+  background: #10292e;
+  will-change: transform;
+  animation: pageWipe 1.7s cubic-bezier(0.7, 0, 0.3, 1) both;
+}
+
+.page-wipe-edge {
+  position: absolute;
+  top: 0;
+  right: -140px;
+  width: 140px;
+  height: 100%;
+}
+
+.page-wipe-edge-trailing {
+  left: -140px;
+  right: auto;
+  transform: scaleX(-1);
+}
+
+.page-wipe-rider {
+  position: absolute;
+  right: -190px;
+  top: 40%;
+  width: 240px;
+}
+
+.page-wipe-wiggle {
+  transform-origin: 70% 50%;
+  animation: pageWipeWiggle 0.32s ease-in-out infinite alternate;
+}
+
+.page-wipe-wiggle svg {
+  display: block;
+}
+
+.page-wipe-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  color: #cfe9ec;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 22px;
+  white-space: nowrap;
+  animation: pageWipeText 1.7s both;
+}
+
+.page-wipe-text span {
+  color: #7fd3d8;
+}
