@@ -1,4 +1,5 @@
 import './Home.css'
+import { useState } from 'react'
 import type { MouseEvent } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
@@ -9,10 +10,9 @@ import BigOrca from '../components/BigOrca'
 import { toStage, useMousePosition } from '../hooks/useMousePosition'
 import { useRipples } from '../hooks/useRipples'
 import { useCutouts } from '../hooks/useCutouts'
-import { useIntro } from '../hooks/useIntro'
 
 function Home() {
-    const play = useIntro()
+    const [play] = useState(() => !matchMedia('(prefers-reduced-motion: reduce)').matches)
     const { stageRef, heroRef, holes } = useCutouts()
     const { pos, onMouseMove, onMouseLeave } = useMousePosition()
     const { waves, addRipple } = useRipples()
