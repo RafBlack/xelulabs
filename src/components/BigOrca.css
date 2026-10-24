@@ -358,6 +358,7 @@
     inset: auto;
     width: 100%;
     height: var(--orca-w);
+    margin-top: auto;
     margin-bottom: calc(var(--orca-w) * -0.2);
   }
 
@@ -373,6 +374,6 @@
 
   .orca-pets {
     left: 16px;
-    bottom: 18px;
+    bottom: calc(var(--orca-w) * 0.2 + 18px);
   }
 }
