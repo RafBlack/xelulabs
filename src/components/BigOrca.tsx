@@ -7,6 +7,7 @@ import { BIG_ORCA, BIG_ORCA_GLITCH, BIG_ORCA_SHINY, BODY_ORCA, SHADES } from '..
 import { BREACH_PATH, HACK_WINDOW, REACTION_DURATIONS, REACTION_HOLDS, SPLASH_END, SWIM_PATH } from '../data/timeline'
 
 type Reaction = keyof typeof REACTION_DURATIONS
+type Point = { x: number; y: number }
 type Scale = { x: number; y: number }
 
 const HEAD_COLS = BIG_ORCA.rows[0].length
@@ -62,6 +63,8 @@ const parseDuration = (value: string) => Number.parseFloat(value) * (value.endsW
 
 function BigOrca({ play }: { play: boolean }) {
     const layerRef = useRef<HTMLDivElement>(null)
+    const aimRef = useRef<HTMLDivElement>(null)
+    const aimPointerRef = useRef<Point | null>(null)
     const bodyRef = useRef<HTMLDivElement>(null)
     const timerRef = useRef<number | undefined>(undefined)
     const tapsRef = useRef<number[]>([])
@@ -72,7 +75,6 @@ function BigOrca({ play }: { play: boolean }) {
         id: 0,
         pets: 0,
         line: '',
-        hover: false,
         scale: { x: 1, y: 1 } as Scale,
     })
     const reducedMotion = !play
@@ -84,6 +86,36 @@ function BigOrca({ play }: { play: boolean }) {
     }, [play])
 
     useEffect(() => () => window.clearTimeout(timerRef.current), [])
+
+    useEffect(() => {
+        const aim = aimRef.current
+        if (!aim || reducedMotion) return
+        let frame = 0
+        const update = () => {
+            frame = 0
+            const pointer = aimPointerRef.current
+            const box = aim.parentElement?.getBoundingClientRect()
+            if (!pointer || !box || state.kind) return
+            const pivotX = box.left + box.width * 0.6
+            const pivotY = box.bottom
+            const angle = Math.atan2(pointer.x - pivotX, pivotY - pointer.y) * 180 / Math.PI
+            aim.style.setProperty('--aim', `${Math.max(-10, Math.min(6, angle))}deg`)
+        }
+        const move = (event: PointerEvent) => {
+            if (event.pointerType === 'touch' && event.type !== 'pointerdown') return
+            aimPointerRef.current = { x: event.clientX, y: event.clientY }
+            if (!frame) frame = window.requestAnimationFrame(update)
+        }
+        if (state.kind) aim.style.setProperty('--aim', '0deg')
+        else if (aimPointerRef.current) frame = window.requestAnimationFrame(update)
+        window.addEventListener('pointermove', move, { passive: true })
+        window.addEventListener('pointerdown', move, { passive: true })
+        return () => {
+            window.removeEventListener('pointermove', move)
+            window.removeEventListener('pointerdown', move)
+            window.cancelAnimationFrame(frame)
+        }
+    }, [reducedMotion, state.kind])
 
     useEffect(() => {
         const kind = state.kind
@@ -134,11 +166,10 @@ function BigOrca({ play }: { play: boolean }) {
             id: current.id + 1,
             pets: current.pets + 1,
             line,
-            hover: false,
             scale,
         }))
         window.clearTimeout(timerRef.current)
-        timerRef.current = window.setTimeout(() => setState((current) => ({ ...current, kind: null, hover: false })), REACTION_HOLDS[next] ?? 2400)
+        timerRef.current = window.setTimeout(() => setState((current) => ({ ...current, kind: null })), REACTION_HOLDS[next] ?? 2400)
     }
 
     const kind = state.kind
@@ -148,7 +179,6 @@ function BigOrca({ play }: { play: boolean }) {
     const headStyle: CSSProperties = {
         animationName: headAnimation,
         animationDuration: kind ? REACTION_DURATIONS[kind] : '0s',
-        transform: state.hover && !kind ? 'rotate(-4deg)' : 'rotate(0deg)',
     }
     const bursts = kind === 'swim' ? [makeBurst(1310, 0.1), makeBurst(1300, 6)] : kind === 'breach' ? [makeBurst(1040, 0), makeBurst(680, 2.4)] : []
     const bubble = kind === 'tilt' ? '?' : kind === 'talk' ? state.line : kind === 'hack' ? 'access granted' : kind === 'shiny' ? 'shiny xelu!' : ''
@@ -167,6 +197,7 @@ function BigOrca({ play }: { play: boolean }) {
                 )}
                 <div className="big-orca" aria-hidden="true">
                     <div className="big-orca-rise">
+                        <div ref={aimRef} className="big-orca-aim">
                         <div key={state.id} className="big-orca-react" style={headStyle}>
                             <svg className="big-orca-bob" viewBox={`0 0 ${HEAD_COLS} ${HEAD_ROWS}`} shapeRendering="crispEdges">
                                 {BIG_ORCA_GLITCH.map((ghost) => (
@@ -217,6 +248,7 @@ function BigOrca({ play }: { play: boolean }) {
                                     <i key={i} className="drip" style={{ ...drip, animationDelay: `${3.2 + i * 0.35}s` }} />
                                 ))}
                         </div>
+                        </div>
                     </div>
                 </div>
                 {isBody && (
@@ -249,8 +281,6 @@ function BigOrca({ play }: { play: boolean }) {
                     className="orca-hit"
                     aria-label="Poke xelu"
                     onClick={poke}
-                    onPointerEnter={(event) => event.pointerType === 'mouse' && setState((current) => ({ ...current, hover: true }))}
-                    onPointerLeave={(event) => event.pointerType === 'mouse' && setState((current) => ({ ...current, hover: false }))}
                 />
                 {state.pets > 0 && <p className="orca-pets">PETS: {state.pets}</p>}
             </div>
