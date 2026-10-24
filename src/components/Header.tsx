@@ -4,10 +4,10 @@ import { Link, NavLink } from 'react-router-dom'
 import { GHOSTS, LOGO_PATHS, LOGO_VIEWBOX } from '../data/logoPaths'
 
 const links = [
-    { to: '/', label: 'Home' },
-    { to: '/about', label: 'About' },
-    { to: '/crew', label: 'Crew' },
-    { to: '/contact', label: 'Contact' },
+    { to: '/', label: 'HOME' },
+    { to: '/crew', label: 'CREW' },
+    { to: '/about', label: 'ABOUT' },
+    { to: '/contact', label: 'CONTACT' },
 ]
 
 function Mark() {

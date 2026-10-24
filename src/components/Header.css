@@ -67,6 +67,7 @@
   display: flex;
   gap: clamp(0.25rem, 1.5vw, 1.5rem);
   font-size: 15px;
+  letter-spacing: 0.12em;
 }
 
 .nav a {
@@ -74,10 +75,12 @@
   align-items: center;
   min-height: 44px;
   padding-inline: 0.5rem;
+  color: #a3a3a6;
 }
 
+.nav a:hover,
 .nav a.active {
-  color: #f2f2f0;
+  color: #ffffff;
 }
 
 .menu-btn {
