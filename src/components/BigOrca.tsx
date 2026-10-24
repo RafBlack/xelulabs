@@ -26,7 +26,7 @@ const SPOUT_DROPS = Array.from({ length: 18 }, (_, i) => ({
     color: SPOUT_TONES[i % 3],
     delay: `${((i * 5) % 6) * 0.03}s`,
 }))
-const RAIN = Array.from({ length: 52 }, (_, i) => ({
+const RAIN = Array.from({ length: 96 }, (_, i) => ({
     left: i * 28,
     delay: `${((i * 7) % 13) * 0.07}s`,
     duration: `${2.2 + ((i * 5) % 7) * 0.12}s`,
