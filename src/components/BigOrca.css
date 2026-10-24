@@ -1,7 +1,7 @@
 .big-orca {
   position: absolute;
-  top: 42%;
-  right: -40px;
+  right: -6%;
+  bottom: -12%;
   z-index: 0;
   width: var(--orca-w);
   pointer-events: none;
@@ -53,8 +53,8 @@
 @media (max-width: 639px) {
   .big-orca {
     position: relative;
-    top: auto;
     right: auto;
+    bottom: auto;
     align-self: flex-end;
     margin: auto -16px calc(var(--orca-w) * -0.2) 0;
   }

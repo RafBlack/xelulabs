@@ -7,10 +7,10 @@ const cols = BIG_ORCA.rows[0].length
 const rows = BIG_ORCA.rows.length
 
 const DRIPS = [
-    { left: '17.5%', top: '29%' },
-    { left: '20%', top: '44%' },
-    { left: '25%', top: '62%' },
-    { left: '30%', top: '76%' },
+    { left: '17.5%', top: '25%' },
+    { left: '20%', top: '37%' },
+    { left: '25%', top: '53%' },
+    { left: '30%', top: '65%' },
 ]
 
 function BigOrca({ play }: { play: boolean }) {
