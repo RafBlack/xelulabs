@@ -28,7 +28,7 @@ function Header() {
     const [open, setOpen] = useState(false)
     return (
         <header className={`header container${open ? ' header-open' : ''}`}>
-            <Link to="/" className="brand" aria-label="XeluLabs home">
+            <Link to="/" className="brand" aria-label="xelulabs home">
                 <Mark />
                 <span>XELU</span>
             </Link>

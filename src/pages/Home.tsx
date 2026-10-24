@@ -41,7 +41,7 @@ function Home() {
                 <Terminal play={play} />
                 <div className="hero-actions">
                     <Link className="btn btn-fill" to="/contact">
-                        Join XeluLabs
+                        Join xelulabs
                     </Link>
                     <Link className="btn btn-line" to="/about">
                         See our projects

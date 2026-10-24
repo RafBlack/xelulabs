@@ -7,7 +7,7 @@ function Contact() {
             <Header />
             <main className="page container">
                 <h1>CONTACT</h1>
-                <p>Interested in joining XeluLabs? Recruitment details are coming soon.</p>
+                <p>Interested in joining xelulabs? Recruitment details are coming soon.</p>
             </main>
         </div>
     )
