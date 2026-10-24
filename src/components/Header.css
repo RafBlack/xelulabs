@@ -181,3 +181,9 @@
     padding-inline: 0;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-track {
+    display: none;
+  }
+}

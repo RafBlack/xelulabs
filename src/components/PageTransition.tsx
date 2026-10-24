@@ -15,6 +15,11 @@ function PageTransition({ children }: { children: ReactNode }) {
 
     const go = (to: string, nextPath: string) => {
         if (busy.current) return
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            navigate(to)
+            window.scrollTo(0, 0)
+            return
+        }
         busy.current = true
         setPath(nextPath)
         timer.current = window.setTimeout(() => {
