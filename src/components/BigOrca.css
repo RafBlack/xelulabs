@@ -1,5 +1,5 @@
 .big-orca {
-  --w: clamp(240px, 40vw, 640px);
+  --w: min(clamp(240px, 40vw, 640px), 62svh);
   position: absolute;
   right: calc(var(--w) * -0.1);
   bottom: calc(var(--w) * -0.06);
@@ -75,4 +75,14 @@
   0% { transform: none; opacity: 0; }
   10% { opacity: 1; }
   100% { transform: translateY(calc(var(--w) * 0.4)); opacity: 0; }
+}
+
+@media (max-width: 639px) {
+  .big-orca {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    align-self: flex-end;
+    margin: auto calc(var(--w) * -0.1) calc(var(--w) * -0.06) 0;
+  }
 }

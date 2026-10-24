@@ -5,7 +5,7 @@ function Crew() {
     return (
         <div className="stage">
             <Header />
-            <main className="page">
+            <main className="page container">
                 <h1>CREW</h1>
                 <p>Meet the crew soon.</p>
             </main>

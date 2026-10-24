@@ -13,13 +13,12 @@ const RADIUS = 140
 const PUSH = 7
 const SIZE = 3
 const EASE = 0.25
+const STEP = 48
 
-// Grid inset from the stage edges: landscape 168/156 on a 48 step, portrait 24/96 on a 32 step
 function makeDots(width: number, height: number) {
-    const [mx, my, step] = width > height ? [168, 156, 48] : [24, 96, 32]
     const dots: Dot[] = []
-    for (let y = my; y <= height - my; y += step) {
-        for (let x = mx; x <= width - mx; x += step) dots.push({ x, y, t: 0, ox: 0, oy: 0 })
+    for (let y = STEP / 2; y < height; y += STEP) {
+        for (let x = ((width % STEP) + STEP) / 2; x < width; x += STEP) dots.push({ x, y, t: 0, ox: 0, oy: 0 })
     }
     return dots
 }
@@ -62,7 +61,6 @@ function DotGrid({ pos, waves, holes }: Props) {
         let dots: Dot[] = []
         let frame = 0
 
-        // Rebuild on layout size change only (rotation), not on the --fit scale
         const setup = () => {
             width = canvas.offsetWidth
             height = canvas.offsetHeight

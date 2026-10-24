@@ -5,7 +5,7 @@ function About() {
     return (
         <div className="stage">
             <Header />
-            <main className="page">
+            <main className="page container">
                 <h1>ABOUT</h1>
                 <p>More about XeluLabs is coming soon.</p>
             </main>

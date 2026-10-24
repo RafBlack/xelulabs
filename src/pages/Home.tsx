@@ -29,7 +29,6 @@ function Home() {
             onClick={burst}
         >
             <DotGrid pos={pos} waves={waves} holes={holes} />
-            <BigOrca />
             <Header />
             <main ref={heroRef} className="hero container">
                 <HeroTitle />
@@ -44,6 +43,7 @@ function Home() {
                 </div>
                 <p className="hero-est">Est. 2026, Philippines</p>
             </main>
+            <BigOrca />
         </div>
     )
 }

@@ -1,4 +1,5 @@
 import './Header.css'
+import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { GHOSTS, LOGO_PATHS, LOGO_VIEWBOX } from '../data/logoPaths'
 
@@ -24,13 +25,26 @@ function Mark() {
 }
 
 function Header() {
+    const [open, setOpen] = useState(false)
     return (
-        <header className="header container">
+        <header className={`header container${open ? ' header-open' : ''}`}>
             <Link to="/" className="brand" aria-label="XeluLabs home">
                 <Mark />
                 <span>XELU</span>
             </Link>
-            <nav className="nav" aria-label="Main">
+            <button
+                type="button"
+                className="menu-btn"
+                aria-label={open ? 'Close menu' : 'Open menu'}
+                aria-expanded={open}
+                aria-controls="main-nav"
+                onClick={() => setOpen(!open)}
+            >
+                <span />
+                <span />
+                <span />
+            </button>
+            <nav id="main-nav" className="nav" aria-label="Main">
                 {links.map((l) => (
                     <NavLink key={l.to} to={l.to} end>
                         {l.label}

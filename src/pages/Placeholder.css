@@ -1,38 +1,20 @@
 .page {
-  position: absolute;
-  left: 260px;
-  top: 270px;
-  max-width: 620px;
+  position: relative;
+  padding-block: clamp(3rem, 12vh, 8rem);
 }
 
 .page h1 {
-  margin: 0 0 32px;
+  margin: 0 0 clamp(1.25rem, 2.5vw, 2rem);
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 140px;
+  font-size: clamp(48px, 9vw, 140px);
   line-height: 0.84;
   font-weight: 700;
 }
 
 .page p {
   margin: 0;
-  font-size: 22px;
+  max-width: 45ch;
+  font-size: clamp(15px, 1.4vw, 19px);
   line-height: 1.55;
   color: #c9cbcf;
-}
-
-@media (orientation: portrait) {
-  .page {
-    left: 20px;
-    right: 20px;
-    top: 140px;
-  }
-
-  .page h1 {
-    margin-bottom: 20px;
-    font-size: 64px;
-  }
-
-  .page p {
-    font-size: 16px;
-  }
 }
