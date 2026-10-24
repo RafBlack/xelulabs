@@ -9,17 +9,17 @@ type Props = { pos: Point; waves: Wave[]; holes: Hole[] }
 
 type Dot = { x: number; y: number; t: number; ox: number; oy: number }
 
-const WIDTH = 1920
-const HEIGHT = 1080
 const RADIUS = 140
 const PUSH = 7
 const SIZE = 3
 const EASE = 0.25
 
-function makeDots() {
+// Grid inset from the stage edges: landscape 168/156 on a 48 step, portrait 24/96 on a 32 step
+function makeDots(width: number, height: number) {
+    const [mx, my, step] = width > height ? [168, 156, 48] : [24, 96, 32]
     const dots: Dot[] = []
-    for (let y = 156; y <= 924; y += 48) {
-        for (let x = 168; x <= 1752; x += 48) dots.push({ x, y, t: 0, ox: 0, oy: 0 })
+    for (let y = my; y <= height - my; y += step) {
+        for (let x = mx; x <= width - mx; x += step) dots.push({ x, y, t: 0, ox: 0, oy: 0 })
     }
     return dots
 }
@@ -57,15 +57,26 @@ function DotGrid({ pos, waves, holes }: Props) {
         const ctx = canvas?.getContext('2d')
         if (!canvas || !ctx) return
         const ratio = window.devicePixelRatio || 1
-        canvas.width = WIDTH * ratio
-        canvas.height = HEIGHT * ratio
-        ctx.scale(ratio, ratio)
-        const dots = makeDots()
+        let width = 0
+        let height = 0
+        let dots: Dot[] = []
         let frame = 0
+
+        // Rebuild on layout size change only (rotation), not on the --fit scale
+        const setup = () => {
+            width = canvas.offsetWidth
+            height = canvas.offsetHeight
+            canvas.width = width * ratio
+            canvas.height = height * ratio
+            ctx.setTransform(ratio, 0, 0, ratio, 0, 0)
+            dots = makeDots(width, height)
+        }
+        const observer = new ResizeObserver(setup)
+        observer.observe(canvas)
 
         const draw = () => {
             const { pos, waves, holes } = latest.current
-            ctx.clearRect(0, 0, WIDTH, HEIGHT)
+            ctx.clearRect(0, 0, width, height)
             dots.forEach((dot) => {
                 const goal = target(dot, pos, waves)
                 dot.t += (goal.t - dot.t) * EASE
@@ -82,7 +93,10 @@ function DotGrid({ pos, waves, holes }: Props) {
         }
 
         frame = requestAnimationFrame(draw)
-        return () => cancelAnimationFrame(frame)
+        return () => {
+            cancelAnimationFrame(frame)
+            observer.disconnect()
+        }
     }, [])
 
     return <canvas ref={canvasRef} className="dots" aria-hidden="true" />

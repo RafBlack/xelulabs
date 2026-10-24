@@ -7,10 +7,8 @@ const OFF: Point = { x: -9999, y: -9999 }
 
 export function toStage(e: MouseEvent<HTMLElement>): Point {
     const r = e.currentTarget.getBoundingClientRect()
-    return {
-        x: ((e.clientX - r.left) * 1920) / r.width,
-        y: ((e.clientY - r.top) * 1080) / r.height,
-    }
+    const s = r.width / e.currentTarget.offsetWidth
+    return { x: (e.clientX - r.left) / s, y: (e.clientY - r.top) / s }
 }
 
 export function useMousePosition() {

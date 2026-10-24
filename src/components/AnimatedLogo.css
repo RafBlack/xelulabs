@@ -172,3 +172,12 @@
     animation: none;
   }
 }
+
+/* Keep in sync with LOGO_HITS_PORTRAIT in src/data/timeline.ts */
+@media (orientation: portrait) {
+  .logo-tilt {
+    left: -20px;
+    top: 420px;
+    width: 440px;
+  }
+}

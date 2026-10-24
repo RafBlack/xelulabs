@@ -19,7 +19,7 @@ export function useCutouts(phase: Phase) {
             if (!stage) return
             const box = stage.getBoundingClientRect()
             if (!box.width) return
-            const s = box.width / 1920
+            const s = box.width / stage.offsetWidth
             const els = [titleRef.current, descRef.current, withOrca ? orcaRef.current : null]
             setHoles(
                 els
@@ -38,9 +38,11 @@ export function useCutouts(phase: Phase) {
         let live = true
         const frame = requestAnimationFrame(measure)
         document.fonts.ready.then(() => live && measure())
+        addEventListener('resize', measure)
         return () => {
             live = false
             cancelAnimationFrame(frame)
+            removeEventListener('resize', measure)
         }
     }, [phase, withOrca])
 

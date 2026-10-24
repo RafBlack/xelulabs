@@ -30,3 +30,24 @@
   letter-spacing: 0.2em;
   color: #a1a4aa;
 }
+
+@media (orientation: portrait) {
+  .header {
+    left: 20px;
+    right: 20px;
+  }
+
+  .nav {
+    gap: 18px;
+    width: auto;
+    padding: 26px 0 14px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+
+  .est {
+    padding-top: 26px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+}

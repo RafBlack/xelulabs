@@ -11,3 +11,15 @@
   flex-direction: column;
   gap: 40px;
 }
+
+@media (orientation: portrait) {
+  .hero {
+    left: 20px;
+    right: 20px;
+    top: 140px;
+    width: auto;
+    align-items: center;
+    gap: 28px;
+    text-align: center;
+  }
+}

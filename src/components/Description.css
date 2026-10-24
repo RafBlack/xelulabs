@@ -5,3 +5,10 @@
   line-height: 1.55;
   color: #c9cbcf;
 }
+
+@media (orientation: portrait) {
+  .hero-desc {
+    max-width: 340px;
+    font-size: 16px;
+  }
+}

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { LOGO_HITS, LOOP_MS, RIPPLE } from '../data/timeline'
+import { LOGO_HITS, LOGO_HITS_PORTRAIT, LOOP_MS, RIPPLE } from '../data/timeline'
 
 export type Wave = { x: number; y: number; r: number }
 
@@ -25,7 +25,8 @@ export function useRipples() {
     useEffect(() => {
         const timers: number[] = []
         const fire = () => {
-            LOGO_HITS.forEach((h) => timers.push(setTimeout(() => addRipple(h.x, h.y), h.at)))
+            const hits = matchMedia('(orientation: portrait)').matches ? LOGO_HITS_PORTRAIT : LOGO_HITS
+            hits.forEach((h) =>timers.push(setTimeout(() => addRipple(h.x, h.y), h.at)))
         }
         fire()
         const loop = setInterval(fire, LOOP_MS)

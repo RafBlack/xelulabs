@@ -19,3 +19,20 @@
   line-height: 1.55;
   color: #c9cbcf;
 }
+
+@media (orientation: portrait) {
+  .page {
+    left: 20px;
+    right: 20px;
+    top: 140px;
+  }
+
+  .page h1 {
+    margin-bottom: 20px;
+    font-size: 64px;
+  }
+
+  .page p {
+    font-size: 16px;
+  }
+}
