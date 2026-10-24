@@ -10,9 +10,46 @@
 }
 
 .hero-xelu {
+  position: relative;
   color: #f2f2ef;
+}
+
+.hero-letter {
+  display: inline-block;
 }
 
 .hero-labs {
   color: #b8b8bc;
+}
+
+.swim-orca {
+  position: absolute;
+  left: 0;
+  top: calc(50% - 0.25em);
+  width: 1em;
+  height: 0.5em;
+  pointer-events: none;
+}
+
+.swim-orca svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  animation: swimBob 0.5s steps(2) infinite alternate;
+}
+
+.swim-tail {
+  transform-box: fill-box;
+  transform-origin: right center;
+  animation: tailWiggle 0.25s ease-in-out infinite alternate;
+}
+
+@keyframes swimBob {
+  to { transform: translateY(-6%); }
+}
+
+@keyframes tailWiggle {
+  from { transform: rotate(-12deg); }
+  to { transform: rotate(12deg); }
 }
