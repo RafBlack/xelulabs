@@ -47,7 +47,7 @@ function Home() {
                         See our projects
                     </Link>
                 </div>
-                <p className="hero-est">Est. 2026, Philippines</p>
+                <p className="hero-est">EST. 2026, PHILIPPINES</p>
             </main>
             <BigOrca play={play} />
         </div>
