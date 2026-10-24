@@ -4,7 +4,7 @@ import type { MouseEvent } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import HeroTitle from '../components/HeroTitle'
-import Description from '../components/Description'
+import Terminal from '../components/Terminal'
 import DotGrid from '../components/DotGrid'
 import BigOrca from '../components/BigOrca'
 import { toStage, useMousePosition } from '../hooks/useMousePosition'
@@ -38,7 +38,7 @@ function Home() {
                     Projects / CTF / Community
                 </p>
                 <HeroTitle play={play} />
-                <Description />
+                <Terminal />
                 <div className="hero-actions">
                     <Link className="btn btn-fill" to="/contact">
                         Join XeluLabs

@@ -1,0 +1,54 @@
+.terminal {
+  max-width: 560px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #c4c4c7;
+}
+
+.terminal p {
+  margin: 0;
+}
+
+.term-cmd {
+  color: #e8e8e6;
+}
+
+.intro .term-cmd {
+  animation: fadeUp 0.2s cubic-bezier(0.2, 0.7, 0.2, 1) 1.75s both;
+}
+
+.term-prompt {
+  position: relative;
+  color: #7fd3d8;
+}
+
+.terminal .term-desc {
+  margin-top: 6px;
+  text-align: justify;
+}
+
+.term-ch {
+  position: relative;
+}
+
+.term-hidden {
+  opacity: 0;
+}
+
+.term-cursor {
+  position: absolute;
+  left: 100%;
+  top: 0.1em;
+  width: 2px;
+  height: 1.1em;
+  background: #f2f2ef;
+}
+
+.term-done .term-cursor {
+  animation: blink 1s steps(1, end) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
