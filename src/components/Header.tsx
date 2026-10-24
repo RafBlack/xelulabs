@@ -1,16 +1,35 @@
 import './Header.css'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
+import { GHOSTS, LOGO_PATHS, LOGO_VIEWBOX } from '../data/logoPaths'
 
 const links = [
-    { to: '/', label: 'HOME' },
-    { to: '/about', label: 'ABOUT' },
-    { to: '/crew', label: 'CREW' },
-    { to: '/contact', label: 'CONTACT' },
+    { to: '/', label: 'Home' },
+    { to: '/about', label: 'About' },
+    { to: '/crew', label: 'Crew' },
+    { to: '/contact', label: 'Contact' },
 ]
+
+function Mark() {
+    const strokes = LOGO_PATHS.map((p) => <path key={p.id} d={p.d} />)
+    return (
+        <svg className="mark" viewBox={LOGO_VIEWBOX} aria-hidden="true">
+            {GHOSTS.map((g, i) => (
+                <g key={g.color} className={`mark-ghost mark-ghost-${i}`} stroke={g.color}>
+                    {strokes}
+                </g>
+            ))}
+            <g stroke="#f2f2ef">{strokes}</g>
+        </svg>
+    )
+}
 
 function Header() {
     return (
-        <header className="header">
+        <header className="header container">
+            <Link to="/" className="brand" aria-label="XeluLabs home">
+                <Mark />
+                <span>XELU</span>
+            </Link>
             <nav className="nav" aria-label="Main">
                 {links.map((l) => (
                     <NavLink key={l.to} to={l.to} end>
@@ -18,7 +37,6 @@ function Header() {
                     </NavLink>
                 ))}
             </nav>
-            <div className="est">EST. 2026</div>
         </header>
     )
 }

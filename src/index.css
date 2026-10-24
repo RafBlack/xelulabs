@@ -31,3 +31,8 @@ a:hover {
     height: var(--stage-h);
   }
 }
+
+.container {
+  width: min(1240px, 100% - 2 * clamp(16px, 4vw, 32px));
+  margin-inline: auto;
+}
