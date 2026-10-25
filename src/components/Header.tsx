@@ -1,5 +1,5 @@
 import './Header.css'
-import { memo, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { GHOSTS, LOGO_PATHS, LOGO_VIEWBOX } from '../data/logoPaths'
 import { SMALL_ORCA } from '../data/orcaArt'
@@ -30,6 +30,17 @@ function Mark() {
 function Header() {
     const [open, setOpen] = useState(false)
     const go = usePageTransition()
+
+    useEffect(() => {
+        const desktop = window.matchMedia('(min-width: 640px)')
+        const closeMenu = (event: MediaQueryListEvent) => {
+            if (event.matches) setOpen(false)
+        }
+
+        desktop.addEventListener('change', closeMenu)
+        return () => desktop.removeEventListener('change', closeMenu)
+    }, [])
+
     return (
         <header className={`header container${open ? ' header-open' : ''}`}>
             <Link to="/" className="brand" aria-label="xelulabs home" onClick={(event) => {
