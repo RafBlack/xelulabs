@@ -9,7 +9,7 @@
 .about-marquee { position: absolute; bottom: 70px; left: -400px; right: -400px; overflow: hidden; pointer-events: none; }
 .about-marquee > div { display: flex; width: max-content; color: #17171a; font: 700 72px 'Silkscreen', monospace; letter-spacing: 4px; white-space: nowrap; }
 .about-work-rows { position: relative; flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
-.about-work-row { position: relative; display: grid; grid-template-columns: 64px minmax(0,1fr) 260px; align-items: center; gap: 28px; padding: 26px 28px; border: 1px solid #2a2a2d; background: #0e0e10; transition: border-color .2s; container-type: inline-size; }
+.about-work-row { position: relative; display: grid; grid-template-columns: 64px minmax(0,1fr) 260px; align-items: center; gap: 28px; padding: 26px 28px; border: 1px solid #2a2a2d; background: #0e0e10; container-type: inline-size; }
 .about-work-row:hover { border-color: #7fd3d8; }
 .about-work-icon { display: block; width: 64px; height: 64px; }
 .about-work-row h3 { margin: 0 0 6px; color: #7fd3d8; font: 500 22px 'JetBrains Mono', monospace; }

@@ -1,11 +1,12 @@
 import './About.css'
 import { useEffect, useRef, useState } from 'react'
+import type { CSSProperties } from 'react'
 import Header from '../components/Header'
 import AboutHero from '../components/about/AboutHero'
 import AboutWork from '../components/about/AboutWork'
 import AboutStory from '../components/about/AboutStory'
 import AboutJoin from '../components/about/AboutJoin'
-import { ABOUT_SECTIONS } from '../data/about'
+import { ABOUT_SECTIONS, ABOUT_TIMING } from '../data/about'
 
 function About() {
     const scrollerRef = useRef<HTMLElement>(null)
@@ -43,11 +44,11 @@ function About() {
         const scroller = scrollerRef.current
         const section = document.getElementById(id)
         if (!scroller || !section) return
-        scroller.scrollTo({ top: scroller.scrollTop + section.getBoundingClientRect().top - scroller.getBoundingClientRect().top, behavior: 'smooth' })
+        scroller.scrollTo({ top: scroller.scrollTop + section.getBoundingClientRect().top - scroller.getBoundingClientRect().top, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
     }
 
     return (
-        <div className="about-page">
+        <div className="about-page" style={{ '--about-dot-transition': `${ABOUT_TIMING.dotTransitionDuration}s` } as CSSProperties}>
             <div className="about-header"><Header /></div>
             <div ref={progressRef} className="about-progress" aria-hidden="true" />
             <nav className="about-dots" aria-label="Sections">{ABOUT_SECTIONS.map((section, index) => <button key={section.id} type="button" className="about-dot" aria-current={active === index ? 'true' : undefined} onClick={() => goToSection(section.id)}>{section.label}<i aria-hidden="true" /></button>)}</nav>

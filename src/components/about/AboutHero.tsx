@@ -14,6 +14,8 @@ function AboutHero() {
         '--about-body-drift-duration': `${ABOUT_TIMING.bodyDriftDuration}s`,
         '--about-body-wig-duration': `${ABOUT_TIMING.bodyWigDuration}s`,
         '--about-hint-duration': `${ABOUT_TIMING.hintDuration}s`,
+        '--about-caret-duration': `${ABOUT_TIMING.caretBlinkDuration}s`,
+        '--about-char-reveal-duration': `${ABOUT_TIMING.charRevealDuration}s`,
     } as CSSProperties
 
     return (

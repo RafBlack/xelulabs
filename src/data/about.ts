@@ -83,4 +83,7 @@ export const ABOUT_TIMING = {
     riseDuration: 1.4,
     bobDuration: 4.5,
     hintDuration: 1.2,
+    caretBlinkDuration: 1,
+    charRevealDuration: 0.01,
+    dotTransitionDuration: 0.25,
 } as const
