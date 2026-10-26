@@ -39,6 +39,76 @@ function About() {
         return () => observer.disconnect()
     }, [])
 
+    useEffect(() => {
+        const scroller = scrollerRef.current
+        if (!scroller) return
+        const media = matchMedia('(min-width: 901px) and (prefers-reduced-motion: no-preference)')
+        let lockedTarget: number | null = null
+        let lockTimer: ReturnType<typeof setTimeout> | undefined
+        let lastWheelAt = 0
+
+        const sections = [...scroller.querySelectorAll<HTMLElement>('.about-section')]
+        const sectionTop = (section: HTMLElement) => scroller.scrollTop + section.getBoundingClientRect().top - scroller.getBoundingClientRect().top
+        const currentIndex = () => sections.reduce((best, section, index) => Math.abs(sectionTop(section) - scroller.scrollTop) < Math.abs(sectionTop(sections[best]) - scroller.scrollTop) ? index : best, 0)
+        const unlock = () => {
+            lockedTarget = null
+            clearTimeout(lockTimer)
+        }
+        const navigate = (index: number) => {
+            if (lockedTarget !== null || index < 0 || index >= sections.length) return
+            const target = sectionTop(sections[index])
+            if (Math.abs(scroller.scrollTop - target) < 2) return
+            lockedTarget = target
+            setActive(index)
+            scroller.scrollTo({ top: target, behavior: 'smooth' })
+            lockTimer = setTimeout(unlock, ABOUT_TIMING.scrollLockDuration)
+        }
+        const onWheel = (event: WheelEvent) => {
+            event.preventDefault()
+            const now = Date.now()
+            const withinGesture = now - lastWheelAt < ABOUT_TIMING.wheelGestureGap
+            lastWheelAt = now
+            if (lockedTarget !== null || withinGesture || (event.deltaMode === 0 && Math.abs(event.deltaY) < ABOUT_TIMING.wheelMinimumDelta) || event.deltaY === 0) return
+            navigate(currentIndex() + Math.sign(event.deltaY))
+        }
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.altKey || event.ctrlKey || event.metaKey) return
+            const target = event.target
+            if (target instanceof HTMLElement && (target.isContentEditable || target.closest('input, textarea, select, [contenteditable], [role="textbox"]'))) return
+            let index: number | undefined
+            if (event.key === 'ArrowDown' || event.key === 'PageDown' || (event.code === 'Space' && !event.shiftKey)) index = currentIndex() + 1
+            if (event.key === 'ArrowUp' || event.key === 'PageUp' || (event.code === 'Space' && event.shiftKey)) index = currentIndex() - 1
+            if (event.key === 'Home') index = 0
+            if (event.key === 'End') index = sections.length - 1
+            if (index === undefined) return
+            event.preventDefault()
+            if (lockedTarget !== null) return
+            navigate(index)
+        }
+        const onScrollEnd = () => {
+            if (lockedTarget !== null && Math.abs(scroller.scrollTop - lockedTarget) < 2) unlock()
+        }
+        const syncListeners = () => {
+            scroller.removeEventListener('wheel', onWheel)
+            window.removeEventListener('keydown', onKeyDown)
+            scroller.removeEventListener('scrollend', onScrollEnd)
+            unlock()
+            if (!media.matches) return
+            scroller.addEventListener('wheel', onWheel, { passive: false })
+            window.addEventListener('keydown', onKeyDown)
+            scroller.addEventListener('scrollend', onScrollEnd)
+        }
+        media.addEventListener('change', syncListeners)
+        syncListeners()
+        return () => {
+            media.removeEventListener('change', syncListeners)
+            scroller.removeEventListener('wheel', onWheel)
+            window.removeEventListener('keydown', onKeyDown)
+            scroller.removeEventListener('scrollend', onScrollEnd)
+            unlock()
+        }
+    }, [])
+
     const updateScroll = () => {
         const scroller = scrollerRef.current
         if (!scroller) return
