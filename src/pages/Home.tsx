@@ -49,10 +49,10 @@ function Home() {
                     }}>
                         Join xelulabs
                     </Link>
-                    <Link className="btn btn-line" to="/about" onClick={(event) => {
+                    <Link className="btn btn-line" to="/projects" onClick={(event) => {
                         if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
                         event.preventDefault()
-                        go('/about', '~/projects')
+                        go('/projects', '~/projects')
                     }}>
                         See our projects
                     </Link>

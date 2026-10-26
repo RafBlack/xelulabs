@@ -8,8 +8,9 @@ import { usePageTransition } from '../hooks/usePageTransition'
 
 const links = [
     { to: '/', label: 'HOME', path: '~/' },
-    { to: '/crew', label: 'CREW', path: '~/crew' },
     { to: '/about', label: 'ABOUT', path: '~/about' },
+    { to: '/crew', label: 'CREW', path: '~/crew' },
+    { to: '/projects', label: 'PROJECTS', path: '~/projects' },
     { to: '/contact', label: 'CONTACT', path: '~/contact' },
 ]
 
