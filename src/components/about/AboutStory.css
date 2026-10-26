@@ -1,6 +1,6 @@
 .about-story { gap: clamp(48px, 6.25vw, 120px); }
 .about-story .about-section-copy { z-index: 1; }
-.about-story-mark { position: absolute; z-index: 0; right: -20px; bottom: 40px; color: #141416; font: 700 clamp(200px, 18vw, 340px)/1 'Silkscreen', monospace; pointer-events: none; }
+.about-story-mark { position: absolute; right: clamp(0px, calc(1740px - 100vw), 100px); bottom: clamp(48px, 7svh, 88px); color: #141416; font: 700 clamp(100px, 9vw, 170px)/1 'Silkscreen', monospace; }
 .about-story-history { position: relative; z-index: 1; flex: 1 1 auto; min-width: 0; }
 .about-story-track { position: relative; max-width: 820px; padding-left: 44px; }
 .about-story-line { position: absolute; top: 6px; bottom: 6px; left: 5px; width: 2px; background: #2a2a2d; transform-origin: center top; transform: scaleY(0); }
@@ -32,7 +32,7 @@
 
 @media (max-width: 900px) {
   .about-story-history { flex: none; width: 100%; }
-  .about-story-mark { right: 0; bottom: 80px; font-size: clamp(130px, 24vw, 250px); }
+  .about-story-mark { right: 0; bottom: 48px; font-size: clamp(64px, 12vw, 120px); }
 }
 
 @media (max-width: 520px) {
