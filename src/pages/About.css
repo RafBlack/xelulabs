@@ -40,6 +40,8 @@
 .about-container {
   width: min(1304px, calc(100% - 2 * clamp(16px, 3.3vw, 48px)));
   margin-inline: auto;
+  box-sizing: border-box;
+  padding-right: clamp(0px, calc(1740px - 100vw), 100px);
 }
 
 .about-section {
@@ -69,7 +71,7 @@
   position: fixed;
   z-index: 21;
   top: 50%;
-  right: 40px;
+  right: clamp(12px, 2.1vw, 40px);
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -80,26 +82,30 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 12px;
+  gap: clamp(7px, .63vw, 12px);
   min-height: 32px;
   padding: 0;
   border: 0;
   background: transparent;
   color: #5a5a5f;
   cursor: pointer;
-  font: 12px 'JetBrains Mono', monospace;
-  letter-spacing: .15em;
+  font: clamp(9px, .625vw, 12px) 'JetBrains Mono', monospace;
+  letter-spacing: clamp(.07em, .094vw, .15em);
 }
 
-.about-dot i { display: block; width: 8px; height: 8px; background: #3a3a3e; transition: transform var(--about-dot-transition); }
+.about-dot i { display: block; flex: none; width: clamp(5px, .42vw, 8px); height: clamp(5px, .42vw, 8px); background: #3a3a3e; transition: transform var(--about-dot-transition); }
 .about-dot[aria-current='true'] { color: #7fd3d8; }
 .about-dot[aria-current='true'] i { background: #7fd3d8; transform: scale(1.75); }
 .about-dot:focus-visible { outline: 2px solid #7fd3d8; outline-offset: 4px; }
 
-@media (max-width: 1740px) and (min-width: 901px) {
-  .about-dots { right: 12px; }
-  .about-dot span { display: none; }
-  .about-dot { min-width: 20px; }
+@media (max-width: 1500px) and (min-width: 901px) {
+  .about-work { gap: 32px; }
+  .about-work .about-section-copy { flex-basis: clamp(280px, 23vw, 340px); }
+  .about-work-row { grid-template-columns: clamp(48px, 4vw, 64px) minmax(0,1fr) clamp(130px, 11vw, 180px); gap: clamp(12px, 1.3vw, 20px); padding: clamp(16px, 1.4vw, 24px); }
+  .about-work-icon { width: clamp(48px, 4vw, 64px); height: clamp(48px, 4vw, 64px); }
+  .about-work-row .about-work-files { font-size: clamp(11px, .9vw, 14px); }
+  .about-join { gap: 40px; }
+  .about-join-checks { padding-inline: clamp(14px, 1.5vw, 22px); font-size: clamp(12px, 1vw, 16px); }
 }
 
 @media (max-width: 1279px) and (min-width: 901px) {
