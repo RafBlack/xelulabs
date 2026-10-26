@@ -9,6 +9,7 @@ import AboutJoin from '../components/about/AboutJoin'
 import { ABOUT_SECTIONS, ABOUT_TIMING } from '../data/about'
 
 function About() {
+    const pageRef = useRef<HTMLDivElement>(null)
     const scrollerRef = useRef<HTMLElement>(null)
     const progressRef = useRef<HTMLDivElement>(null)
     const [seen, setSeen] = useState<string[]>(['who-we-are'])
@@ -41,7 +42,8 @@ function About() {
 
     useEffect(() => {
         const scroller = scrollerRef.current
-        if (!scroller) return
+        const page = pageRef.current
+        if (!scroller || !page) return
         const media = matchMedia('(min-width: 901px) and (prefers-reduced-motion: no-preference)')
         let lockedTarget: number | null = null
         let lockTimer: ReturnType<typeof setTimeout> | undefined
@@ -90,12 +92,12 @@ function About() {
             if (lockedTarget !== null && Math.abs(scroller.scrollTop - lockedTarget) < 2) unlock()
         }
         const syncListeners = () => {
-            scroller.removeEventListener('wheel', onWheel)
+            page.removeEventListener('wheel', onWheel)
             window.removeEventListener('keydown', onKeyDown)
             scroller.removeEventListener('scrollend', onScrollEnd)
             unlock()
             if (!media.matches) return
-            scroller.addEventListener('wheel', onWheel, { passive: false })
+            page.addEventListener('wheel', onWheel, { passive: false })
             window.addEventListener('keydown', onKeyDown)
             scroller.addEventListener('scrollend', onScrollEnd)
         }
@@ -103,7 +105,7 @@ function About() {
         syncListeners()
         return () => {
             media.removeEventListener('change', syncListeners)
-            scroller.removeEventListener('wheel', onWheel)
+            page.removeEventListener('wheel', onWheel)
             window.removeEventListener('keydown', onKeyDown)
             scroller.removeEventListener('scrollend', onScrollEnd)
             unlock()
@@ -129,7 +131,7 @@ function About() {
     }
 
     return (
-        <div className="about-page" style={{ '--about-dot-transition': `${ABOUT_TIMING.dotTransitionDuration}s` } as CSSProperties}>
+        <div ref={pageRef} className="about-page" style={{ '--about-dot-transition': `${ABOUT_TIMING.dotTransitionDuration}s` } as CSSProperties}>
             <div className="about-header"><Header /></div>
             <div ref={progressRef} className="about-progress" aria-hidden="true" />
             <nav className="about-dots" aria-label="Sections">{ABOUT_SECTIONS.map((section, index) => <button key={section.id} type="button" className="about-dot" aria-current={active === index ? 'true' : undefined} onClick={() => goToSection(section.id)}><span>{section.label}</span><i aria-hidden="true" /></button>)}</nav>
