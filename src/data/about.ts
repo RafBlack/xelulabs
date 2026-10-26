@@ -47,12 +47,12 @@ export const ABOUT_SECTIONS = [
 ]
 
 export const ABOUT_DIVE_BUBBLES = [
-    { top: 24, left: 13, size: 3, color: '#7fd3d8', delay: 0.55 },
-    { top: 78, left: -6, size: 4, color: '#cfe9ec', delay: 0.85 },
-    { top: 132, left: 12, size: 3, color: '#7fd3d8', delay: 1.12 },
-    { top: 190, left: -5, size: 4, color: '#cfe9ec', delay: 1.42 },
-    { top: 246, left: 13, size: 3, color: '#7fd3d8', delay: 1.74 },
-    { top: 300, left: -6, size: 4, color: '#cfe9ec', delay: 2.08 },
+    { top: 24, left: 13, size: 4, color: '#7fd3d8', delay: 0.55 },
+    { top: 78, left: -6, size: 5, color: '#cfe9ec', delay: 0.85 },
+    { top: 132, left: 12, size: 4, color: '#7fd3d8', delay: 1.12 },
+    { top: 190, left: -5, size: 6, color: '#cfe9ec', delay: 1.42 },
+    { top: 246, left: 13, size: 4, color: '#7fd3d8', delay: 1.74 },
+    { top: 300, left: -6, size: 5, color: '#cfe9ec', delay: 2.08 },
 ]
 
 export const ABOUT_TIMING = {

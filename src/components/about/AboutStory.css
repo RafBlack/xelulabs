@@ -21,7 +21,7 @@
 @keyframes aboutDive { from { opacity: 1; transform: translateY(-30px); } to { opacity: 1; transform: translateY(330px); } }
 @keyframes aboutDiveSway { 0%, 50%, 100% { transform: translateX(0) rotate(90deg); } 25% { transform: translateX(6px) rotate(98deg); } 75% { transform: translateX(-6px) rotate(82deg); } }
 @keyframes aboutDiveTail { from { transform: rotate(-12deg); } to { transform: rotate(12deg); } }
-@keyframes aboutDiveBubble { 0% { opacity: 0; transform: translateY(0); } 20% { opacity: .45; } 100% { opacity: 0; transform: translateY(-18px); } }
+@keyframes aboutDiveBubble { 0% { opacity: 0; transform: translate(0, 0); } 20% { opacity: .8; } 100% { opacity: 0; transform: translate(8px, -22px); } }
 @keyframes aboutDiveWake { 0% { opacity: 0; transform: scaleY(0); } 12% { opacity: .65; transform: scaleY(0); } 85% { opacity: .65; transform: scaleY(.8); } 100% { opacity: 0; transform: scaleY(1); } }
 
 .about-story .about-animate { opacity: 0; transform: translateY(10px); }
