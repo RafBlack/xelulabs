@@ -158,10 +158,9 @@
   .about-join-window { flex: none; width: 100%; }
   .about-work-row { grid-template-columns: 56px minmax(0,1fr); gap: 10px 20px; padding: 20px; }
   .about-work-icon { width: 56px; height: 56px; }
-  .about-work-row > div { display: contents; }
+  .about-work-row > div { min-width: 0; }
   .about-work-row h3 { margin: 0; }
-  .about-work-row > div > p,
-  .about-work-row .about-work-files { grid-column: 1 / -1; text-align: left; }
+  .about-work-row .about-work-files { grid-column: 1 / -1; text-align: left; white-space: normal; overflow-wrap: anywhere; }
   .about-work-row { --about-fish-distance: calc(100cqw + 76px); }
   .about-story-mark { right: 0; bottom: 80px; font-size: clamp(130px, 24vw, 250px); }
   .about-join-copy { flex: none; }
