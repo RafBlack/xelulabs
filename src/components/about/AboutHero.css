@@ -53,7 +53,7 @@
 .about-caret { display: inline-block; width: 2px; height: 1.1em; margin-left: .15em; background: #f2f2ef; vertical-align: text-bottom; opacity: 0; }
 
 .about-hero-visual { position: relative; flex: 0 1 540px; min-width: 0; }
-.about-body-drift { position: absolute; right: -10px; top: -190px; width: 300px; pointer-events: none; }
+.about-body-drift { position: absolute; right: -10px; top: clamp(-190px, calc(170px - 33.33svh), -40px); width: 300px; pointer-events: none; }
 .about-body-wig { transform-origin: 70% 50%; }
 .about-body-wig svg { display: block; width: 100%; height: auto; }
 .about-window { border: 1px solid #2a2a2d; background: #0e0e10; box-shadow: 0 0 0 1px #0c0c0d; }

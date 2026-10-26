@@ -118,7 +118,7 @@
   .about-section { padding-top: 76px; }
   .about-hero-copy { gap: 16px; }
   .about-hero-title { font-size: clamp(64px, min(6.67vw, 12.5vh), 128px); }
-  .about-hero .about-body-drift { top: -110px; width: 220px; }
+  .about-hero .about-body-drift { width: 220px; }
   .about-scroll-hint { bottom: 24px; }
   .about-work-row { padding-block: 16px; }
   .about-work-rows { gap: 12px; }
