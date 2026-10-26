@@ -56,7 +56,7 @@
 .about-caret { display: inline-block; width: 2px; height: 1.1em; margin-left: .15em; background: #f2f2ef; vertical-align: text-bottom; opacity: 0; }
 
 .about-hero-visual { position: relative; z-index: 1; flex: 0 1 540px; min-width: 0; }
-.about-body-drift { position: absolute; right: -10px; top: clamp(-190px, calc(170px - 33.33svh), -40px); width: 300px; pointer-events: none; }
+.about-body-drift { position: absolute; z-index: 2; right: -10px; top: clamp(-190px, calc(170px - 33.33svh), -40px); width: clamp(180px, 34svh, 300px); pointer-events: none; }
 .about-body-wig { transform-origin: 70% 50%; }
 .about-body-wig svg { display: block; width: 100%; height: auto; }
 .about-neofetch { padding: 24px 26px 28px; font: 16px/1.75 'JetBrains Mono', monospace; }
@@ -91,7 +91,6 @@
   .about-hero-mark { font-size: clamp(36px, 5vw, 72px); }
   .about-hero-copy { gap: 16px; }
   .about-hero-title { font-size: clamp(64px, min(6.67vw, 12.5vh), 128px); }
-  .about-hero .about-body-drift { width: 220px; }
   .about-scroll-hint { bottom: 24px; }
 }
 
