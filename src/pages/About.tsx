@@ -13,6 +13,7 @@ function About() {
     const progressRef = useRef<HTMLDivElement>(null)
     const [seen, setSeen] = useState<string[]>(['who-we-are'])
     const [active, setActive] = useState(0)
+    const [storyInView, setStoryInView] = useState(false)
 
     useEffect(() => {
         const scroller = scrollerRef.current
@@ -26,6 +27,15 @@ function About() {
             }
         }, { root: scroller, threshold: 0.25 })
         scroller.querySelectorAll('.about-section:not(#who-we-are)').forEach((section) => observer.observe(section))
+        return () => observer.disconnect()
+    }, [])
+
+    useEffect(() => {
+        const scroller = scrollerRef.current
+        const story = scroller?.querySelector('#our-story')
+        if (!scroller || !story) return
+        const observer = new IntersectionObserver(([entry]) => setStoryInView(entry.isIntersecting), { root: scroller, threshold: 0.25 })
+        observer.observe(story)
         return () => observer.disconnect()
     }, [])
 
@@ -57,7 +67,7 @@ function About() {
                     <div className="about-container">
                         <AboutHero />
                         <AboutWork seen={seen.includes('what-we-do')} />
-                        <AboutStory seen={seen.includes('our-story')} />
+                        <AboutStory seen={seen.includes('our-story')} inView={storyInView} />
                         <AboutJoin seen={seen.includes('join')} />
                     </div>
                 </div>
