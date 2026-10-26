@@ -47,8 +47,9 @@
   .about-work-rows { flex: none; width: 100%; }
   .about-work-row { grid-template-columns: 56px minmax(0,1fr); gap: 10px 20px; padding: 20px; }
   .about-work-icon { width: 56px; height: 56px; }
-  .about-work-row > div { min-width: 0; }
+  .about-work-row > div { display: contents; }
   .about-work-row h3 { margin: 0; }
+  .about-work-row > div p { grid-column: 1 / -1; }
   .about-work-row .about-work-files { grid-column: 1 / -1; text-align: left; white-space: normal; overflow-wrap: anywhere; }
   .about-work-row { --about-fish-distance: calc(100cqw + 76px); }
 }

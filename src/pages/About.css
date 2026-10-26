@@ -121,6 +121,7 @@
   .about-scroller { scroll-snap-type: none; }
   .about-dots { display: none; }
   .about-header .header { padding-block: 12px; }
+  .about-container { padding-right: 0; }
   .about-section {
     min-height: 100svh;
     flex-direction: column;
