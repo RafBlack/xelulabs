@@ -1,6 +1,7 @@
 import './About.css'
 import Header from '../components/Header'
 import AboutHero from '../components/about/AboutHero'
+import AboutWork from '../components/about/AboutWork'
 
 function About() {
     return (
@@ -10,7 +11,7 @@ function About() {
                 <div className="about-surface">
                     <div className="about-container">
                         <AboutHero />
-                        <section className="about-section" id="what-we-do" aria-label="What we do" />
+                        <AboutWork seen />
                         <section className="about-section" id="our-story" aria-label="Our story" />
                         <section className="about-section" id="join" aria-label="Join" />
                     </div>

@@ -1,0 +1,30 @@
+.about-work { gap: clamp(36px, 4.17vw, 80px); }
+.about-section-copy { position: relative; flex: 0 0 clamp(310px, 29vw, 420px); display: flex; flex-direction: column; gap: 24px; }
+.about-section-command { margin: 0; color: #e8e8e6; font: 16px 'JetBrains Mono', monospace; }
+.about-section-command span { color: #7fd3d8; }
+.about-section-title { margin: 0; font: 700 clamp(64px, 4.6vw, 88px)/.95 'Silkscreen', monospace; letter-spacing: 2px; white-space: nowrap; }
+.about-section-title span { display: block; color: #f2f2ef; }
+.about-section-title span + span { color: #b8b8bc; }
+.about-section-description { max-width: 30ch; margin: 0; color: #c4c4c7; font-size: 19px; line-height: 1.55; }
+.about-marquee { position: absolute; bottom: 70px; left: -400px; right: -400px; overflow: hidden; pointer-events: none; }
+.about-marquee > div { display: flex; width: max-content; color: #17171a; font: 700 72px 'Silkscreen', monospace; letter-spacing: 4px; white-space: nowrap; }
+.about-work-rows { position: relative; flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+.about-work-row { position: relative; display: grid; grid-template-columns: 64px minmax(0,1fr) 260px; align-items: center; gap: 28px; padding: 26px 28px; border: 1px solid #2a2a2d; background: #0e0e10; transition: border-color .2s; container-type: inline-size; }
+.about-work-row:hover { border-color: #7fd3d8; }
+.about-work-icon { display: block; width: 64px; height: 64px; }
+.about-work-row h3 { margin: 0 0 6px; color: #7fd3d8; font: 500 22px 'JetBrains Mono', monospace; }
+.about-work-row p { margin: 0; color: #c4c4c7; font-size: 18px; line-height: 1.5; }
+.about-work-row .about-work-files { color: #8e8e92; font: 14px/1.8 'JetBrains Mono', monospace; text-align: right; white-space: pre-wrap; }
+.about-row-fish { position: absolute; top: -8px; left: -30px; width: 24px; height: 12px; opacity: 0; }
+
+@keyframes aboutSlide { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: none; } }
+@keyframes aboutMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes aboutCardFish { from { transform: translateX(0); } to { transform: translateX(var(--about-fish-distance)); } }
+
+.about-work .about-animate { opacity: 0; transform: translateY(10px); }
+.about-work .about-work-row { transform: translateX(60px); }
+.about-work.seen .about-animate { animation: aboutFade var(--about-fade-duration) cubic-bezier(.2,.7,.2,1) both; }
+.about-work.seen .about-work-row { animation-name: aboutSlide; }
+.about-work.seen .about-marquee > div { animation: aboutMarquee var(--about-marquee-duration) linear infinite; }
+.about-work-row:hover .about-row-fish { opacity: 1; animation: aboutCardFish var(--about-fish-duration) linear infinite; }
+.about-work-row { --about-fish-distance: calc(100cqw + 92px); }
