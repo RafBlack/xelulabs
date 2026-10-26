@@ -101,6 +101,4 @@ export const ABOUT_TIMING = {
     charRevealDuration: 0.01,
     dotTransitionDuration: 0.25,
     scrollLockDuration: 1400,
-    wheelGestureGap: 180,
-    wheelMinimumDelta: 5,
 } as const
