@@ -3,7 +3,7 @@
   gap: clamp(30px, 4vw, 80px);
 }
 
-.about-hero-mark { position: absolute; right: clamp(0px, calc(1740px - 100vw), 100px); bottom: clamp(48px, 7svh, 88px); color: #141416; font: 700 clamp(36px, 6vw, 96px)/1 'Silkscreen', monospace; white-space: nowrap; }
+.about-hero-mark { position: absolute; right: clamp(0px, calc(1740px - 100vw), 100px); bottom: clamp(48px, 7svh, 88px); color: #141416; font: 700 clamp(30px, min(6vw, calc(16svh - 73px)), 96px)/1 'Silkscreen', monospace; white-space: nowrap; }
 .about-hero-copy {
   position: relative;
   z-index: 1;
@@ -88,7 +88,6 @@
 .about-hero.seen .about-scroll-hint i { animation: aboutNudge var(--about-hint-duration) ease-in-out infinite; }
 
 @media (max-height: 760px) and (min-width: 901px) {
-  .about-hero-mark { font-size: clamp(36px, 5vw, 72px); }
   .about-hero-copy { gap: 16px; }
   .about-hero-title { font-size: clamp(64px, min(6.67vw, 12.5vh), 128px); }
   .about-scroll-hint { bottom: 24px; }
