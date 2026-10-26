@@ -1,4 +1,4 @@
-.crew-grid { gap: clamp(36px, 4.17vw, 80px); flex-wrap: wrap; }
+.crew-grid { gap: clamp(36px, 4.17vw, 80px); flex-wrap: wrap; overflow: clip; }
 .crew-grid .crew-grid-copy { z-index: 1; }
 
 .crew-grid-mark { position: absolute; top: calc(50% - 80px); left: 0; color: #141416; font: 700 clamp(60px, min(5.6vw, calc(14svh - 60px)), 110px)/1 'Silkscreen', monospace; white-space: nowrap; pointer-events: none; }
@@ -180,6 +180,10 @@
   .crew-grid { gap: 32px; }
   .crew-grid .crew-grid-copy { flex-basis: clamp(280px, 23vw, 340px); }
 }
+
+@media (max-width: 1279px) and (min-width: 901px) {
+  .crew-card { --crew-fish-distance: calc(100cqw + 76px); }
+}
 @media (max-height: 760px) and (min-width: 901px) {
   .crew-grid { padding-top: 112px; }
 }
@@ -189,6 +193,7 @@
   .crew-grid-cards { flex: none; width: 100%; grid-template-columns: 1fr; }
   .crew-grid-copy { flex: none; }
   .crew-grid-cta { flex-direction: column; align-items: stretch; text-align: center; }
+  .crew-card { --crew-fish-distance: calc(100cqw + 76px); }
 }
 
 @media (max-width: 520px) {
@@ -197,6 +202,7 @@
   .crew-card-bio { font-size: 14px; }
   .crew-grid-cta { padding: 20px; }
   .crew-section-title { font-size: clamp(50px, 10vw, 88px); }
+  .crew-card { --crew-fish-distance: calc(100cqw + 68px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
