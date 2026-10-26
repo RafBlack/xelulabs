@@ -4,7 +4,7 @@ import PixelRects from '../PixelRects'
 import { SMALL_ORCA } from '../../data/orcaArt'
 import { ABOUT_COMMITS, ABOUT_TIMING } from '../../data/about'
 
-function AboutStory({ seen, inView }: { seen: boolean, inView: boolean }) {
+function AboutStory({ inView }: { inView: boolean }) {
     const timing = {
         '--about-fade-duration': `${ABOUT_TIMING.fade}s`,
         '--about-line-duration': `${ABOUT_TIMING.lineDuration}s`,
@@ -12,7 +12,7 @@ function AboutStory({ seen, inView }: { seen: boolean, inView: boolean }) {
     } as CSSProperties
 
     return (
-        <section className={`about-section about-story${seen ? ' seen' : ''}${inView ? ' in-view' : ''}`} id="our-story" aria-label="Our story" style={timing}>
+        <section className={`about-section about-story${inView ? ' seen' : ''}`} id="our-story" aria-label="Our story" style={timing}>
             <div className="about-story-mark about-animate" aria-hidden="true" style={{ animationDelay: `${ABOUT_TIMING.timeline}s` }}>2026</div>
             <div className="about-section-copy">
                 <p className="about-section-command about-animate" style={{ animationDelay: `${ABOUT_TIMING.sectionCommand}s` }}><span>$ </span>git log --oneline</p>

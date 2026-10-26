@@ -27,7 +27,7 @@ function About() {
                 }
             }
         }, { root: scroller, threshold: 0.25 })
-        scroller.querySelectorAll('.about-section:not(#who-we-are)').forEach((section) => observer.observe(section))
+        scroller.querySelectorAll('.about-section:not(#who-we-are, #our-story)').forEach((section) => observer.observe(section))
         return () => observer.disconnect()
     }, [])
 
@@ -140,7 +140,7 @@ function About() {
                     <div className="about-container">
                         <AboutHero />
                         <AboutWork seen={seen.includes('what-we-do')} />
-                        <AboutStory seen={seen.includes('our-story')} inView={storyInView} />
+                        <AboutStory inView={storyInView} />
                         <AboutJoin seen={seen.includes('join')} />
                     </div>
                 </div>
