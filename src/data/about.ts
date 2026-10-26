@@ -43,7 +43,7 @@ export const ABOUT_SECTIONS = [
     { id: 'who-we-are', label: 'WHO WE ARE' },
     { id: 'what-we-do', label: 'WHAT WE DO' },
     { id: 'our-story', label: 'OUR STORY' },
-    { id: 'join', label: 'JOIN' },
+    { id: 'join', label: 'JOIN US!' },
 ]
 
 export const ABOUT_DIVE_BUBBLES = [
