@@ -1,0 +1,70 @@
+.about-work { gap: clamp(36px, 4.17vw, 80px); overflow: clip; }
+.about-work .about-section-copy { z-index: 1; }
+.about-marquee { position: absolute; bottom: 70px; left: -400px; right: -400px; overflow: hidden; pointer-events: none; }
+.about-marquee > div { display: flex; width: max-content; color: #17171a; font: 700 72px 'Silkscreen', monospace; letter-spacing: 4px; white-space: nowrap; }
+.about-work-rows { position: relative; flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+.about-work-row { position: relative; display: grid; grid-template-columns: 64px minmax(0,1fr) 260px; align-items: center; gap: 28px; padding: 26px 28px; border: 1px solid #2a2a2d; background: #0e0e10; container-type: inline-size; }
+.about-work-row:hover { border-color: #7fd3d8; }
+.about-work-icon { display: block; width: 64px; height: 64px; }
+.about-work-row h3 { margin: 0 0 6px; color: #7fd3d8; font: 500 22px 'JetBrains Mono', monospace; }
+.about-work-row p { margin: 0; color: #c4c4c7; font-size: 18px; line-height: 1.5; }
+.about-work-row .about-work-files { color: #8e8e92; font: 14px/1.8 'JetBrains Mono', monospace; text-align: right; white-space: pre-wrap; }
+.about-row-fish { position: absolute; top: -8px; left: -30px; width: 24px; height: 12px; opacity: 0; }
+
+@keyframes aboutMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes aboutCardFish { from { transform: translateX(0); } to { transform: translateX(var(--about-fish-distance)); } }
+
+.about-work .about-animate { opacity: 0; transform: translateY(10px); }
+.about-work .about-work-row { transform: translateX(60px); }
+.about-work.seen .about-animate { animation: aboutFade var(--about-fade-duration) cubic-bezier(.2,.7,.2,1) both; }
+.about-work.seen .about-work-row { animation-name: aboutSlide; }
+.about-work.seen .about-marquee > div { animation: aboutMarquee var(--about-marquee-duration) linear infinite; }
+.about-work-row:hover .about-row-fish { opacity: 1; animation: aboutCardFish var(--about-fish-duration) linear infinite; }
+.about-work-row { --about-fish-distance: calc(100cqw + 92px); }
+
+@media (max-width: 1500px) and (min-width: 901px) {
+  .about-work { gap: 32px; }
+  .about-work .about-section-copy { flex-basis: clamp(280px, 23vw, 340px); }
+  .about-work-row { grid-template-columns: clamp(48px, 4vw, 64px) minmax(0,1fr) clamp(130px, 11vw, 180px); gap: clamp(12px, 1.3vw, 20px); padding: clamp(16px, 1.4vw, 24px); }
+  .about-work-icon { width: clamp(48px, 4vw, 64px); height: clamp(48px, 4vw, 64px); }
+  .about-work-row .about-work-files { font-size: clamp(11px, .9vw, 14px); }
+}
+
+@media (max-width: 1279px) and (min-width: 901px) {
+  .about-work { gap: 32px; }
+  .about-work .about-section-copy { flex-basis: 300px; }
+  .about-work-row { grid-template-columns: 48px minmax(0,1fr); gap: 12px 20px; padding: 20px; }
+  .about-work-icon { width: 48px; height: 48px; }
+  .about-work-row .about-work-files { grid-column: 2; text-align: left; }
+  .about-work-row { --about-fish-distance: calc(100cqw + 76px); }
+}
+
+@media (max-height: 760px) and (min-width: 901px) {
+  .about-work-row { padding-block: 16px; }
+  .about-work-rows { gap: 12px; }
+}
+
+@media (max-width: 900px) {
+  .about-work-rows { flex: none; width: 100%; }
+  .about-work-row { grid-template-columns: 56px minmax(0,1fr); gap: 10px 20px; padding: 20px; }
+  .about-work-icon { width: 56px; height: 56px; }
+  .about-work-row > div { display: contents; }
+  .about-work-row h3 { margin: 0; }
+  .about-work-row > div p { grid-column: 1 / -1; }
+  .about-work-row .about-work-files { grid-column: 1 / -1; text-align: left; white-space: normal; overflow-wrap: anywhere; }
+  .about-work-row { --about-fish-distance: calc(100cqw + 76px); }
+}
+
+@media (max-width: 520px) {
+  .about-work-row { grid-template-columns: 48px minmax(0,1fr); gap: 10px 12px; padding: 16px; }
+  .about-work-icon { width: 48px; height: 48px; }
+  .about-work-row h3 { font-size: 18px; }
+  .about-work-row p { font-size: 15px; }
+  .about-work-row .about-work-files { font-size: 11px; }
+  .about-work-row { --about-fish-distance: calc(100cqw + 68px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-page .about-marquee > div { transform: none; }
+  .about-page .about-work-row:hover .about-row-fish { transform: none; }
+}
