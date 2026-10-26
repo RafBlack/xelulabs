@@ -51,7 +51,7 @@ export const ABOUT_TIMING = {
     letterDuration: 0.55,
     heroCommand: 1.2,
     introStart: 1.5,
-    introStep: 0.02,
+    introStep: 0.012,
     terminal: 0.6,
     body: 1,
     head: 1.1,
