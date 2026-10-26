@@ -11,7 +11,7 @@
 .about-join-window { z-index: 1; flex: 0 1 520px; min-width: 0; margin-bottom: 220px; }
 .about-join-checks { padding: 22px 26px 26px; font: 16px/2 'JetBrains Mono', monospace; }
 .about-join-checks p { margin: 0; color: #c4c4c7; white-space: nowrap; }
-.about-join-rise { position: absolute; right: calc((100% - 100vw) / 2 - 30px); bottom: -60px; width: min(600px, 46vw); pointer-events: none; transform: translateY(110%); }
+.about-join-rise { position: absolute; right: calc((100% - 100vw) / 2 - 30px); bottom: -60px; width: min(600px, 46vw, calc(100svh - 280px)); pointer-events: none; transform: translateY(110%); }
 .about-join-bob { transform-origin: 60% 100%; }
 .about-join-bob svg { display: block; width: 100%; height: auto; }
 
