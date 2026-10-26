@@ -55,6 +55,8 @@
   scroll-snap-stop: always;
 }
 
+.about-mark-layer { position: absolute; inset: 0; z-index: 0; overflow: clip; pointer-events: none; }
+
 .about-section-copy { position: relative; flex: 0 0 clamp(310px, 29vw, 420px); display: flex; flex-direction: column; gap: 24px; }
 .about-section-command { margin: 0; color: #e8e8e6; font: 16px 'JetBrains Mono', monospace; }
 .about-section-command span { color: #7fd3d8; }

@@ -1,4 +1,4 @@
-.about-join { gap: clamp(40px, 5.2vw, 100px); overflow: clip; }
+.about-join { gap: clamp(40px, 5.2vw, 100px); }
 .about-join-mark { position: absolute; z-index: 0; bottom: 18px; left: 0; color: #141416; font: 700 clamp(64px, 11vw, 180px)/1 'Silkscreen', monospace; white-space: nowrap; pointer-events: none; }
 .about-join-copy { flex: 0 1 620px; display: flex; flex-direction: column; gap: 28px; z-index: 1; }
 .about-join .about-section-title { color: #f2f2ef; }

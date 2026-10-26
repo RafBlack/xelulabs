@@ -13,7 +13,7 @@ function AboutStory({ inView }: { inView: boolean }) {
 
     return (
         <section className={`about-section about-story${inView ? ' seen' : ''}`} id="our-story" aria-label="Our story" style={timing}>
-            <div className="about-story-mark about-animate" aria-hidden="true" style={{ animationDelay: `${ABOUT_TIMING.timeline}s` }}>2026</div>
+            <div className="about-mark-layer" aria-hidden="true"><div className="about-story-mark about-animate" style={{ animationDelay: `${ABOUT_TIMING.timeline}s` }}>2026</div></div>
             <div className="about-section-copy">
                 <p className="about-section-command about-animate" style={{ animationDelay: `${ABOUT_TIMING.sectionCommand}s` }}><span>$ </span>git log --oneline</p>
                 <h2 className="about-section-title about-animate" style={{ animationDelay: `${ABOUT_TIMING.sectionTitle}s` }}><span>OUR</span><span>STORY</span></h2>

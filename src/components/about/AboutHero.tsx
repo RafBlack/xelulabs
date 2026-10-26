@@ -20,7 +20,7 @@ function AboutHero() {
 
     return (
         <section className="about-section about-hero seen" id="who-we-are" aria-label="Who we are" style={timing}>
-            <div className="about-hero-mark about-animate" aria-hidden="true" style={{ animationDelay: `${ABOUT_TIMING.timeline}s` }}>{ABOUT_BACKGROUND_WORDS.hero}</div>
+            <div className="about-mark-layer" aria-hidden="true"><div className="about-hero-mark about-animate" style={{ animationDelay: `${ABOUT_TIMING.timeline}s` }}>{ABOUT_BACKGROUND_WORDS.hero}</div></div>
             <div className="about-hero-copy">
                 <p className="about-eyebrow about-animate" style={{ animationDelay: `${ABOUT_TIMING.heroEyebrow}s` }}><span aria-hidden="true" />ABOUT</p>
                 <h1 className="about-hero-title" aria-label="WHO WE ARE">

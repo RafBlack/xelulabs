@@ -1,7 +1,6 @@
 .about-hero {
   justify-content: space-between;
   gap: clamp(30px, 4vw, 80px);
-  overflow: clip;
 }
 
 .about-hero-mark { position: absolute; z-index: 0; bottom: 0; left: 0; color: #141416; font: 700 clamp(28px, 10vw, 160px)/1 'Silkscreen', monospace; white-space: nowrap; pointer-events: none; }
