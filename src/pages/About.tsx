@@ -3,6 +3,7 @@ import Header from '../components/Header'
 import AboutHero from '../components/about/AboutHero'
 import AboutWork from '../components/about/AboutWork'
 import AboutStory from '../components/about/AboutStory'
+import AboutJoin from '../components/about/AboutJoin'
 
 function About() {
     return (
@@ -14,7 +15,7 @@ function About() {
                         <AboutHero />
                         <AboutWork seen />
                         <AboutStory seen />
-                        <section className="about-section" id="join" aria-label="Join" />
+                        <AboutJoin seen />
                     </div>
                 </div>
             </main>
