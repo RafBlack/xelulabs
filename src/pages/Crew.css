@@ -75,6 +75,9 @@
   scroll-snap-stop: always;
 }
 
+/* end snap point so sections taller than the viewport can rest at their bottom */
+.crew-section::after { content: ''; position: absolute; bottom: 0; width: 1px; height: 1px; scroll-snap-align: end; }
+
 .crew-mark-layer { position: absolute; inset: 0; z-index: 0; overflow: clip; pointer-events: none; }
 
 .crew-window { border: 1px solid #2a2a2d; background: #0e0e10; box-shadow: 0 0 0 1px #0c0c0d; }
