@@ -21,8 +21,8 @@ export const ABOUT_PILLARS = [
 
 export const ABOUT_COMMITS = [
     { hash: 'a1f3c2e', message: 'init: xelulabs founded', when: '2026, PHILIPPINES', dot: '#7fd3d8' },
-    { hash: '[hash]', message: '[first event or CTF]', when: '[DATE]', dot: '#4a4a52' },
-    { hash: '[hash]', message: '[next milestone]', when: '[DATE]', dot: '#4a4a52' },
+    { hash: '3d9b0f7', message: 'feat: first crew assembled', when: '2026', dot: '#4a4a52' },
+    { hash: '7e21c4a', message: 'wip: first ctf and first project', when: 'IN PROGRESS', dot: '#4a4a52' },
     { hash: 'HEAD', message: 'you, maybe?', when: 'NEXT', dot: '#f2f2ef' },
 ]
 
