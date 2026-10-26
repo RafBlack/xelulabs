@@ -3,7 +3,7 @@
   gap: clamp(30px, 4vw, 80px);
 }
 
-.about-hero-mark { position: absolute; z-index: 0; bottom: 0; left: 0; color: #141416; font: 700 clamp(28px, 10vw, 160px)/1 'Silkscreen', monospace; white-space: nowrap; pointer-events: none; }
+.about-hero-mark { position: absolute; right: clamp(0px, calc(1740px - 100vw), 100px); bottom: clamp(48px, 7svh, 88px); color: #141416; font: 700 clamp(36px, 6vw, 96px)/1 'Silkscreen', monospace; white-space: nowrap; }
 .about-hero-copy {
   position: relative;
   z-index: 1;
@@ -88,7 +88,7 @@
 .about-hero.seen .about-scroll-hint i { animation: aboutNudge var(--about-hint-duration) ease-in-out infinite; }
 
 @media (max-height: 760px) and (min-width: 901px) {
-  .about-hero-mark { font-size: clamp(60px, 7vw, 100px); }
+  .about-hero-mark { font-size: clamp(36px, 5vw, 72px); }
   .about-hero-copy { gap: 16px; }
   .about-hero-title { font-size: clamp(64px, min(6.67vw, 12.5vh), 128px); }
   .about-hero .about-body-drift { width: 220px; }
@@ -96,7 +96,7 @@
 }
 
 @media (max-width: 900px) {
-  .about-hero-mark { bottom: 12px; font-size: clamp(28px, 10vw, 90px); }
+  .about-hero-mark { right: 0; bottom: 24px; font-size: clamp(24px, 6vw, 54px); }
   .about-hero-copy { flex: none; gap: 22px; }
   .about-hero-title { font-size: clamp(44px, 11.5vw, 88px); }
   .about-hero-visual { flex: none; width: 100%; margin-top: 80px; }
