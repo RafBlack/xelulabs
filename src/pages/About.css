@@ -1,0 +1,53 @@
+.about-page {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+  background: #0c0c0d;
+  color: #e8e8e6;
+  font-family: 'Barlow', sans-serif;
+}
+
+.about-header {
+  position: fixed;
+  z-index: 20;
+  inset: 0 0 auto;
+  padding-bottom: 32px;
+  background: linear-gradient(#0c0c0d 60%, transparent);
+}
+
+.about-header .header {
+  width: min(1400px, calc(100% - 2 * clamp(24px, 3vw, 48px)));
+  padding-block: 28px 22px;
+  border-color: #2a2a2d;
+}
+
+.about-scroller {
+  height: 100svh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+.about-surface {
+  background-color: #0c0c0d;
+  background-image: radial-gradient(#26262a 1px, transparent 1.3px);
+  background-size: 32px 32px;
+  overflow: hidden;
+}
+
+.about-container {
+  width: min(1400px, calc(100% - 2 * clamp(24px, 3vw, 48px)));
+  margin-inline: auto;
+}
+
+.about-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  box-sizing: border-box;
+  padding-top: 60px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
