@@ -1,11 +1,12 @@
 import './DotGrid.css'
 import { useEffect, useRef } from 'react'
+import type { RefObject } from 'react'
 import { RIPPLE } from '../data/timeline'
 import type { Hole } from '../hooks/useCutouts'
 import type { Point } from '../hooks/useMousePosition'
 import type { Wave } from '../hooks/useRipples'
 
-type Props = { pos: Point; waves: Wave[]; holes: Hole[] }
+type Props = { pos: RefObject<Point>; waves: Wave[]; holes: Hole[] }
 
 type Dot = { x: number; y: number; t: number; ox: number; oy: number }
 
@@ -61,6 +62,9 @@ function DotGrid({ pos, waves, holes }: Props) {
         let height = 0
         let dots: Dot[] = []
         let frame = 0
+        let dirty = true
+        let last: Point = { x: NaN, y: NaN }
+        let lastHoles: Hole[] = []
 
         const setup = () => {
             ratio = window.devicePixelRatio || 1
@@ -70,15 +74,23 @@ function DotGrid({ pos, waves, holes }: Props) {
             canvas.width = Math.round(width * ratio)
             canvas.height = Math.round(height * ratio)
             dots = makeDots(width, height)
+            dirty = true
         }
         const observer = new ResizeObserver(setup)
         observer.observe(canvas)
 
         const draw = () => {
-            const { pos, waves, holes } = latest.current
+            frame = requestAnimationFrame(draw)
+            const { waves, holes } = latest.current
+            const pos = latest.current.pos.current
+            if (!dirty && !waves.length && holes === lastHoles && pos.x === last.x && pos.y === last.y) return
+            last = pos
+            lastHoles = holes
+            dirty = false
             ctx.clearRect(0, 0, canvas.width, canvas.height)
             dots.forEach((dot) => {
                 const goal = target(dot, pos, waves)
+                if (Math.abs(goal.t - dot.t) > 0.001 || Math.abs(goal.ox - dot.ox) > 0.01 || Math.abs(goal.oy - dot.oy) > 0.01) dirty = true
                 dot.t += (goal.t - dot.t) * EASE
                 dot.ox += (goal.ox - dot.ox) * EASE
                 dot.oy += (goal.oy - dot.oy) * EASE
@@ -87,7 +99,6 @@ function DotGrid({ pos, waves, holes }: Props) {
                 ctx.fillStyle = `rgb(${c},${c},${Math.round(42 + (82 - 42) * dot.t)})`
                 ctx.fillRect(Math.round((dot.x + dot.ox) * ratio), Math.round((dot.y + dot.oy) * ratio), size, size)
             })
-            frame = requestAnimationFrame(draw)
         }
 
         frame = requestAnimationFrame(draw)
