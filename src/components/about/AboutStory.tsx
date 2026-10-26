@@ -1,14 +1,18 @@
 import './AboutStory.css'
 import type { CSSProperties } from 'react'
 import PixelRects from '../PixelRects'
-import { SMALL_ORCA } from '../../data/orcaArt'
-import { ABOUT_COMMITS, ABOUT_TIMING } from '../../data/about'
+import { SMALL_ORCA, SMALL_ORCA_TAIL } from '../../data/orcaArt'
+import { ABOUT_COMMITS, ABOUT_DIVE_BUBBLES, ABOUT_TIMING } from '../../data/about'
 
 function AboutStory({ inView }: { inView: boolean }) {
     const timing = {
         '--about-fade-duration': `${ABOUT_TIMING.fade}s`,
         '--about-line-duration': `${ABOUT_TIMING.lineDuration}s`,
         '--about-dive-duration': `${ABOUT_TIMING.diveDuration}s`,
+        '--about-dive-sway-duration': `${ABOUT_TIMING.diveSwayDuration}s`,
+        '--about-dive-tail-duration': `${ABOUT_TIMING.diveTailDuration}s`,
+        '--about-dive-bubble-duration': `${ABOUT_TIMING.diveBubbleDuration}s`,
+        '--about-timeline-delay': `${ABOUT_TIMING.timeline}s`,
     } as CSSProperties
 
     return (
@@ -22,7 +26,16 @@ function AboutStory({ inView }: { inView: boolean }) {
             <div className="about-story-history">
                 <div className="about-story-track">
                     <div className="about-story-line" aria-hidden="true" style={{ animationDelay: `${ABOUT_TIMING.timeline}s` }} />
-                    <div className="about-story-diver" aria-hidden="true" style={{ animationDelay: `${ABOUT_TIMING.timeline}s` }}><svg viewBox="0 0 20 10" shapeRendering="crispEdges"><PixelRects art={SMALL_ORCA} /></svg></div>
+                    <div className="about-story-wake" aria-hidden="true" style={{ animationDelay: `${ABOUT_TIMING.timeline}s` }} />
+                    <div className="about-story-diver" aria-hidden="true" style={{ animationDelay: `${ABOUT_TIMING.timeline}s` }}>
+                        <div className="about-story-sway">
+                            <svg viewBox="0 0 20 10" shapeRendering="crispEdges">
+                                <g className="about-story-tail"><PixelRects art={SMALL_ORCA} to={SMALL_ORCA_TAIL} /></g>
+                                <PixelRects art={SMALL_ORCA} from={SMALL_ORCA_TAIL} />
+                            </svg>
+                        </div>
+                    </div>
+                    {ABOUT_DIVE_BUBBLES.map((bubble, index) => <i key={index} className="about-story-bubble" aria-hidden="true" style={{ top: bubble.top, left: bubble.left, width: bubble.size, height: bubble.size, background: bubble.color, animationDelay: `${ABOUT_TIMING.timeline + bubble.delay}s` }} />)}
                     <ol>{ABOUT_COMMITS.map((commit, index) => <li key={index} className="about-animate" style={{ animationDelay: `${ABOUT_TIMING.commitStart + index * ABOUT_TIMING.commitStep}s` }}><span className="about-story-dot" aria-hidden="true" style={{ background: commit.dot }} /><span className="about-story-hash">{commit.hash}</span><span className="about-story-message">{commit.message}</span><span className="about-story-when">{commit.when}</span></li>)}</ol>
                 </div>
             </div>

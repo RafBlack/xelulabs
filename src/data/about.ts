@@ -46,6 +46,15 @@ export const ABOUT_SECTIONS = [
     { id: 'join', label: 'JOIN' },
 ]
 
+export const ABOUT_DIVE_BUBBLES = [
+    { top: 24, left: 13, size: 3, color: '#7fd3d8', delay: 0.55 },
+    { top: 78, left: -6, size: 4, color: '#cfe9ec', delay: 0.85 },
+    { top: 132, left: 12, size: 3, color: '#7fd3d8', delay: 1.12 },
+    { top: 190, left: -5, size: 4, color: '#cfe9ec', delay: 1.42 },
+    { top: 246, left: 13, size: 3, color: '#7fd3d8', delay: 1.74 },
+    { top: 300, left: -6, size: 4, color: '#cfe9ec', delay: 2.08 },
+]
+
 export const ABOUT_TIMING = {
     fade: 0.7,
     heroEyebrow: 0.2,
@@ -81,6 +90,9 @@ export const ABOUT_TIMING = {
     bodyDriftDuration: 12,
     bodyWigDuration: 0.34,
     diveDuration: 2.4,
+    diveSwayDuration: 1.2,
+    diveTailDuration: 0.3,
+    diveBubbleDuration: 0.8,
     lineDuration: 1.6,
     riseDuration: 1.4,
     bobDuration: 4.5,
