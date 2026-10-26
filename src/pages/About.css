@@ -185,6 +185,7 @@
   .about-story-message { font-size: 18px; }
   .about-story-when { font-size: 11px; }
   .about-join-copy { gap: 22px; }
+  .about-join .about-section-title { font-size: clamp(30px, 9vw, 46px); }
   .about-join-checks { padding: 16px; font-size: clamp(9px, 2.65vw, 12px); }
   .about-join-window { margin-bottom: 130px; }
   .about-join-rise { width: min(350px, 85vw); }
