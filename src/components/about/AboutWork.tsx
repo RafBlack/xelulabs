@@ -2,7 +2,7 @@ import './AboutWork.css'
 import type { CSSProperties } from 'react'
 import PixelRects from '../PixelRects'
 import { ABOUT_ICONS, SMALL_ORCA } from '../../data/orcaArt'
-import { ABOUT_BACKGROUND_WORDS, ABOUT_MARQUEE, ABOUT_PILLARS, ABOUT_TIMING } from '../../data/about'
+import { ABOUT_MARQUEE, ABOUT_PILLARS, ABOUT_TIMING } from '../../data/about'
 
 function AboutWork({ seen }: { seen: boolean }) {
     const timing = {
@@ -13,7 +13,6 @@ function AboutWork({ seen }: { seen: boolean }) {
 
     return (
         <section className={`about-section about-work${seen ? ' seen' : ''}`} id="what-we-do" aria-label="What we do" style={timing}>
-            <div className="about-work-mark about-animate" aria-hidden="true" style={{ animationDelay: `${ABOUT_TIMING.timeline}s` }}>{ABOUT_BACKGROUND_WORDS.work}</div>
             <div className="about-marquee" aria-hidden="true"><div>{ABOUT_MARQUEE}{ABOUT_MARQUEE}</div></div>
             <div className="about-section-copy">
                 <p className="about-section-command about-animate" style={{ animationDelay: `${ABOUT_TIMING.sectionCommand}s` }}><span>$ </span>ls ~/xelulabs</p>

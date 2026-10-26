@@ -1,5 +1,4 @@
 .about-work { gap: clamp(36px, 4.17vw, 80px); overflow: clip; }
-.about-work-mark { position: absolute; z-index: 0; top: 126px; right: 0; color: #141416; font: 700 clamp(34px, 7vw, 112px)/1 'Silkscreen', monospace; white-space: nowrap; pointer-events: none; }
 .about-work .about-section-copy { z-index: 1; }
 .about-marquee { position: absolute; bottom: 70px; left: -400px; right: -400px; overflow: hidden; pointer-events: none; }
 .about-marquee > div { display: flex; width: max-content; color: #17171a; font: 700 72px 'Silkscreen', monospace; letter-spacing: 4px; white-space: nowrap; }
@@ -41,13 +40,11 @@
 }
 
 @media (max-height: 760px) and (min-width: 901px) {
-  .about-work-mark { top: 112px; font-size: clamp(40px, 4vw, 60px); }
   .about-work-row { padding-block: 16px; }
   .about-work-rows { gap: 12px; }
 }
 
 @media (max-width: 900px) {
-  .about-work-mark { top: 112px; font-size: clamp(28px, 7vw, 62px); }
   .about-work-rows { flex: none; width: 100%; }
   .about-work-row { grid-template-columns: 56px minmax(0,1fr); gap: 10px 20px; padding: 20px; }
   .about-work-icon { width: 56px; height: 56px; }
@@ -68,7 +65,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about-page .about-work-mark { animation: none; opacity: 1; transform: none; }
   .about-page .about-marquee > div { transform: none; }
   .about-page .about-work-row:hover .about-row-fish { transform: none; }
 }
