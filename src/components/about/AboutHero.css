@@ -83,7 +83,7 @@
 .about-hero.seen .about-animate { animation: aboutFade var(--about-fade-duration) cubic-bezier(.2,.7,.2,1) both; }
 .about-hero.seen .about-letter { animation: aboutDrop var(--about-letter-duration) cubic-bezier(.2,.9,.3,1.25) both; }
 .about-hero.seen .about-char { animation: aboutReveal var(--about-char-reveal-duration) both; }
-.about-hero.seen .about-char-cursor { animation: aboutCursor var(--about-char-duration) steps(1,end) both; animation-delay: inherit; }
+.about-hero.seen .about-char-cursor { animation: aboutCursor var(--about-char-duration) steps(1,end); animation-delay: inherit; }
 .about-hero.seen .about-caret { animation: aboutBlink var(--about-caret-duration) steps(1,end) infinite; }
 .about-hero.seen .about-body-drift { animation: aboutDrift var(--about-body-drift-duration) ease-in-out infinite; }
 .about-hero.seen .about-body-wig { animation: aboutWig var(--about-body-wig-duration) ease-in-out infinite alternate; }
