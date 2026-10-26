@@ -159,6 +159,7 @@
 .crew-cta-button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   min-height: 44px;
   padding: 0 24px;
   background: #f2f2ef;
