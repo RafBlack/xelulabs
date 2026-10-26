@@ -139,13 +139,14 @@
 }
 
 .crew-grid-cta {
-  flex-basis: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 24px;
   padding: 24px 28px;
   border: 1px solid #2a2a2d;
   background: #0e0e10;
+  box-sizing: border-box;
 }
 
 .crew-cta-text {

@@ -25,6 +25,10 @@ function CrewGrid({ seen }: { seen: boolean }) {
                 <p className="crew-section-command crew-animate" style={{ animationDelay: '0.05s' }}><span>$ </span>ls ~/crew/members</p>
                 <h2 className="crew-section-title crew-animate" style={{ animationDelay: '0.15s' }}><span>MEET</span><span>THE TEAM</span></h2>
                 <p className="crew-section-description crew-animate" style={{ animationDelay: '0.25s' }}>Every handle has a story. Here's who's building xelulabs.</p>
+                <div className="crew-grid-cta crew-animate" style={{ animationDelay: `${CREW_TIMING.ctaDelay}s` }}>
+                    <p className="crew-cta-text">Think you belong here?</p>
+                    <Link to="/contact" className="crew-cta-button" onClick={(event) => transition(event, '/contact', '~/join')}>Apply to join</Link>
+                </div>
             </div>
             <div className="crew-grid-cards">
                 {CREW_MEMBERS.map((member, index) => (
@@ -51,10 +55,6 @@ function CrewGrid({ seen }: { seen: boolean }) {
                         </div>
                     </article>
                 ))}
-            </div>
-            <div className="crew-grid-cta crew-animate" style={{ animationDelay: `${CREW_TIMING.ctaDelay}s` }}>
-                <p className="crew-cta-text">Think you belong here?</p>
-                <Link to="/contact" className="crew-cta-button" onClick={(event) => transition(event, '/contact', '~/join')}>Apply to join</Link>
             </div>
         </section>
     )
