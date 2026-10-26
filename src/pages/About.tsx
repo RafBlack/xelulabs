@@ -12,6 +12,7 @@ function About() {
     const pageRef = useRef<HTMLDivElement>(null)
     const scrollerRef = useRef<HTMLElement>(null)
     const progressRef = useRef<HTMLDivElement>(null)
+    const scrollFrame = useRef(0)
     const [seen, setSeen] = useState<string[]>(['who-we-are'])
     const [active, setActive] = useState(0)
     const [storyInView, setStoryInView] = useState(false)
@@ -113,6 +114,12 @@ function About() {
     }, [])
 
     const updateScroll = () => {
+        if (scrollFrame.current) return
+        scrollFrame.current = requestAnimationFrame(syncScroll)
+    }
+
+    const syncScroll = () => {
+        scrollFrame.current = 0
         const scroller = scrollerRef.current
         if (!scroller) return
         const max = scroller.scrollHeight - scroller.clientHeight
