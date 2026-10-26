@@ -1,9 +1,13 @@
 .about-hero {
   justify-content: space-between;
   gap: clamp(30px, 4vw, 80px);
+  overflow: clip;
 }
 
+.about-hero-mark { position: absolute; z-index: 0; bottom: 0; left: 0; color: #141416; font: 700 clamp(28px, 10vw, 160px)/1 'Silkscreen', monospace; white-space: nowrap; pointer-events: none; }
 .about-hero-copy {
+  position: relative;
+  z-index: 1;
   flex: 0 1 720px;
   min-width: 0;
   display: flex;
@@ -52,7 +56,7 @@
 .about-char-cursor { position: absolute; top: .2em; left: 100%; width: 2px; height: 1.1em; background: #f2f2ef; opacity: 0; }
 .about-caret { display: inline-block; width: 2px; height: 1.1em; margin-left: .15em; background: #f2f2ef; vertical-align: text-bottom; opacity: 0; }
 
-.about-hero-visual { position: relative; flex: 0 1 540px; min-width: 0; }
+.about-hero-visual { position: relative; z-index: 1; flex: 0 1 540px; min-width: 0; }
 .about-body-drift { position: absolute; right: -10px; top: clamp(-190px, calc(170px - 33.33svh), -40px); width: 300px; pointer-events: none; }
 .about-body-wig { transform-origin: 70% 50%; }
 .about-body-wig svg { display: block; width: 100%; height: auto; }
@@ -64,7 +68,7 @@
 .about-neofetch-lines p { margin: 0; color: #c4c4c7; white-space: nowrap; }
 .about-swatches { display: flex; margin-top: 12px; }
 .about-swatches span { width: 22px; height: 16px; }
-.about-scroll-hint { position: absolute; bottom: 56px; left: 0; display: flex; align-items: center; gap: 12px; margin: 0; color: #8e8e92; font: 13px 'JetBrains Mono', monospace; letter-spacing: .2em; }
+.about-scroll-hint { position: absolute; z-index: 1; bottom: 56px; left: 0; display: flex; align-items: center; gap: 12px; margin: 0; color: #8e8e92; font: 13px 'JetBrains Mono', monospace; letter-spacing: .2em; }
 .about-scroll-hint i { display: block; width: 8px; height: 8px; background: #7fd3d8; }
 
 @keyframes aboutDrop { from { opacity: 0; transform: translateY(-40px); } 60% { opacity: 1; } to { opacity: 1; transform: none; } }
@@ -85,6 +89,7 @@
 .about-hero.seen .about-scroll-hint i { animation: aboutNudge var(--about-hint-duration) ease-in-out infinite; }
 
 @media (max-height: 760px) and (min-width: 901px) {
+  .about-hero-mark { font-size: clamp(60px, 7vw, 100px); }
   .about-hero-copy { gap: 16px; }
   .about-hero-title { font-size: clamp(64px, min(6.67vw, 12.5vh), 128px); }
   .about-hero .about-body-drift { width: 220px; }
@@ -92,6 +97,7 @@
 }
 
 @media (max-width: 900px) {
+  .about-hero-mark { bottom: 12px; font-size: clamp(28px, 10vw, 90px); }
   .about-hero-copy { flex: none; gap: 22px; }
   .about-hero-title { font-size: clamp(44px, 11.5vw, 88px); }
   .about-hero-visual { flex: none; width: 100%; margin-top: 80px; }
@@ -115,6 +121,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .about-page .about-hero-mark { animation: none; opacity: 1; transform: none; }
   .about-page .about-letter,
   .about-page .about-char { opacity: 1; transform: none; }
   .about-page .about-char-cursor { opacity: 0; }

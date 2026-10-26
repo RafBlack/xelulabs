@@ -2,7 +2,7 @@ import './AboutHero.css'
 import type { CSSProperties } from 'react'
 import PixelRects from '../PixelRects'
 import { ABOUT_HEAD, BODY_ORCA } from '../../data/orcaArt'
-import { ABOUT_INTRO, ABOUT_NEOFETCH, ABOUT_SWATCHES, ABOUT_TIMING } from '../../data/about'
+import { ABOUT_BACKGROUND_WORDS, ABOUT_INTRO, ABOUT_NEOFETCH, ABOUT_SWATCHES, ABOUT_TIMING } from '../../data/about'
 
 function AboutHero() {
     const first = 'WHO WE'
@@ -20,6 +20,7 @@ function AboutHero() {
 
     return (
         <section className="about-section about-hero seen" id="who-we-are" aria-label="Who we are" style={timing}>
+            <div className="about-hero-mark about-animate" aria-hidden="true" style={{ animationDelay: `${ABOUT_TIMING.timeline}s` }}>{ABOUT_BACKGROUND_WORDS.hero}</div>
             <div className="about-hero-copy">
                 <p className="about-eyebrow about-animate" style={{ animationDelay: `${ABOUT_TIMING.heroEyebrow}s` }}><span aria-hidden="true" />ABOUT</p>
                 <h1 className="about-hero-title" aria-label="WHO WE ARE">

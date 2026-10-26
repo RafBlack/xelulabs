@@ -3,7 +3,7 @@ import type { CSSProperties, MouseEvent } from 'react'
 import { Link } from 'react-router-dom'
 import PixelRects from '../PixelRects'
 import { ABOUT_HEAD } from '../../data/orcaArt'
-import { ABOUT_CHECKS, ABOUT_TIMING } from '../../data/about'
+import { ABOUT_BACKGROUND_WORDS, ABOUT_CHECKS, ABOUT_TIMING } from '../../data/about'
 import { usePageTransition } from '../../hooks/usePageTransition'
 
 function AboutJoin({ seen }: { seen: boolean }) {
@@ -21,6 +21,7 @@ function AboutJoin({ seen }: { seen: boolean }) {
 
     return (
         <section className={`about-section about-join${seen ? ' seen' : ''}`} id="join" aria-label="Join" style={timing}>
+            <div className="about-join-mark about-animate" aria-hidden="true" style={{ animationDelay: `${ABOUT_TIMING.timeline}s` }}>{ABOUT_BACKGROUND_WORDS.join}</div>
             <div className="about-join-copy">
                 <p className="about-section-command about-animate" style={{ animationDelay: `${ABOUT_TIMING.sectionCommand}s` }}><span>$ </span>./join.sh</p>
                 <h2 className="about-section-title about-animate" style={{ animationDelay: `${ABOUT_TIMING.joinTitle}s` }}>WANT IN?</h2>
