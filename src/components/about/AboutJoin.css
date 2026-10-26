@@ -1,5 +1,10 @@
 .about-join { gap: clamp(40px, 5.2vw, 100px); }
-.about-join-mark { position: absolute; z-index: 0; bottom: 18px; left: 0; color: #141416; font: 700 clamp(64px, 11vw, 180px)/1 'Silkscreen', monospace; white-space: nowrap; pointer-events: none; }
+.about-join-heading { position: relative; width: min(820px, calc(100vw - 2 * clamp(16px, 3.3vw, 48px))); padding-block: 12px; margin-block: -12px; }
+.about-join-mark { position: absolute; top: 50%; left: 0; margin-top: -.5em; color: #141416; font: 700 clamp(74px, 5.4vw, 100px)/1 'Silkscreen', monospace; white-space: nowrap; }
+.about-join-mark span { display: block; }
+.about-join-mark span:nth-child(1) { position: absolute; top: .12em; left: .12em; opacity: .25; }
+.about-join-mark span:nth-child(2) { position: absolute; top: .06em; left: .06em; opacity: .5; }
+.about-join .about-section-title { position: relative; z-index: 1; }
 .about-join-copy { flex: 0 1 620px; display: flex; flex-direction: column; gap: 28px; z-index: 1; }
 .about-join .about-section-title { color: #f2f2ef; }
 .about-join .about-section-description { max-width: 42ch; font-size: 18px; }
@@ -32,12 +37,12 @@
 }
 
 @media (max-height: 760px) and (min-width: 901px) {
-  .about-join-mark { font-size: clamp(72px, 7vw, 100px); }
   .about-join-window { margin-bottom: 120px; }
 }
 
 @media (max-width: 900px) {
-  .about-join-mark { font-size: clamp(48px, 10vw, 90px); }
+  .about-join-heading { width: 100%; }
+  .about-join-mark { font-size: clamp(54px, 11.5vw, 96px); }
   .about-join-window { flex: none; width: 100%; }
   .about-join-copy { flex: none; }
   .about-join-window { max-width: 520px; margin-bottom: 180px; }
@@ -47,6 +52,7 @@
 @media (max-width: 520px) {
   .about-join-copy { gap: 22px; }
   .about-join .about-section-title { font-size: clamp(30px, 9vw, 46px); }
+  .about-join-mark { font-size: clamp(36px, 10vw, 54px); }
   .about-join-checks { padding: 16px; font-size: clamp(9px, 2.65vw, 12px); }
   .about-join-window { margin-bottom: 130px; }
   .about-join-rise { width: min(350px, 85vw); }

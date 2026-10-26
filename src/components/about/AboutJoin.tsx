@@ -21,10 +21,12 @@ function AboutJoin({ seen }: { seen: boolean }) {
 
     return (
         <section className={`about-section about-join${seen ? ' seen' : ''}`} id="join" aria-label="Join" style={timing}>
-            <div className="about-mark-layer" aria-hidden="true"><div className="about-join-mark about-animate" style={{ animationDelay: `${ABOUT_TIMING.timeline}s` }}>{ABOUT_BACKGROUND_WORDS.join}</div></div>
             <div className="about-join-copy">
                 <p className="about-section-command about-animate" style={{ animationDelay: `${ABOUT_TIMING.sectionCommand}s` }}><span>$ </span>./join.sh</p>
-                <h2 className="about-section-title about-animate" style={{ animationDelay: `${ABOUT_TIMING.joinTitle}s` }}>WANT IN?</h2>
+                <div className="about-join-heading">
+                    <div className="about-mark-layer" aria-hidden="true"><div className="about-join-mark about-animate" style={{ animationDelay: `${ABOUT_TIMING.joinTitle}s` }}><span>{ABOUT_BACKGROUND_WORDS.join}</span><span>{ABOUT_BACKGROUND_WORDS.join}</span><span>{ABOUT_BACKGROUND_WORDS.join}</span></div></div>
+                    <h2 className="about-section-title about-animate" style={{ animationDelay: `${ABOUT_TIMING.joinTitle}s` }}>WANT IN?</h2>
+                </div>
                 <p className="about-section-description about-animate" style={{ animationDelay: `${ABOUT_TIMING.sectionDescription}s` }}>Beginner or seasoned, if you like breaking and building things, there's a seat for you.</p>
                 <div className="about-join-actions about-animate" style={{ animationDelay: `${ABOUT_TIMING.joinActions}s` }}>
                     <Link to="/contact" className="about-join-button about-join-primary" onClick={(event) => transition(event, '/contact', '~/join')}>Join xelulabs</Link>

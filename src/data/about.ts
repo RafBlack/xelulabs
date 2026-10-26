@@ -37,7 +37,7 @@ export const ABOUT_CHECKS = [
 export const ABOUT_MARQUEE = 'WEB / CRYPTO / FORENSICS / PWN / OSINT / REVERSING / MISC / '
 export const ABOUT_BACKGROUND_WORDS = {
     hero: 'WHO WE ARE',
-    join: 'JOIN',
+    join: 'JOIN US!',
 } as const
 export const ABOUT_SECTIONS = [
     { id: 'who-we-are', label: 'WHO WE ARE' },
