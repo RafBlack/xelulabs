@@ -31,8 +31,9 @@
 }
 
 @media (max-width: 900px) {
+  .about-section.about-story { padding-bottom: calc(80px + clamp(48px, 11vw, 96px)); }
   .about-story-history { flex: none; width: 100%; }
-  .about-story-mark { right: 0; bottom: 48px; font-size: clamp(64px, 12vw, 120px); }
+  .about-story-mark { right: 0; bottom: 48px; font-size: clamp(48px, 11vw, 96px); }
 }
 
 @media (max-width: 520px) {
