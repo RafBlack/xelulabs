@@ -95,6 +95,12 @@
 .about-dot[aria-current='true'] i { background: #7fd3d8; transform: scale(1.75); }
 .about-dot:focus-visible { outline: 2px solid #7fd3d8; outline-offset: 4px; }
 
+@media (max-width: 1740px) and (min-width: 901px) {
+  .about-dots { right: 12px; }
+  .about-dot span { display: none; }
+  .about-dot { min-width: 20px; }
+}
+
 @media (max-width: 1279px) and (min-width: 901px) {
   .about-work,
   .about-story { gap: 32px; }

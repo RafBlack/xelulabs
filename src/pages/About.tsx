@@ -51,7 +51,7 @@ function About() {
         <div className="about-page" style={{ '--about-dot-transition': `${ABOUT_TIMING.dotTransitionDuration}s` } as CSSProperties}>
             <div className="about-header"><Header /></div>
             <div ref={progressRef} className="about-progress" aria-hidden="true" />
-            <nav className="about-dots" aria-label="Sections">{ABOUT_SECTIONS.map((section, index) => <button key={section.id} type="button" className="about-dot" aria-current={active === index ? 'true' : undefined} onClick={() => goToSection(section.id)}>{section.label}<i aria-hidden="true" /></button>)}</nav>
+            <nav className="about-dots" aria-label="Sections">{ABOUT_SECTIONS.map((section, index) => <button key={section.id} type="button" className="about-dot" aria-label={section.label} aria-current={active === index ? 'true' : undefined} onClick={() => goToSection(section.id)}><span>{section.label}</span><i aria-hidden="true" /></button>)}</nav>
             <main ref={scrollerRef} className="about-scroller" onScroll={updateScroll}>
                 <div className="about-surface">
                     <div className="about-container">
