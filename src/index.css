@@ -42,6 +42,9 @@ a:hover {
   to { opacity: 1; transform: none; }
 }
 
+@keyframes aboutFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes aboutSlide { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: none; } }
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
