@@ -24,3 +24,32 @@
 .about-join.seen .about-join-window { animation-name: aboutSlide; }
 .about-join.seen .about-join-rise { animation: aboutRise var(--about-rise-duration) cubic-bezier(.34,1.3,.5,1) both; }
 .about-join.seen .about-join-bob { animation: aboutBob var(--about-bob-duration) ease-in-out infinite; }
+
+@media (max-width: 1500px) and (min-width: 901px) {
+  .about-join { gap: 40px; }
+  .about-join-checks { padding-inline: clamp(14px, 1.5vw, 22px); font-size: clamp(12px, 1vw, 16px); }
+}
+
+@media (max-height: 760px) and (min-width: 901px) {
+  .about-join-window { margin-bottom: 120px; }
+}
+
+@media (max-width: 900px) {
+  .about-join-window { flex: none; width: 100%; }
+  .about-join-copy { flex: none; }
+  .about-join-window { max-width: 520px; margin-bottom: 180px; }
+  .about-join-rise { right: -20px; bottom: -30px; width: min(480px, 75vw); }
+}
+
+@media (max-width: 520px) {
+  .about-join-copy { gap: 22px; }
+  .about-join .about-section-title { font-size: clamp(30px, 9vw, 46px); }
+  .about-join-checks { padding: 16px; font-size: clamp(9px, 2.65vw, 12px); }
+  .about-join-window { margin-bottom: 130px; }
+  .about-join-rise { width: min(350px, 85vw); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-page .about-join-rise { transform: none; }
+  .about-page .about-join-bob { transform: none; }
+}

@@ -20,3 +20,30 @@
 .about-story.seen .about-animate { animation: aboutFade var(--about-fade-duration) cubic-bezier(.2,.7,.2,1) both; }
 .about-story.seen .about-story-line { animation: aboutLine var(--about-line-duration) cubic-bezier(.3,.6,.3,1) both; }
 .about-story.seen .about-story-diver { animation: aboutDive var(--about-dive-duration) cubic-bezier(.4,0,.6,1) both; }
+
+@media (max-width: 1279px) and (min-width: 901px) {
+  .about-story { gap: 32px; }
+  .about-story .about-section-copy { flex-basis: 300px; }
+}
+
+@media (max-height: 760px) and (min-width: 901px) {
+  .about-story ol { gap: 35px; }
+}
+
+@media (max-width: 900px) {
+  .about-story-history { flex: none; width: 100%; }
+  .about-story-mark { right: 0; bottom: 80px; font-size: clamp(130px, 24vw, 250px); }
+}
+
+@media (max-width: 520px) {
+  .about-story ol { gap: 40px; }
+  .about-story-track { padding-left: 30px; }
+  .about-story-dot { left: -30px; }
+  .about-story-message { font-size: 18px; }
+  .about-story-when { font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-page .about-story-line { transform: scaleY(1); }
+  .about-page .about-story-diver { top: auto; bottom: 0; opacity: 1; transform: rotate(90deg); }
+}
