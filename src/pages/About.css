@@ -25,6 +25,7 @@
   height: 100svh;
   overflow-x: hidden;
   overflow-y: auto;
+  color-scheme: dark;
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
 }
