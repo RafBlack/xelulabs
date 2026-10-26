@@ -5,7 +5,11 @@
   background: #0c0c0d;
   color: #e8e8e6;
   font-family: 'Barlow', sans-serif;
+  cursor: crosshair;
 }
+
+.about-page a,
+.about-page button { cursor: pointer; }
 
 .about-header {
   position: fixed;
