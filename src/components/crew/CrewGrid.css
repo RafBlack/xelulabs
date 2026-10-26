@@ -202,7 +202,7 @@
   .crew-card-handle { font-size: 16px; }
   .crew-card-bio { font-size: 14px; }
   .crew-grid-cta { padding: 20px; }
-  .crew-section-title { font-size: clamp(50px, 10vw, 88px); }
+  .crew-section-title { font-size: clamp(32px, 13vw, 52px); }
   .crew-card { --crew-fish-distance: calc(100cqw + 68px); }
 }
 
