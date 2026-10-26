@@ -75,6 +75,7 @@ function About() {
             if (event.altKey || event.ctrlKey || event.metaKey) return
             const target = event.target
             if (target instanceof HTMLElement && (target.isContentEditable || target.closest('input, textarea, select, [contenteditable], [role="textbox"]'))) return
+            if (event.code === 'Space' && target instanceof HTMLElement && target.closest('button, a, summary, [role="button"]')) return
             let index: number | undefined
             if (event.key === 'ArrowDown' || event.key === 'PageDown' || (event.code === 'Space' && !event.shiftKey)) index = currentIndex() + 1
             if (event.key === 'ArrowUp' || event.key === 'PageUp' || (event.code === 'Space' && event.shiftKey)) index = currentIndex() - 1
