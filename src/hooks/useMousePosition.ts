@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useRef } from 'react'
 import type { MouseEvent } from 'react'
 
 export type Point = { x: number; y: number }
@@ -11,26 +11,12 @@ export function toStage(e: MouseEvent<HTMLElement>): Point {
 }
 
 export function useMousePosition() {
-    const [pos, setPos] = useState<Point>(OFF)
-    const frame = useRef(0)
-    const pending = useRef<Point>(OFF)
-
+    const pos = useRef<Point>(OFF)
     const onMouseMove = useCallback((e: MouseEvent<HTMLElement>) => {
-        pending.current = toStage(e)
-        if (frame.current) return
-        frame.current = requestAnimationFrame(() => {
-            frame.current = 0
-            setPos(pending.current)
-        })
+        pos.current = toStage(e)
     }, [])
-
     const onMouseLeave = useCallback(() => {
-        cancelAnimationFrame(frame.current)
-        frame.current = 0
-        setPos(OFF)
+        pos.current = OFF
     }, [])
-
-    useEffect(() => () => cancelAnimationFrame(frame.current), [])
-
     return { pos, onMouseMove, onMouseLeave }
 }
