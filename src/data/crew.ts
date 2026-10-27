@@ -68,5 +68,6 @@ export const CREW_TIMING = {
     ctaDelay: 0.35,
     scrollHintDelay: 1.8,
     hintDuration: 1.2,
-    bobDuration: 4.5,
+    bodyDriftDuration: 12,
+    bodyWigDuration: 0.34,
 } as const

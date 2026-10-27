@@ -85,8 +85,6 @@
 .crew-window-bar i { display: block; width: 10px; height: 10px; background: #3a3a3e; }
 .crew-window-bar span { margin-left: 8px; }
 
-.crew-stats { padding: 22px 26px 26px; font: 16px/2 'JetBrains Mono', monospace; }
-.crew-stats p { margin: 0; color: #c4c4c7; white-space: nowrap; }
 
 .crew-progress {
   position: fixed;
