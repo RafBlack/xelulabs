@@ -100,5 +100,5 @@ export const ABOUT_TIMING = {
     caretBlinkDuration: 1,
     charRevealDuration: 0.01,
     dotTransitionDuration: 0.25,
-    scrollLockDuration: 1400,
+    scrollLockDuration: 700,
 } as const
