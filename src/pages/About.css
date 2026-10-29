@@ -54,7 +54,7 @@
   background-color: #0c0c0d;
   background-image: radial-gradient(#26262a 1px, transparent 1.3px);
   background-size: 32px 32px;
-  overflow: hidden;
+  overflow: clip;
 }
 
 .about-container {
@@ -74,6 +74,8 @@
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
+
+.about-section::after { content: ''; position: absolute; bottom: 0; width: 1px; height: 1px; scroll-snap-align: end; }
 
 .about-mark-layer { position: absolute; inset: 0; z-index: 0; overflow: clip; pointer-events: none; }
 
