@@ -1,11 +1,12 @@
 import './BigOrca.css'
 import { memo, useEffect, useRef, useState } from 'react'
-import type { CSSProperties } from 'react'
+import type { CSSProperties, MouseEvent } from 'react'
 import PixelRects from './PixelRects'
 import Splash from './Splash'
 import { BIG_ORCA, BIG_ORCA_GLITCH, BIG_ORCA_SHINY, BODY_ORCA, SHADES } from '../data/orcaArt'
 import { XELU_LINES } from '../data/xeluLines'
-import { BREACH_PATH, HACK_WINDOW, HEAD_AIM, pickReaction, REACTION_DURATIONS, REACTION_HOLDS, SPLASH_END, SWIM_PATH } from '../data/timeline'
+import { readPetCount, savePetCount, XELU_MILESTONES, XELU_PET_REWARD } from '../data/xeluMilestones'
+import { MINIGAME_OFFER, BREACH_PATH, HACK_WINDOW, HEAD_AIM, pickReaction, REACTION_DURATIONS, REACTION_HOLDS, SPLASH_END, SWIM_PATH } from '../data/timeline'
 import type { RandomReaction } from '../data/timeline'
 
 type Reaction = keyof typeof REACTION_DURATIONS
@@ -70,14 +71,25 @@ function BigOrca({ play }: { play: boolean }) {
     const tapsRef = useRef<number[]>([])
     const lastReactionRef = useRef<Reaction | null>(null)
     const withoutBubbleRef = useRef(0)
+    const shownMinigameRef = useRef(false)
+    const sessionPetsRef = useRef(0)
+    const saveTimerRef = useRef<number | undefined>(undefined)
+    const mountedRef = useRef(false)
+    const loadingRef = useRef(false)
+    const petCounterRef = useRef<HTMLDivElement>(null)
     const [fx, setFx] = useState(play)
-    const [state, setState] = useState({
+    const [minigameOpen, setMinigameOpen] = useState(false)
+    const [petMenu, setPetMenu] = useState<'closed' | 'options' | 'confirm'>('closed')
+    const [OrcaMinigame, setOrcaMinigame] = useState<typeof import('./OrcaMinigame')['default'] | null>(null)
+    const [state, setState] = useState(() => ({
         kind: null as Reaction | null,
         id: 0,
-        pets: 0,
+        pets: readPetCount(),
+        milestone: null as number | null,
         line: '',
         scale: { x: 1, y: 1 } as Scale,
-    })
+    }))
+    const petsRef = useRef(state.pets)
     const reducedMotion = !play
 
     useEffect(() => {
@@ -89,8 +101,36 @@ function BigOrca({ play }: { play: boolean }) {
     useEffect(() => () => window.clearTimeout(timerRef.current), [])
 
     useEffect(() => {
+        mountedRef.current = true
+        const save = () => {
+            window.clearTimeout(saveTimerRef.current)
+            if (petsRef.current > 0) savePetCount(petsRef.current)
+        }
+        const onVisibilityChange = () => {
+            if (document.hidden) save()
+        }
+        window.addEventListener('pagehide', save)
+        document.addEventListener('visibilitychange', onVisibilityChange)
+        return () => {
+            mountedRef.current = false
+            window.removeEventListener('pagehide', save)
+            document.removeEventListener('visibilitychange', onVisibilityChange)
+            save()
+        }
+    }, [])
+
+    useEffect(() => {
+        if (petMenu === 'closed') return
+        const dismiss = (event: PointerEvent) => {
+            if (event.target instanceof Node && !petCounterRef.current?.contains(event.target)) setPetMenu('closed')
+        }
+        document.addEventListener('pointerdown', dismiss)
+        return () => document.removeEventListener('pointerdown', dismiss)
+    }, [petMenu])
+
+    useEffect(() => {
         const aim = aimRef.current
-        if (!aim || reducedMotion) return
+        if (!aim || reducedMotion || minigameOpen) return
         let frame = 0
         const update = () => {
             frame = 0
@@ -116,7 +156,7 @@ function BigOrca({ play }: { play: boolean }) {
             window.removeEventListener('pointerdown', move)
             window.cancelAnimationFrame(frame)
         }
-    }, [reducedMotion, state.kind])
+    }, [reducedMotion, state.kind, minigameOpen])
 
     useEffect(() => {
         const kind = state.kind
@@ -140,7 +180,20 @@ function BigOrca({ play }: { play: boolean }) {
         return () => animation.cancel()
     }, [reducedMotion, state.id, state.kind, state.scale])
 
-    const poke = () => {
+    const poke = (event: MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation()
+        if (loadingRef.current) return
+        setPetMenu('closed')
+        const sessionPets = ++sessionPetsRef.current
+        const nextPets = Math.min(Number.MAX_SAFE_INTEGER, petsRef.current + 1)
+        petsRef.current = nextPets
+        window.clearTimeout(saveTimerRef.current)
+        saveTimerRef.current = window.setTimeout(() => savePetCount(petsRef.current), XELU_PET_REWARD.saveDelay)
+        const milestone = XELU_MILESTONES.find((entry) => entry.pets === nextPets)
+        if (state.kind === 'milestone' && !milestone) {
+            setState((current) => ({ ...current, pets: nextPets }))
+            return
+        }
         const now = Date.now()
         const taps = tapsRef.current.filter((tap) => now - tap < HACK_WINDOW)
         taps.push(now)
@@ -148,25 +201,41 @@ function BigOrca({ play }: { play: boolean }) {
         const stage = layerRef.current?.closest('.stage')
         const stageRect = stage?.getBoundingClientRect()
         const scale = stageRect ? { x: stageRect.width / 1440, y: stageRect.height / 860 } : { x: 1, y: 1 }
+        const last = lastReactionRef.current
+        const canOfferMinigame = sessionPets >= MINIGAME_OFFER.minimumPets && taps.length < MINIGAME_OFFER.maxRapidTaps && state.kind !== 'minigame'
+
         let next: Reaction
-        if (taps.length >= 5) {
+        if (milestone) {
+            next = 'milestone'
+            tapsRef.current = []
+        } else if (taps.length >= 5) {
             next = 'hack'
             tapsRef.current = []
         } else if (Math.random() < 0.02) {
             next = 'shiny'
+        } else if (canOfferMinigame && !shownMinigameRef.current && sessionPets >= MINIGAME_OFFER.guaranteedPets) {
+            next = 'minigame'
         } else {
-            const last = lastReactionRef.current
-            next = pickReaction(last === 'hack' || last === 'shiny' ? null : last as RandomReaction | null, withoutBubbleRef.current)
+            next = pickReaction(
+                last === 'hack' || last === 'shiny' || last === 'milestone' ? null : (last as RandomReaction | null),
+                withoutBubbleRef.current,
+                canOfferMinigame,
+            )
         }
-        if (reducedMotion && next !== 'hack' && next !== 'shiny') next = 'talk'
+        if (reducedMotion && next !== 'hack' && next !== 'shiny' && next !== 'minigame' && next !== 'milestone') next = 'talk'
+        if (next === 'minigame') shownMinigameRef.current = true
         lastReactionRef.current = next
-        withoutBubbleRef.current = next === 'talk' || next === 'tilt' || next === 'hack' || next === 'shiny' ? 0 : withoutBubbleRef.current + 1
-        const line = XELU_LINES[Math.floor(Math.random() * XELU_LINES.length)]
+        withoutBubbleRef.current =
+            next === 'talk' || next === 'tilt' || next === 'hack' || next === 'shiny' || next === 'minigame' || next === 'milestone'
+                ? 0
+                : withoutBubbleRef.current + 1
+        const line = milestone?.message ?? XELU_LINES[Math.floor(Math.random() * XELU_LINES.length)]
         setState((current) => ({
             ...current,
             kind: next,
             id: current.id + 1,
-            pets: current.pets + 1,
+            pets: nextPets,
+            milestone: milestone?.pets ?? null,
             line,
             scale,
         }))
@@ -174,20 +243,75 @@ function BigOrca({ play }: { play: boolean }) {
         timerRef.current = window.setTimeout(() => setState((current) => ({ ...current, kind: null })), REACTION_HOLDS[next] ?? 2400)
     }
 
+    const resetPets = () => {
+        window.clearTimeout(timerRef.current)
+        window.clearTimeout(saveTimerRef.current)
+        petsRef.current = 0
+        sessionPetsRef.current = 0
+        tapsRef.current = []
+        shownMinigameRef.current = false
+        lastReactionRef.current = null
+        withoutBubbleRef.current = 0
+        savePetCount(0)
+        setPetMenu('closed')
+        setState((current) => ({ ...current, kind: null, id: current.id + 1, pets: 0, milestone: null, line: '' }))
+        layerRef.current?.querySelector<HTMLButtonElement>('.orca-hit')?.focus({ preventScroll: true })
+    }
+
+    const closeMinigame = () => {
+        setMinigameOpen(false)
+        layerRef.current?.querySelector<HTMLButtonElement>('.orca-hit')?.focus({ preventScroll: true })
+    }
+
+    const startMinigame = async (event: MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation()
+        if (loadingRef.current) return
+        loadingRef.current = true
+        window.clearTimeout(timerRef.current)
+        setState((current) => ({ ...current, kind: 'talk', line: MINIGAME_OFFER.loadingMessage }))
+        try {
+            const { default: Game } = await import('./OrcaMinigame')
+            if (!mountedRef.current) return
+            setOrcaMinigame(() => Game)
+            setState((current) => ({ ...current, kind: null }))
+            setMinigameOpen(true)
+        } catch {
+            if (!mountedRef.current) return
+            setState((current) => ({ ...current, kind: 'talk', line: MINIGAME_OFFER.errorMessage }))
+            timerRef.current = window.setTimeout(() => setState((current) => ({ ...current, kind: null })), REACTION_HOLDS.talk)
+        } finally {
+            loadingRef.current = false
+        }
+    }
+
     const kind = state.kind
+    const celebrating = kind === 'milestone' && state.milestone === XELU_PET_REWARD.threshold
+    const earnedReward = state.pets >= XELU_PET_REWARD.threshold
     const isBody = !reducedMotion && (kind === 'swim' || kind === 'breach')
-    const headArt = kind === 'shiny' && !reducedMotion ? BIG_ORCA_SHINY : BIG_ORCA
-    const headAnimation = reducedMotion || !kind ? 'none' : isBody ? 'o5away' : `o5${kind}`
+    const headArt = (kind === 'shiny' || celebrating) && !reducedMotion ? BIG_ORCA_SHINY : BIG_ORCA
+    const headAnimation =
+        reducedMotion || !kind ? 'none' : isBody ? 'o5away' : celebrating ? 'o5shiny' : kind === 'minigame' || kind === 'milestone' ? 'o5talk' : `o5${kind}`
     const headStyle: CSSProperties = {
         animationName: headAnimation,
         animationDuration: kind ? REACTION_DURATIONS[kind] : '0s',
     }
     const bursts = kind === 'swim' ? [makeBurst(1310, 0.1), makeBurst(1300, 6)] : kind === 'breach' ? [makeBurst(1040, 0), makeBurst(680, 2.4)] : []
-    const bubble = kind === 'tilt' ? '?' : kind === 'talk' ? state.line : kind === 'hack' ? 'access granted' : kind === 'shiny' ? 'shiny xelu!' : ''
+    const bubble =
+        kind === 'tilt'
+            ? '?'
+            : kind === 'talk' || kind === 'milestone'
+              ? state.line
+              : kind === 'hack'
+                ? 'access granted'
+                : kind === 'shiny'
+                  ? 'shiny xelu!'
+                  : kind === 'minigame'
+                    ? 'want to play a minigame?'
+                    : ''
 
     return (
         <>
-            <div ref={layerRef} className="orca-layer">
+            <div ref={layerRef} className={`orca-layer${minigameOpen ? ' orca-layer-game-open' : ''}${celebrating ? ' orca-celebrating' : ''}`} style={{ '--orca-minigame-offer-duration': `${REACTION_HOLDS.minigame}ms`, '--orca-celebration-iterations': XELU_PET_REWARD.sparkIterations } as CSSProperties}>
                 {!reducedMotion && kind === 'hack' && (
                     <div className="orca-rain" aria-hidden="true">
                         {RAIN.map((rain) => (
@@ -197,11 +321,11 @@ function BigOrca({ play }: { play: boolean }) {
                         ))}
                     </div>
                 )}
-                <div className="big-orca" aria-hidden="true">
+                <div className="big-orca">
                     <div className="big-orca-rise">
                         <div ref={aimRef} className="big-orca-aim">
                             <div key={state.id} className="big-orca-react" style={headStyle}>
-                                <svg className="big-orca-bob" viewBox={`0 0 ${HEAD_COLS} ${HEAD_ROWS}`} shapeRendering="crispEdges">
+                                <svg className="big-orca-bob" viewBox={`0 0 ${HEAD_COLS} ${HEAD_ROWS}`} shapeRendering="crispEdges" aria-hidden="true">
                                     {BIG_ORCA_GLITCH.map((ghost) => (
                                         <g key={ghost.color} opacity={0.6}>
                                             <g style={{ animationName: kind === 'glitch' || kind === 'hack' ? ghost.dx < 0 ? 'o5gR' : 'o5gC' : 'none', animationDuration: '0.6s' }}>
@@ -216,7 +340,7 @@ function BigOrca({ play }: { play: boolean }) {
                                         <PixelRects art={SHADES} />
                                     </svg>
                                 )}
-                                {!reducedMotion && kind === 'shiny' && (
+                                {!reducedMotion && (kind === 'shiny' || celebrating) && (
                                     <>
                                         <span className="orca-spark" style={{ left: '30%', top: '12%' }} />
                                         <span className="orca-spark" style={{ left: '62%', top: '30%', animationDelay: '0.3s' }} />
@@ -238,13 +362,26 @@ function BigOrca({ play }: { play: boolean }) {
                                         ))}
                                     </div>
                                 )}
-                                {bubble && (
-                                    <div className="orca-bubble" role="status">
-                                        {bubble}
-                                        <span className="orca-tail" />
-                                        <span className="orca-tail-two" />
-                                    </div>
-                                )}
+                                {bubble &&
+                                    (kind === 'minigame' ? (
+                                        <button
+                                            type="button"
+                                            className="orca-bubble orca-bubble-btn"
+                                            onClick={startMinigame}
+                                        >
+                                            {bubble}
+                                            <span className="orca-bubble-timer" aria-hidden="true" />
+                                            <span className="orca-tail" aria-hidden="true" />
+                                            <span className="orca-tail-two" aria-hidden="true" />
+                                        </button>
+                                    ) : (
+                                        <div className={`orca-bubble${kind === 'milestone' ? ' orca-bubble-milestone' : ''}`} role="status">
+                                            {bubble}
+                                            {celebrating && <span className="orca-milestone-note">{XELU_PET_REWARD.farewell}</span>}
+                                            <span className="orca-tail" />
+                                            <span className="orca-tail-two" />
+                                        </div>
+                                    ))}
                                 {fx &&
                                     DRIPS.map((drip, i) => (
                                         <i key={i} className="drip" style={{ ...drip, animationDelay: `${3.2 + i * 0.35}s` }} />
@@ -284,9 +421,36 @@ function BigOrca({ play }: { play: boolean }) {
                     aria-label="Poke xelu"
                     onClick={poke}
                 />
-                {state.pets > 0 && <p className="orca-pets">PETS: {state.pets}</p>}
+                {state.pets > 0 && (
+                    <div ref={petCounterRef} className="orca-pet-counter" onClick={(event) => event.stopPropagation()}>
+                        <button
+                            type="button"
+                            className={`orca-pets${earnedReward ? ' orca-pets-earned' : ''}`}
+                            title={earnedReward ? XELU_PET_REWARD.title : 'Pet counter options'}
+                            aria-label={`Pet counter: ${state.pets} pets.${earnedReward ? ` ${XELU_PET_REWARD.title}.` : ''} Open reset options.`}
+                            aria-expanded={petMenu !== 'closed'}
+                            aria-controls="orca-pet-options"
+                            onClick={() => setPetMenu((current) => current === 'closed' ? 'options' : 'closed')}
+                        >PETS: {state.pets}</button>
+                        {petMenu !== 'closed' && (
+                            <div id="orca-pet-options" className={`orca-pet-options${petMenu === 'confirm' ? ' orca-pet-options-confirm' : ''}`} role="group" aria-label="Pet counter options">
+                                {earnedReward && <p className="orca-pet-title">{XELU_PET_REWARD.title}</p>}
+                                {petMenu === 'confirm' ? (
+                                    <>
+                                        <p>Reset pets to 0 and clear your pet achievement? Your game high score stays.</p>
+                                        <div className="orca-pet-actions">
+                                            <button type="button" onClick={resetPets}>Reset pets</button>
+                                            <button type="button" onClick={() => setPetMenu('closed')}>Cancel</button>
+                                        </div>
+                                    </>
+                                ) : <button type="button" onClick={() => setPetMenu('confirm')}>Reset pet counter</button>}
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
             {fx && <Splash />}
+            {minigameOpen && OrcaMinigame && <OrcaMinigame onClose={closeMinigame} />}
         </>
     )
 }

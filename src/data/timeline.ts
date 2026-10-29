@@ -16,6 +16,8 @@ export const REACTION_DURATIONS = {
     talk: '1s',
     hack: '0.8s',
     shiny: '1.2s',
+    minigame: '1s',
+    milestone: '1s',
 } as const
 
 export const REACTION_HOLDS = {
@@ -28,6 +30,16 @@ export const REACTION_HOLDS = {
     talk: 2400,
     hack: 3400,
     shiny: 3000,
+    minigame: 10000,
+    milestone: 10000,
+} as const
+
+export const MINIGAME_OFFER = {
+    minimumPets: 1,
+    guaranteedPets: 5,
+    maxRapidTaps: 5,
+    loadingMessage: 'Getting the ocean ready...',
+    errorMessage: 'The game couldn\'t load. Poke me to try again.',
 } as const
 
 export const HACK_WINDOW = 1800
@@ -42,16 +54,18 @@ export const REACTION_WEIGHTS = {
     dive: 10,
     swim: 8,
     breach: 7,
+    minigame: 35,
 } as const
 
 export type RandomReaction = keyof typeof REACTION_WEIGHTS
 
-export function pickReaction(last: RandomReaction | null, withoutBubble: number, random = Math.random): RandomReaction {
+export function pickReaction(last: RandomReaction | null, withoutBubble: number, allowMinigame = true, random = Math.random): RandomReaction {
     const body = last === 'swim' || last === 'breach'
     const pool = (Object.keys(REACTION_WEIGHTS) as RandomReaction[]).filter((reaction) =>
         reaction !== last &&
         (!body || (reaction !== 'swim' && reaction !== 'breach')) &&
-        (withoutBubble < 2 || reaction === 'talk' || reaction === 'tilt'),
+        (withoutBubble < 2 || reaction === 'talk' || reaction === 'tilt' || reaction === 'minigame') &&
+        (allowMinigame || reaction !== 'minigame'),
     )
     const total = pool.reduce((sum, reaction) => sum + REACTION_WEIGHTS[reaction], 0)
     let choice = random() * total
