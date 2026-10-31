@@ -478,6 +478,7 @@ function OrcaMinigame({ onClose }: { onClose: () => void }) {
             style={{ '--orca-game-enter-duration': `${ORCA_GAME.enterDuration}s` } as CSSProperties}
             aria-label="Xelu Orca Runner Minigame"
             aria-describedby="orca-game-instructions"
+            onMouseMove={(event) => event.stopPropagation()}
             onCancel={(event) => {
                 event.preventDefault()
                 onClose()
