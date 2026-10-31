@@ -63,10 +63,11 @@
 .about-neofetch > p { margin: 0 0 16px; }
 .about-neofetch-content { display: flex; gap: clamp(12px, 1.1vw, 24px); align-items: flex-start; }
 .about-neofetch-head { flex: none; width: clamp(96px, 8.33vw, 150px); height: auto; }
-.about-neofetch-lines { min-width: 0; }
-.about-neofetch-lines p { margin: 0; color: #c4c4c7; white-space: nowrap; }
+.about-neofetch-lines { flex: 1; min-width: 0; }
+.about-neofetch-lines p { margin: 0; padding-left: 2ch; color: #c4c4c7; text-indent: -2ch; white-space: normal; }
+.about-neofetch-lines p:nth-child(2) { white-space: nowrap; }
 .about-swatches { display: flex; margin-top: 12px; }
-.about-swatches span { width: 22px; height: 16px; }
+.about-swatches span { width: clamp(14px, 1.15vw, 22px); height: 16px; }
 .about-scroll-hint { position: absolute; z-index: 1; bottom: 56px; left: 0; display: flex; align-items: center; gap: 12px; margin: 0; color: #8e8e92; font: 13px 'JetBrains Mono', monospace; letter-spacing: .2em; }
 .about-scroll-hint i { display: block; width: 8px; height: 8px; background: #7fd3d8; }
 
@@ -102,6 +103,8 @@
   .about-neofetch { padding: 24px 26px 28px; font-size: 16px; }
   .about-neofetch-content { gap: 28px; }
   .about-neofetch-head { width: 150px; height: 128px; }
+  .about-neofetch-lines p { padding-left: 0; text-indent: 0; white-space: nowrap; }
+  .about-swatches span { width: 22px; }
   .about-scroll-hint { position: static; margin-top: 12px; }
 }
 
