@@ -11,7 +11,7 @@ export const CREW_MEMBERS: CrewMember[] = [
     {
         handle: 'cyu',
         role: 'member @ xelulabs',
-        tags: ['ctf', 'dev', 'fullstack', 'red team', 'AI'],
+        tags: ['CTF', 'Dev', 'Fullstack', 'Red Team', 'AI'],
         joinHash: '7c4e1a2',
         status: 'active',
     },
