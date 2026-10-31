@@ -1,7 +1,7 @@
 export interface CrewMember {
     handle: string
     role: string
-    bio: string
+    bio?: string
     tags: string[]
     joinHash: string
     status: 'active' | 'afk'
@@ -9,27 +9,31 @@ export interface CrewMember {
 
 export const CREW_MEMBERS: CrewMember[] = [
     {
-        handle: 'RafBlack',
-        role: 'Founder / Lead',
-        bio: 'Started xelulabs from a dorm room and a dream about breaking things. Full-stack dev by day, CTF addict by night.',
-        tags: ['web', 'pwn', 'fullstack'],
-        joinHash: 'a1f3c2e',
+        handle: 'cyu',
+        role: 'member @ xelulabs',
+        tags: ['CTF', 'Dev', 'Fullstack', 'Red Team', 'AI'],
+        joinHash: '7c4e1a2',
         status: 'active',
     },
     {
         handle: 'p0ch174',
-        role: 'Core / Frontend',
-        bio: 'Pixel-perfect interfaces and clean commits. Turns Figma dreams into CSS reality.',
-        tags: ['frontend', 'design', 'web'],
+        role: 'member @ xelulabs',
+        tags: ['OSINT', 'Red team', 'Blue Team', 'AI'],
         joinHash: '3d9b0f7',
         status: 'active',
     },
     {
-        handle: 'dcyuq',
-        role: 'Core / Responsiveness',
-        bio: 'If it doesn\'t look right on a 320px screen, it\'s not done. Mobile-first evangelist.',
-        tags: ['css', 'responsive', 'a11y'],
-        joinHash: '7c4e1a2',
+        handle: 'Ater',
+        role: 'member @ xelulabs',
+        tags: ['GRC', 'IAM', 'OSINT', 'Red Team', 'Blue Team'],
+        joinHash: 'a1f3c2e',
+        status: 'active',
+    },
+    {
+        handle: 'eun',
+        role: 'member @ xelulabs',
+        tags: ['CTF', 'OSINT', 'GRC', 'Design'],
+        joinHash: 'e5b2d90',
         status: 'active',
     },
     {

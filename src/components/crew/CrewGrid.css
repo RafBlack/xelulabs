@@ -38,6 +38,7 @@
 .crew-card:hover { border-color: #7fd3d8; }
 
 .crew-card-vacant {
+  grid-column: 1 / -1;
   border-style: dashed;
   border-color: #3a3a3e;
 }
@@ -112,6 +113,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  margin-top: auto;
   padding-top: 14px;
   border-top: 1px solid #1e1e21;
 }
