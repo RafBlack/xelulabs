@@ -77,6 +77,13 @@
 .crew-hero.seen .crew-hero-bob { animation: crewDrift var(--crew-body-drift-duration) ease-in-out infinite; }
 .crew-hero.seen .crew-hero-bob-inner { animation: crewWig var(--crew-body-wig-duration) ease-in-out infinite alternate; }
 
+@media (max-width: 1279px) and (min-width: 901px) {
+  .crew-hero-copy { flex-basis: 320px; }
+  .crew-terminal { padding: clamp(14px, 1.5vw, 20px); font-size: clamp(12px, 1.25vw, 15px); }
+  .crew-terminal-content { gap: clamp(12px, 1.4vw, 18px); }
+  .crew-terminal-head { width: clamp(90px, 9vw, 120px); height: auto; }
+}
+
 @media (max-height: 760px) and (min-width: 901px) {
   .crew-hero-copy { gap: 16px; }
   .crew-hero-title { font-size: clamp(64px, min(6.67vw, 12.5vh), 128px); }
