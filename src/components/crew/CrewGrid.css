@@ -184,6 +184,9 @@
 }
 
 @media (max-width: 1279px) and (min-width: 901px) {
+  .crew-grid { flex-direction: column; align-items: stretch; }
+  .crew-grid .crew-grid-copy { flex: none; }
+  .crew-grid-cards { flex: none; width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .crew-card { --crew-fish-distance: calc(100cqw + 76px); }
 }
 @media (max-height: 760px) and (min-width: 901px) {
