@@ -135,6 +135,7 @@ function OrcaMinigame({ onClose }: { onClose: () => void }) {
         const ctx = canvas?.getContext('2d', { alpha: false })
         if (!canvas || !ctx) return
         ctx.imageSmoothingEnabled = false
+        ctx.font = 'bold 12px "JetBrains Mono", monospace'
         const sprites = spritesRef.current ?? createOrcaSprites()
         spritesRef.current = sprites
 
@@ -429,7 +430,6 @@ function OrcaMinigame({ onClose }: { onClose: () => void }) {
 
             drawOrca(ctx, sprites, ORCA_X, orcaY, orcaVy, tick)
 
-            ctx.font = 'bold 12px "JetBrains Mono", monospace'
             for (const pop of popups) {
                 ctx.fillStyle = pop.color
                 ctx.fillText(pop.text, Math.round(pop.x - 10), Math.round(pop.y))
@@ -478,6 +478,7 @@ function OrcaMinigame({ onClose }: { onClose: () => void }) {
             style={{ '--orca-game-enter-duration': `${ORCA_GAME.enterDuration}s` } as CSSProperties}
             aria-label="Xelu Orca Runner Minigame"
             aria-describedby="orca-game-instructions"
+            onMouseMove={(event) => event.stopPropagation()}
             onCancel={(event) => {
                 event.preventDefault()
                 onClose()
