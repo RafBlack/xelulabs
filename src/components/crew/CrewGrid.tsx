@@ -48,7 +48,7 @@ function CrewGrid({ seen }: { seen: boolean }) {
                                 <p className="crew-card-role">{member.role}</p>
                             </div>
                         </div>
-                        <p className="crew-card-bio">{member.bio}</p>
+                        {member.bio && <p className="crew-card-bio">{member.bio}</p>}
                         <div className="crew-card-footer">
                             <div className="crew-card-tags">{member.tags.map((tag) => <span key={tag} className="crew-tag">{tag}</span>)}</div>
                             <span className="crew-card-hash">{member.joinHash}</span>
