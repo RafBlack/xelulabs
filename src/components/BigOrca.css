@@ -4,7 +4,7 @@
   pointer-events: none;
 }
 
-.orca-layer-game-open * {
+.stage:has(.orca-layer-game-open) * {
   animation-play-state: paused !important;
 }
 
