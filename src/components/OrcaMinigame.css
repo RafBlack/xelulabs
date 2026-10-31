@@ -1,0 +1,241 @@
+.orca-game-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(11, 11, 12, 0.82);
+  backdrop-filter: blur(4px);
+  pointer-events: auto;
+  cursor: default;
+  animation: fadeUp var(--orca-game-enter-duration) cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.orca-game-backdrop[open] {
+  display: flex;
+}
+
+.orca-game-backdrop::backdrop {
+  background: transparent;
+}
+
+.orca-game-modal {
+  width: min(680px, 100%);
+  max-height: 100%;
+  overflow-y: auto;
+  border: 2px solid #f2f2ef;
+  background: #0c0c0d;
+  color: #f2f2ef;
+  font-family: 'JetBrains Mono', monospace;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.75), 6px 6px 0 #16363b;
+}
+
+.orca-game-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 2px solid #2e2e33;
+  background: #111114;
+  font-size: 13px;
+}
+
+.orca-game-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e8e8e6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.orca-game-prompt {
+  color: #7fd3d8;
+}
+
+.orca-game-stats {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.orca-game-hi {
+  color: #8e8e92;
+}
+
+.orca-game-score {
+  color: #7fd3d8;
+  font-weight: 600;
+}
+
+.orca-game-close {
+  padding: 2px 8px;
+  border: 1px solid #4a4a52;
+  background: transparent;
+  color: #f2f2ef;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.orca-game-close:hover {
+  border-color: #7fd3d8;
+  color: #7fd3d8;
+}
+
+.orca-game-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 260px;
+  aspect-ratio: 2 / 1;
+  background: #0b0b0c;
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+}
+
+.orca-game-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  image-rendering: pixelated;
+}
+
+.orca-game-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px;
+  background: rgba(11, 11, 12, 0.78);
+  text-align: center;
+}
+
+.orca-game-heading {
+  margin: 0;
+  font-size: clamp(14px, 3vw, 22px);
+  letter-spacing: 0.12em;
+  color: #f2f2ef;
+  text-transform: uppercase;
+}
+
+.orca-game-sub {
+  margin: 0;
+  max-width: 440px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #a1a4aa;
+}
+
+.orca-game-flag {
+  margin: 0;
+  padding: 4px 10px;
+  border: 1px dashed #7fd3d8;
+  background: rgba(127, 211, 216, 0.08);
+  color: #7fd3d8;
+  font-size: 12px;
+}
+
+.orca-game-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.orca-game-btn {
+  padding: 8px 16px;
+  border: 1px solid #f2f2ef;
+  background: #f2f2ef;
+  color: #0b0b0c;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.orca-game-btn:hover {
+  background: #7fd3d8;
+  border-color: #7fd3d8;
+}
+
+.orca-game-btn-alt {
+  background: transparent;
+  color: #f2f2ef;
+  border-color: #6b6d72;
+}
+
+.orca-game-btn-alt:hover {
+  background: transparent;
+  color: #f2f2ef;
+  border-color: #f2f2ef;
+}
+
+.orca-game-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 14px;
+  border-top: 1px solid #222227;
+  background: #0e0e11;
+  color: #8e8e92;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 639px) {
+  .orca-game-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .orca-game-stats {
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 11px;
+  }
+
+  .orca-game-footer {
+    font-size: 10px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .orca-game-stage {
+    min-height: 320px;
+  }
+}
+
+.orca-game-canvas:focus-visible,
+.orca-game-btn:focus-visible,
+.orca-game-close:focus-visible {
+  outline: 2px solid #7fd3d8;
+  outline-offset: -3px;
+}
