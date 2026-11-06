@@ -37,6 +37,13 @@ export const CREW_MEMBERS: CrewMember[] = [
         status: 'active',
     },
     {
+        handle: 'goku z',
+        role: 'member @ xelulabs',
+        tags: ['API', 'Linux', 'Red team', 'IDOR', 'CSRF'],
+        joinHash: 'b7e2a90',
+        status: 'active',
+    },
+    {
         handle: '???',
         role: 'Next Recruit',
         bio: 'This could be you. We\'re always looking for curious minds who like breaking and building.',

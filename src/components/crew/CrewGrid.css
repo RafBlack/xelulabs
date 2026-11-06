@@ -1,4 +1,4 @@
-.crew-grid { gap: clamp(36px, 4.17vw, 80px); flex-wrap: wrap; overflow: clip; }
+.crew-grid { gap: 32px; flex-wrap: wrap; overflow: clip; }
 .crew-grid .crew-grid-copy { z-index: 1; }
 
 .crew-grid-mark { position: absolute; right: clamp(0px, calc(1740px - 100vw), 100px); bottom: clamp(16px, 3svh, 40px); color: #141416; font: 700 clamp(60px, min(5.6vw, calc(14svh - 60px)), 110px)/1 'Silkscreen', monospace; white-space: nowrap; pointer-events: none; }
@@ -13,11 +13,11 @@
 
 .crew-grid-cards {
   position: relative;
-  flex: 1 1 auto;
+  flex: 1 1 0;
   min-width: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  align-items: stretch;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
   gap: 18px;
 }
 
@@ -25,9 +25,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  height: 100%;
-  padding: 26px 28px;
+  min-width: 0;
+  gap: 12px;
+  padding: 16px 20px;
   border: 1px solid #2a2a2d;
   background: #0e0e10;
   box-sizing: border-box;
@@ -47,19 +47,21 @@
 .crew-card-fish { position: absolute; top: -8px; left: -30px; width: 24px; height: 12px; opacity: 0; }
 @keyframes crewCardFish { from { transform: translateX(0); } to { transform: translateX(var(--crew-fish-distance)); } }
 .crew-card:hover .crew-card-fish { opacity: 1; animation: crewCardFish var(--crew-fish-duration) linear infinite; }
-.crew-card { --crew-fish-distance: calc(100cqw + 92px); }
+.crew-card { --crew-fish-distance: calc(100cqw + 76px); }
 
 .crew-card-header {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
+
+.crew-card-header > div:last-child { min-width: 0; }
 
 .crew-card-avatar {
   position: relative;
   flex: none;
-  width: 48px;
-  height: 48px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,13 +93,15 @@
   margin: 0;
   color: #f2f2ef;
   font: 600 18px 'JetBrains Mono', monospace;
+  overflow-wrap: anywhere;
 }
 
 .crew-card-role {
   margin: 4px 0 0;
   color: #8e8e92;
-  font: 13px 'JetBrains Mono', monospace;
+  font: 12px 'JetBrains Mono', monospace;
   letter-spacing: 0.06em;
+  overflow-wrap: anywhere;
 }
 
 .crew-card-bio {
@@ -110,11 +114,12 @@
 
 .crew-card-footer {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px;
   margin-top: auto;
-  padding-top: 14px;
+  padding-top: 10px;
   border-top: 1px solid #1e1e21;
 }
 
@@ -136,6 +141,7 @@
 
 .crew-card-hash {
   flex: none;
+  margin-left: auto;
   color: #4a4a52;
   font: 12px 'JetBrains Mono', monospace;
 }
@@ -181,15 +187,13 @@
 
 /* --- Responsive --- */
 @media (max-width: 1500px) and (min-width: 901px) {
-  .crew-grid { gap: 32px; }
   .crew-grid .crew-grid-copy { flex-basis: clamp(280px, 23vw, 340px); }
 }
 
 @media (max-width: 1279px) and (min-width: 901px) {
-  .crew-grid { flex-direction: column; align-items: stretch; }
-  .crew-grid .crew-grid-copy { flex: none; }
-  .crew-grid-cards { flex: none; width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .crew-card { --crew-fish-distance: calc(100cqw + 76px); }
+  .crew-grid .crew-grid-copy { flex-basis: clamp(240px, 24vw, 300px); }
+  .crew-section-title { font-size: 48px; }
+  .crew-grid-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-height: 760px) and (min-width: 901px) {
   .crew-grid { padding-top: 112px; }
@@ -197,20 +201,22 @@
 
 
 @media (max-width: 900px) {
-  .crew-grid-cards { flex: none; width: 100%; grid-template-columns: 1fr; }
+  .crew-grid-cards { flex: none; width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .crew-grid-mark { right: 0; bottom: 20px; font-size: clamp(32px, 11vw, 96px); }
   .crew-grid-copy { flex: none; }
   .crew-grid-cta { flex-direction: column; align-items: stretch; text-align: center; }
   .crew-card { --crew-fish-distance: calc(100cqw + 76px); }
 }
 
+@media (max-width: 640px) {
+  .crew-grid-cards { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 520px) {
-  .crew-card { padding: 20px; }
   .crew-card-handle { font-size: 16px; }
   .crew-card-bio { font-size: 14px; }
   .crew-grid-cta { padding: 20px; }
   .crew-section-title { font-size: clamp(32px, 13vw, 52px); }
-  .crew-card { --crew-fish-distance: calc(100cqw + 68px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
